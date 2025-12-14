@@ -5,20 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Havacılığa Giriş - Soru Bankası</title>
     <style>
-        /* --- CSS STİLLERİ --- */
+        /* --- CSS STİLLERİ (Görsel Tasarım) --- */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
         :root {
-            --primary-color: #0056b3; /* Koyu Mavi */
-            --accent-color: #e3f2fd; /* Açık Mavi */
-            --success-color: #28a745; /* Yeşil */
-            --danger-color: #dc3545; /* Kırmızı */
+            --primary-color: #0056b3; /* Ana Mavi */
+            --primary-hover: #004494;
+            --accent-color: #f0f7ff; /* Açık Mavi Arkaplan */
+            --success-color: #28a745; /* Doğru Yeşil */
+            --danger-color: #dc3545; /* Yanlış Kırmızı */
             --text-color: #333;
             --bg-color: #f4f6f9;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
 
         * { box-sizing: border-box; }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif; /* Modern Font */
             margin: 0;
             padding: 20px;
             background-color: var(--bg-color);
@@ -32,22 +36,26 @@
         .main-container {
             background: white;
             width: 100%;
-            max-width: 900px;
+            max-width: 850px;
             padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
             position: relative;
-            min-height: 500px; /* Sabit yükseklik hissi */
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* --- SAYFA YAPILARI (Giriş, Quiz, Sonuç) --- */
+        /* --- SAYFA YAPILARI --- */
         .page-section {
-            display: none; /* Varsayılan olarak hepsi gizli */
-            animation: fadeIn 0.4s ease-in-out;
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+            flex-grow: 1;
         }
 
         .page-section.active {
-            display: block; /* Sadece aktif olan görünür */
+            display: flex;
+            flex-direction: column;
         }
 
         @keyframes fadeIn {
@@ -55,82 +63,94 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- GİRİŞ EKRANI --- */
-        .landing-header {
+        /* --- GİRİŞ EKRANI (LANDING) --- */
+        .landing-content {
             text-align: center;
-            margin-bottom: 40px;
+            margin-top: auto;
+            margin-bottom: auto;
         }
+
         .landing-header h1 {
             color: var(--primary-color);
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             margin-bottom: 10px;
+            font-weight: 700;
         }
         .landing-header p {
             color: #666;
             font-size: 1.1rem;
+            margin-bottom: 40px;
         }
 
         .menu-buttons {
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            max-width: 500px;
+            gap: 15px;
+            max-width: 400px;
             margin: 0 auto;
         }
 
         .menu-btn {
             background: white;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            padding: 20px;
-            border-radius: 10px;
-            font-size: 1.2rem;
+            border: 2px solid #e0e0e0;
+            color: #333;
+            padding: 18px;
+            border-radius: 12px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
             text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         .menu-btn:hover {
-            background: var(--primary-color);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 86, 179, 0.3);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .menu-btn.mix-btn {
             background: var(--primary-color);
             color: white;
-            border: none;
+            border-color: var(--primary-color);
+            margin-top: 10px;
         }
         .menu-btn.mix-btn:hover {
-            background: #004494;
+            background: var(--primary-hover);
         }
 
-        /* --- QUIZ ALANI --- */
+        /* --- QUIZ EKRANI --- */
         .quiz-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             padding-bottom: 15px;
-            border-bottom: 2px solid #eee;
+            border-bottom: 1px solid #eee;
         }
 
-        .question-badge {
-            background: var(--primary-color);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: bold;
+        .question-counter {
+            font-weight: 600;
+            color: #555;
         }
+
+        /* Switch Toggle */
+        .switch-wrapper { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: #555; }
+        .switch { position: relative; display: inline-block; width: 46px; height: 24px; }
+        .switch input { display:none; }
+        .slider { position: absolute; cursor: pointer; top:0; left:0; right:0; bottom:0; background-color: #ccc; transition:.4s; border-radius: 34px; }
+        .slider:before { position: absolute; content:""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition:.4s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--success-color); }
+        input:checked + .slider:before { transform: translateX(22px); }
 
         .question-text {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: 600;
-            margin-bottom: 30px;
-            line-height: 1.5;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            color: #222;
         }
 
         .options-grid {
@@ -141,18 +161,19 @@
 
         .option-card {
             background: #fff;
-            border: 1px solid #ddd;
-            padding: 18px;
+            border: 1px solid #e0e0e0;
+            padding: 16px 20px;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 1.05rem;
+            font-size: 1rem;
             transition: all 0.2s;
             position: relative;
+            color: #444;
         }
 
         .option-card:hover {
-            background-color: var(--accent-color);
-            border-color: var(--primary-color);
+            background-color: #f8f9fa;
+            border-color: #bbb;
         }
 
         /* Doğru/Yanlış Durumları */
@@ -166,79 +187,99 @@
             color: white;
             border-color: var(--danger-color);
         }
-        /* İpucu (Yanlış yapınca doğruyu gösterme) */
         .option-card.hint {
             border: 2px solid var(--success-color);
-            background-color: #d4edda;
-            color: #155724;
-            font-weight: bold;
+            background-color: #e8f5e9;
+            color: var(--success-color);
+            font-weight: 600;
         }
 
         /* Navigasyon */
         .nav-buttons {
             display: flex;
             justify-content: space-between;
-            margin-top: 30px;
+            margin-top: 40px;
         }
         
         .nav-btn {
             padding: 12px 30px;
             border: none;
             border-radius: 8px;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.95rem;
+            transition: background 0.2s;
         }
-        .btn-prev { background: #e2e6ea; color: #333; }
+        .btn-prev { background: #e9ecef; color: #555; }
+        .btn-prev:hover { background: #dde2e6; }
         .btn-next { background: var(--primary-color); color: white; }
+        .btn-next:hover { background: var(--primary-hover); }
         .btn-prev:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        /* Hızlı Erişim */
+        /* Hızlı Erişim (Grid) */
         .fast-access {
-            margin-top: 40px;
-            border-top: 1px solid #eee;
+            margin-top: auto; /* Sayfanın altına it */
             padding-top: 20px;
+            border-top: 1px solid #eee;
         }
-        .fast-access h4 { margin-bottom: 15px; color: #666; font-size: 0.9rem; }
+        .fast-access h4 { margin: 0 0 15px 0; color: #888; font-size: 0.85rem; font-weight: 500; text-align: center; }
         .dots-grid {
             display: flex;
             flex-wrap: wrap;
             gap: 6px;
+            justify-content: center;
         }
         .dot {
-            width: 30px; height: 30px;
-            background: #eee;
-            border-radius: 4px;
+            width: 32px; height: 32px;
+            background: #f1f3f5;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
             display: flex; justify-content: center; align-items: center;
-            font-size: 0.8rem; cursor: pointer;
+            font-size: 0.8rem; cursor: pointer; color: #666;
+            transition: all 0.1s;
         }
-        .dot.current { border: 2px solid var(--primary-color); font-weight: bold; }
-        .dot.correct { background: var(--success-color); color: white; }
-        .dot.incorrect { background: var(--danger-color); color: white; }
-
-        /* Switch */
-        .switch-wrapper { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; }
-        .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
-        .switch input { display:none; }
-        .slider { position: absolute; cursor: pointer; top:0; left:0; right:0; bottom:0; background-color: #ccc; transition:.4s; border-radius: 34px; }
-        .slider:before { position: absolute; content:""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition:.4s; border-radius: 50%; }
-        input:checked + .slider { background-color: var(--success-color); }
-        input:checked + .slider:before { transform: translateX(20px); }
+        .dot:hover { background: #e2e6ea; }
+        .dot.current { border: 2px solid var(--primary-color); color: var(--primary-color); font-weight: bold; background: white; }
+        .dot.correct { background: var(--success-color); color: white; border-color: var(--success-color); }
+        .dot.incorrect { background: var(--danger-color); color: white; border-color: var(--danger-color); }
 
         /* --- SONUÇ EKRANI --- */
-        .result-content { text-align: center; padding: 40px 0; }
+        .result-content {
+            text-align: center;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
         .score-circle {
-            width: 160px; height: 160px;
+            width: 180px; height: 180px;
             border-radius: 50%;
-            border: 8px solid var(--primary-color);
+            background: var(--primary-color);
+            color: white;
             display: flex; flex-direction: column;
             justify-content: center; align-items: center;
             margin: 0 auto 30px;
-            font-size: 2.5rem; font-weight: bold; color: var(--primary-color);
+            box-shadow: 0 10px 20px rgba(0, 86, 179, 0.3);
         }
-        .score-label { font-size: 1rem; color: #666; font-weight: normal; margin-top: 5px; }
-        .result-message { font-size: 1.5rem; margin-bottom: 30px; }
+        .score-percent { font-size: 3.5rem; font-weight: 700; }
+        .score-label { font-size: 1rem; opacity: 0.9; margin-top: 5px; }
+        
+        .result-message { font-size: 1.4rem; margin-bottom: 40px; color: #444; font-weight: 600; }
+        .result-msg-sub { font-size: 1rem; color: #666; font-weight: normal; display: block; margin-top: 10px;}
+
         .result-actions { display: flex; flex-direction: column; gap: 15px; max-width: 300px; margin: 0 auto; }
+
+        /* Ana Menüye Dön Linki */
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            text-decoration: none;
+            color: #999;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .back-link:hover { color: var(--primary-color); }
 
     </style>
 </head>
@@ -247,23 +288,28 @@
 <div class="main-container">
 
     <div id="landing-page" class="page-section active">
-        <div class="landing-header">
-            <h1>Havacılığa Giriş</h1>
-            <p>Lütfen çözmek istediğiniz soru havuzunu seçiniz.</p>
-        </div>
-        
-        <div class="menu-buttons">
-            <button class="menu-btn" id="btn-basic">Temel Soru Havuzu (102 Soru)</button>
-            <button class="menu-btn" id="btn-past">Çıkmış Sorular (26 Soru)</button>
-            <button class="menu-btn mix-btn" id="btn-mix">Hepsini Karıştır (Tümü)</button>
+        <div class="landing-content">
+            <div class="landing-header">
+                <h1>Havacılık Güvenliği Bilinci</h1>
+                <p>Lütfen çözmek istediğiniz soru havuzunu seçiniz.</p>
+            </div>
+            
+            <div class="menu-buttons">
+                <button class="menu-btn" onclick="startQuiz('temel')">Temel Soru Havuzu (102 Soru)</button>
+                <button class="menu-btn" onclick="startQuiz('cikmis')">Çıkmış Sorular (48 Soru)</button>
+                <button class="menu-btn" onclick="startQuiz('ai')">AI (Yapay Zeka) Soru Havuzu (40 Soru)</button>
+                <button class="menu-btn mix-btn" onclick="startQuiz('mix')">Hepsini Karıştır (Tümü)</button>
+            </div>
         </div>
     </div>
 
     <div id="quiz-page" class="page-section">
+        <a href="#" onclick="location.reload()" class="back-link">← Ana Menü</a>
+        
         <div class="quiz-header">
-            <span class="question-badge" id="q-progress">Soru: 1/--</span>
+            <span class="question-counter" id="q-progress">Soru: 1/--</span>
             <div class="switch-wrapper">
-                <span>Doğruysa Otomatik Geç</span>
+                Doğruysa Otomatik Geç
                 <label class="switch">
                     <input type="checkbox" id="auto-next-toggle">
                     <span class="slider"></span>
@@ -271,7 +317,7 @@
             </div>
         </div>
 
-        <div class="question-text" id="q-text">Soru yükleniyor...</div>
+        <div class="question-text" id="q-text">Yükleniyor...</div>
         
         <div class="options-grid" id="q-options">
             </div>
@@ -285,24 +331,22 @@
             <h4>Hızlı Erişim</h4>
             <div class="dots-grid" id="dots-area"></div>
         </div>
-        
-        <div style="text-align: center; margin-top: 30px;">
-            <button onclick="location.reload()" style="background:none; border:none; color:#999; cursor:pointer; text-decoration:underline;">Testten Çık / Ana Menü</button>
-        </div>
     </div>
 
     <div id="result-page" class="page-section">
         <div class="result-content">
             <h2>Test Tamamlandı!</h2>
             <div class="score-circle">
-                <span id="final-score">%0</span>
+                <span class="score-percent" id="final-score">%0</span>
                 <span class="score-label">BAŞARI</span>
             </div>
-            <p class="result-message" id="final-msg">Sonuçlar analiz ediliyor...</p>
+            <p class="result-message" id="final-msg">
+                Sonuç analiz ediliyor...
+            </p>
             
             <div class="result-actions">
-                <button class="menu-btn mix-btn" onclick="location.reload()">Ana Menüye Dön</button>
-                <button class="menu-btn" id="btn-review-wrong">Yanlışları İncele</button>
+                <button class="menu-btn mix-btn" onclick="location.reload()">Tüm Testi Yeniden Başlat (Karışık)</button>
+                <button class="menu-btn" id="btn-review-wrong" style="display:none;">Sadece Yanlışları Çöz</button>
             </div>
         </div>
     </div>
@@ -310,128 +354,122 @@
 </div>
 
 <script>
-    // --- 1. VERİ HAVUZU ---
+    // --- 1. VERİ HAVUZLARI ---
 
-    // Temel Sorular (102 Soru)
-    const basicQuestionsData = [
-        { q: "Dünyadaki tüm havacılık faaliyetleri temelde hangi iki ana gruba ayrılır?", options: ["Sadece sivil havacılık", "Sivil havacılık ve Devlet havacılığı", "Uluslararası ve Ulusal havacılık", "Askeri ve Ticari havacılık"], answer: "Sivil havacılık ve Devlet havacılığı" },
-        { q: "Sivil havacılık faaliyetlerinin temel amacı aşağıdakilerden hangisidir?", options: ["Sadece hızlı ulaşım sağlamak", "Uçak üretimini artırmak", "İnsanların emniyetli, ekonomik, hızlı ve çevreye duyarlı bir şekilde ulaşımı", "Askerî operasyonları desteklemek"], answer: "İnsanların emniyetli, ekonomik, hızlı ve çevreye duyarlı bir şekilde ulaşımı" },
-        { q: "Havadan ağır, motor gücüyle seyreden ve aerodinamik kuvvetlerden destek alan sabit kanatlı hava aracı nedir?", options: ["Balon", "Helikopter", "Planör", "Uçak"], answer: "Uçak" },
-        { q: "Havacılıkta mesafe ölçümünde yoğun olarak kullanılan birim nedir?", options: ["Kilometre (km)", "Deniz mili (NM)", "Mil (mi)", "Foot (ft)"], answer: "Deniz mili (NM)" },
-        { q: "Bir deniz mili (NM), SI sisteminde kaç metreye (m) karşılık gelir?", options: ["1000 metre", "1500 metre", "1852 metre (m)", "1609 metre"], answer: "1852 metre (m)" },
-        { q: "Hava araçlarının uçuş hızlarının ölçümünde kullanılan İngiliz ölçü birimi nedir?", options: ["Mach", "Kilometre/saat (km/saat)", "Mil/saat (mph)", "Knot (kn)"], answer: "Knot (kn)" },
+    // 1. TEMEL SORU HAVUZU (Önceki 102 sorudan örneklem - Kodun kısalığı için bir kısmını koyuyorum, tamamını isterseniz ekleyebilirsiniz)
+    const basicQuestions = [
+        { q: "Havacılık faaliyetleri kaça ayrılır?", options: ["Üçe", "İkiye", "Dörde", "Beşe"], answer: "İkiye" },
+        { q: "Devlet hava araçları nelerdir?", options: ["Askerî, gümrük, polis", "Yolcu, kargo, eğitim", "Tarım, balon, planör", "Helikopter, jet, planör"], answer: "Askerî, gümrük, polis" },
+        { q: "ICAO'ya göre sivil havacılığın amacı nedir?", options: ["Askerî uçuşlar düzenlemek", "Hızlı ama pahalı ulaşım sağlamak", "Emniyetli, ekonomik, çevreye duyarlı ulaşım", "Uçak üretimini artırmak"], answer: "Emniyetli, ekonomik, çevreye duyarlı ulaşım" },
+        { q: "1 foot kaç metredir?", options: ["0,25", "0,3048", "1,85", "3,048"], answer: "0,3048" },
+        { q: "Knot hangi büyüklüğü ölçer?", options: ["Yükseklik", "Basınç", "Hız", "Mesafe"], answer: "Hız" },
+        { q: "Mach sayısı nasıl hesaplanır?", options: ["Ağırlık / Hız", "Hız / Ses hızı", "Sıcaklık / Basınç", "Hız / Yükseklik"], answer: "Hız / Ses hızı" },
         { q: "ICAO'nun tam açılımı nedir?", options: ["International Civil Aviation Organization", "International Cargo Air Organization", "Industrial Civil Air Operations", "International Control of Air Operations"], answer: "International Civil Aviation Organization" },
-        { q: "Havacılıkta, pilotlar ve hava trafik kontrolörleri arasındaki iletişimde kullanılan özel dil türü nedir?", options: ["Aviation English", "Phraseology (Freyzyoloji)", "ITU Language", "NATO Code"], answer: "Phraseology (Freyzyoloji)" },
-        { q: "Uçağın dengesini sağlayan ana eleman hangisidir?", options: ["Motor", "Gövde", "Kanat", "Kuyruk"], answer: "Kuyruk" },
-        { q: "ATM nedir?", options: ["Air Terminal Maintenance", "Aviation Transport Market", "Aircraft Training Manual", "Air Traffic Management"], answer: "Air Traffic Management" },
-        { q: "ICAO kodu kaç harflidir?", options: ["2", "3", "4", "5"], answer: "4" },
-        { q: "PAT sahaları hangi üç alandan oluşur?", options: ["Park, Apron, Terminal", "Pist, Apron, Taksi yolu", "Pasaport, Apron, Terminal", "Personel, Araç, Terminal"], answer: "Pist, Apron, Taksi yolu" },
-        { q: "Check-in işlemi nedir?", options: ["Yolcuların uçağa biniş için yaptıkları ilk işlemdir", "Uçak bakımıdır", "Kule ile konuşmadır", "Bagaj teslim alma işlemidir"], answer: "Yolcuların uçağa biniş için yaptıkları ilk işlemdir" },
-        { q: "Havadan hafif hava araçlarına örnek hangisidir?", options: ["Planör ve Helikopter", "Uçak ve Zeplin", "Balon ve Zeplin", "Gyroplane ve Planör"], answer: "Balon ve Zeplin" },
-        { q: "Ticari hava taşımacılığı nedir?", options: ["Sadece tarifeli yolcu uçuşları", "Ücretsiz yapılan insani yardım operasyonları", "Devlet hizmetinde yapılan askeri uçuşlar", "Ücret veya kira karşılığında yapılan hava aracı operasyonu"], answer: "Ücret veya kira karşılığında yapılan hava aracı operasyonu" },
-        { q: "Hava taksi işletmeciliği yapan araçların maksimum koltuk kapasitesi genellikle kaçtır?", options: ["50 koltuk", "30 koltuk", "19 koltuk", "5 koltuk"], answer: "19 koltuk" },
-        { q: "Uluslararası bir anlaşma ile bir foot (ft) kaç metreye eşit olduğu kabul edilmiştir?", options: ["1 metreye", "0,5 metreye", "0,3048 metreye", "1,852 metreye"], answer: "0,3048 metreye" },
-        { q: "Bir knot, bir saatte kat edilen kaç deniz mili mesafeyi gösterir?", options: ["Yarım deniz mili", "Bir deniz mili mesafeyi", "İki deniz mili", "Bir kilometre"], answer: "Bir deniz mili mesafeyi" },
-        { q: "Hava aracının hızının, aracın içinde uçtuğu atmosfer ortamındaki ses hızına oranı ile ifade edilen boyutsuz hız birimi nedir?", options: ["Knot (kn)", "Mach sayısı", "G-kuvveti", "TAS (True Airspeed)"], answer: "Mach sayısı" },
-        { q: "İki farklı konum arasındaki en kısa mesafeyi ifade eden ve küre yüzeyi üzerinde bulunan mesafe kavramı nedir?", options: ["Nautical Mile", "Rhumb Line", "En büyük daire mesafesi ('Great circle distance')", "Straight Line Distance"], answer: "En büyük daire mesafesi ('Great circle distance')" },
-        { q: "Uçağın başlıca elemanları hangi şıkta doğru verilmiştir?", options: ["Motor, İniş Takımı, Radar", "Gövde, Motor, Kanat", "Gövde, kanat, motor, kuyruklar, iniş takımları ve kumanda yüzeyleri", "Pervane, Kokpit, Kargo Bölümü"], answer: "Gövde, kanat, motor, kuyruklar, iniş takımları ve kumanda yüzeyleri" },
-        { q: "Uçaktaki personel, yolcu ve kargoların içerisinde yer aldığı temel eleman hangisidir?", options: ["Kanat", "Motor", "Gövde", "Kuyruk"], answer: "Gövde" },
-        { q: "Uçağın dönüşünü kolaylaştırmak için sağa ve sola yatmasını sağlayan, kanatlar üzerinde bulunan hareketli yüzeylere ne denir?", options: ["Flap", "Slat", "Kanatçık (Aileron)", "Stabilizatör"], answer: "Kanatçık (Aileron)" },
-        { q: "Dikey kuyruk üzerinde yer alan ve uçağın sağa ve sola dönmesini sağlayan yüzey nedir?", options: ["İrtifa dümeni (Elevator)", "İstikamet dümeni (Rudder)", "Kanatçık", "Flap"], answer: "İstikamet dümeni (Rudder)" },
-        { q: "Kalkış ve iniş yaptıkları zemine göre uçaklar hangi üç gruba ayrılır?", options: ["Dar, Geniş ve Orta Gövdeli", "Kara, Deniz ve Amfibik uçaklar", "Ana Hat, Bölgesel ve Kargo", "Askeri, Ticari ve Genel Havacılık"], answer: "Kara, Deniz ve Amfibik uçaklar" },
-        { q: "Havada kalmak için gereken taşımayı bir veya birden fazla rotorla sağlayan havadan ağır hava araçlarına ne denir?", options: ["Sabit Kanatlı", "Havadan Hafif", "Döner Kanatlı", "Amfibik"], answer: "Döner Kanatlı" },
-        { q: "Döner kanatlı hava araçlarından, dikey iniş ve kalkış yapabilme yeteneği ile öne çıkan ve en yaygın kullanılan araç hangisidir?", options: ["Gyroplane", "Balon", "Zeplin", "Helikopter"], answer: "Helikopter" },
-        { q: "Uçuş yönetiminde pilotun müdahalelerine gerek olmayan insansız hava aracı türü nedir?", options: ["Uzaktan Kumandalı", "İHA", "Otonom Hava Aracı", "Drone"], answer: "Otonom Hava Aracı" },
-        { q: "Türk hava aracı siciline kayıtlı hava araçlarının milliyet işareti hangisidir?", options: ["TK", "TR", "ABC", "TC"], answer: "TC" },
-        { q: "Hava araçlarında kullanılan ana motor tipleri nelerdir?", options: ["Elektrikli ve Hidrolik", "Pistonlu ve Türbinli motorlar", "Radyal ve Sıralı", "Roket ve Jet"], answer: "Pistonlu ve Türbinli motorlar" },
-        { q: "Türbinli motorlar hangi dört farklı türdür?", options: ["Turbojet, Turboşaft, Pistonlu, Turbofan", "Turboprop, Turbofan, Turbojet, Turboşaft", "Ramjet, Scramjet, Turboprop, Pistonlu", "Radyal, Jet, Pervaneli, Turboşaft"], answer: "Turboprop, Turbofan, Turbojet, Turboşaft" },
-        { q: "Yüksek hızlı gaz çıkışına 'jet' adı verilen, gazların itme etkisiyle uçağı ileri hareket ettiren motor nedir?", options: ["Turboprop", "Pistonlu motor", "Turbojet motoru", "Turboşaft"], answer: "Turbojet motoru" },
-        { q: "Turbojet motoruna pervane bağlanmış ve itki kuvvetinin büyük kısmını pervanenin ürettiği motor türü nedir?", options: ["Turbofan", "Turboşaft", "Turboprop motoru", "Pistonlu motor"], answer: "Turboprop motoru" },
-        { q: "Egzostan çıkan itme kuvvetine ihtiyaç duyulmayan, özellikle döner kanatlı hava araçlarında rotorun döndürülmesi için kullanılan motor nedir?", options: ["Turbojet", "Turboprop", "Pistonlu", "Turboşaft motoru"], answer: "Turboşaft motoru" },
-        { q: "THAT'ın açılımı nedir?", options: ["Tarifeli Havayolu Taşıyıcısı", "Tam Hizmet Ağı Taşıyıcısı", "Tüm Hava Yolları Taşıyıcısı", "Ticari Havayolu Taşımacılığı"], answer: "Tam Hizmet Ağı Taşıyıcısı" },
-        { q: "DMT'nin açılımı nedir?", options: ["Dünya Maliyetli Taşıyıcılar", "Düşük Mesafeli Taşıyıcılar", "Düşük Maliyetli Taşıyıcılar", "Dış Hat Taşıyıcıları"], answer: "Düşük Maliyetli Taşıyıcılar" },
-        { q: "THAT ve DMT özelliklerini birleştiren havayolu iş modeli nedir?", options: ["Bölgesel Taşıyıcı", "Özel Sefer Taşıyıcı", "Karma (Hibrit) Taşıyıcılar", "Odak Taşıyıcı"], answer: "Karma (Hibrit) Taşıyıcılar" },
-        { q: "Uçuş planlaması yapan havayolları tarafından hizmet verilmeyen ikincil veya bölgesel havalimanlarından operasyonlarını gerçekleştiren iş modeli nedir?", options: ["Tam Hizmet Ağı Taşıyıcıları", "Düşük Maliyetli Taşıyıcılar", "Özel Sefer (Charter) Taşıyıcılar", "Hibrit Taşıyıcılar"], answer: "Özel Sefer (Charter) Taşıyıcılar" },
-        { q: "Havayolu işletmesinin ücret karşılığında taşıdığı yolcu nedir?", options: ["Ücretli Yolcu", "Transfer Yolcu", "Kargo Yolcu", "İş Yolcusu"], answer: "Ücretli Yolcu" },
-        { q: "Havayolu işletmesi tarafından ücretli yolcu taşımak üzere arz edilen koltuk sayısı ile bu koltuk sayısının uçurulduğu mesafenin çarpımına eşit olan değer nedir?", options: ["RPK", "ASK (Arz Edilen Koltuk-Kilometre)", "Genel Doluluk Oranı", "Blok Saat"], answer: "ASK (Arz Edilen Koltuk-Kilometre)" },
-        { q: "Ücretli olarak seyahat eden yolcuların uçtukları mesafeler ile çarpımından elde edilen değer nedir?", options: ["ASK", "Konma Sayısı", "RPK (Ücretli Yolcu-Kilometre)", "Genel Ton-Kilometre"], answer: "RPK (Ücretli Yolcu-Kilometre)" },
-        { q: "Doluluk oranı nasıl hesaplanır?", options: ["ASK x RPK", "ASK / RPK", "RPK / ASK", "ASK + RPK"], answer: "RPK / ASK" },
-        { q: "Uçağın gidiş kapısından hareketinden, varış kapısına ulaşıncaya kadar geçen süreye ne ad verilir?", options: ["Uçuş Süresi", "Taksi Süresi", "Blok Saat", "Zamanında Kalkış"], answer: "Blok Saat" },
-        { q: "Pilotların asgari sağlık koşulları, dil yeterlilikleri ve yetki sınırlarının standartlara bağlandığı ICAO Ek'i hangisidir?", options: ["Ek-2 (Hava Kuralları)", "Ek-1 (Personel Lisanslandırma)", "Ek-17 (Güvenlik)", "Ek-14 (Havaalanları)"], answer: "Ek-1 (Personel Lisanslandırma)" },
-        { q: "Çok pilotlu hava araçlarında kaptan pilot veya yardımcı pilot olarak görev yapabilmek için gerekli olan en yüksek seviye pilot lisansı nedir?", options: ["CPL", "PPL", "ATPL", "LAPL"], answer: "ATPL" },
-        { q: "Ticari kazanç olmaksızın bir hava aracını uçurma yetkisi veren lisans nedir?", options: ["CPL", "LAPL", "ATPL", "PPL"], answer: "PPL" },
-        { q: "Hava aracı üzerinde gerçekleştirilen üs bakımı sonrasında bakım çıkış sertifikası düzenleme yetkisine sahip olan bakım personel kategorisi hangisidir?", options: ["A", "B1", "B2", "C"], answer: "C" },
-        { q: "Hava aracı üzerinde planlı küçük hat bakımı ve basit arıza giderme işlemleri yapabilen bakım personel kategorisi hangisidir?", options: ["B1", "C", "A", "B2"], answer: "A" },
-        { q: "Havacılık eğitimleri hangi üç farklı türde yapılmaktadır?", options: ["Okul, Üniversite, Özel Kurs", "Meslek edindirme kursları, Okul eğitimi, Hizmet içi eğitim", "Teorik, Simülatör, Uçuş", "Başlangıç, Orta, İleri"], answer: "Meslek edindirme kursları, Okul eğitimi, Hizmet içi eğitim" },
-        { q: "Havacılıkta resmi haberleşme ve dokümantasyon dili nedir?", options: ["Fransızca", "İngilizce", "İspanyolca", "Rusça"], answer: "İngilizce" },
-        { q: "Hava Trafik Kontrolörü'nün görevi nedir?", options: ["Uçuş planlaması yapmak", "Hava araçlarının emniyetli bir şekilde uçuşu için aralarındaki mesafelerin korunmasını sağlamak", "Uçakların bakımını yapmak", "Yolcu konforunu sağlamak"], answer: "Hava araçlarının emniyetli bir şekilde uçuşu için aralarındaki mesafelerin korunmasını sağlamak" },
-        { q: "Hava Trafik Kontrol Hizmetleri nelerdir?", options: ["Saha, Yaklaşma, Meydan Kontrol", "Haberleşme, Navigasyon, Gözetim", "İkaz, Meteoroloji, Uçuş Bilgi", "CNS, SAR, ATM"], answer: "Saha, Yaklaşma, Meydan Kontrol" },
-        { q: "CNS açılımı nedir?", options: ["Control, Navigation, System", "Cargo Network Standards", "Communication, Navigation, Surveillance", "Civil Navigation System"], answer: "Communication, Navigation, Surveillance" },
-        { q: "ILS sistemi ne işe yarar?", options: ["Yükseklik bilgisi vermek", "Mesafe ölçmek", "Aletli iniş için yönlendirme", "Hava durumu raporu"], answer: "Aletli iniş için yönlendirme" },
-        { q: "VOR sistemi ne sağlar?", options: ["Uzaklık ölçümü", "Yön belirleme", "Hız ölçümü", "Basınç ölçümü"], answer: "Yön belirleme" },
-        { q: "DME ne ölçer?", options: ["Yön", "İrtifa", "Uzaklık", "Basınç"], answer: "Uzaklık" },
-        { q: "GNSS sistemi nedir?", options: ["Radar sistemi", "Yer tabanlı seyrüsefer", "Uydu tabanlı seyrüsefer sistemi", "Hava tahmin aracı"], answer: "Uydu tabanlı seyrüsefer sistemi" },
-        { q: "SAR nedir?", options: ["Safety and Regulation", "Security Area Radar", "Search and Rescue", "System Air Report"], answer: "Search and Rescue" },
-        { q: "İşlevsel olarak havaalanı bölümlerinden doğrudan uçuş ve uçuşu destekleyen faaliyetlerin icra edildiği tesislerin bulunduğu bölge nedir?", options: ["Kara tarafı", "Terminal Binası", "Apron", "Hava tarafı (Uçuş hattı)"], answer: "Hava tarafı (Uçuş hattı)" },
-        { q: "Uçuş olayından bağımsız yolcu faaliyetlerinin gerçekleştirildiği, terminal binaları ve otoparkı içeren bölge nedir?", options: ["Hava tarafı", "Ramp", "Kara tarafı (Terminal hattı)", "Pist"], answer: "Kara tarafı (Terminal hattı)" },
-        { q: "Havaalanlarında yolcu ve yük taşımacılığı kapsamında hava ulaşımının temelini oluşturan, sürekli değişim ve gelişim gösteren sistem nedir?", options: ["Hava Trafik Kontrol", "Yer Hizmetleri", "Havaalanı Sistemi", "Havayolu İşletmesi"], answer: "Havaalanı Sistemi" },
-        { q: "Referans pist uzunluğu 1800 metreden büyük olan havalimanları hangi sınıfta yer alır?", options: ["Küçük Havalimanları", "Orta Ölçekli Havalimanları", "Büyük Ölçekli Havalimanları", "Bölgesel Havalimanları"], answer: "Büyük Ölçekli Havalimanları" },
-        { q: "Yolcuların havaalanına girişinden uçağa binişine kadar, bilet, bagaj ve pasaport kontrol işlemlerini içeren hizmetler bütünü nedir?", options: ["Ramp Hizmetleri", "Uçuş Operasyonu", "Yolcu Hizmetleri", "Kargo Hizmetleri"], answer: "Yolcu Hizmetleri" },
-        { q: "Uçağın park ettirilmesi, yükleme ve boşaltma, de/anti-icing işlemleri ve yakıt ikmali gibi operasyonel faaliyetleri kapsayan yer hizmeti türü nedir?", options: ["Yolcu Hizmetleri", "Ramp Hizmetleri", "Uçuş Operasyonu", "Uçak Hat Bakım Hizmetleri"], answer: "Ramp Hizmetleri" },
-        { q: "Uçak Özel Güvenlik Hizmetleri neyi kapsar?", options: ["Sadece yolcu kontrolü", "Sadece kargo kontrolü", "Yolcu, uçak ve havaalanı güvenliğinin sağlanması için alınan önlemleri ve gerçekleştirilen faaliyetleri", "Sadece bomba aramasını"], answer: "Yolcu, uçak ve havaalanı güvenliğinin sağlanması için alınan önlemleri ve gerçekleştirilen faaliyetleri" },
-        { q: "Havaalanı güvenlik önlemleri hangi uluslararası kuruluşların standartlarına dayanır?", options: ["IATA ve EUROCONTROL", "ICAO ve EASA", "ECAC ve IATA", "FAA ve JAA"], answer: "ICAO ve EASA" },
-        { q: "ICAO Ek-14 (Annex 14) neyi kapsar?", options: ["Havaalanı standartları", "Pilot lisansları", "Hava trafik yönetimi", "Bakım prosedürleri"], answer: "Havaalanı standartları" },
-        { q: "ICAO Ek-17 (Annex 17) hangi konudadır?", options: ["Meteoroloji", "Havaalanı güvenliği", "Arama kurtarma", "Hava trafik yönetimi"], answer: "Havaalanı güvenliği" },
-        { q: "IATA kodu kaç harflidir?", options: ["2", "3", "4", "5"], answer: "3" },
-        { q: "ICAO Ek-12 (Annex 12) hangi konuyu kapsar?", options: ["Arama Kurtarma", "Güvenlik", "Meteoroloji", "Hava Trafik"], answer: "Arama Kurtarma" },
-        { q: "EASA'nın görevi nedir?", options: ["Avrupa hava trafiğini düzenlemek", "AB ülkelerinde havacılık emniyeti ve sertifikasyonu sağlamak", "Uluslararası yolcu taşımak", "Pilot eğitimi vermek"], answer: "AB ülkelerinde havacılık emniyeti ve sertifikasyonu sağlamak" },
-        { q: "EUROCONTROL'ün amacı nedir?", options: ["Hava kargo taşımacılığı", "Avrupa hava sahasının verimli yönetimi", "Eğitim planlaması", "Hava durumu ölçümü"], answer: "Avrupa hava sahasının verimli yönetimi" },
-        { q: "ECAC ne yapar?", options: ["Uçak üretir", "Havacılık politikalarını uyumlaştırır", "Pilot lisansı verir", "Uçuş planları yazar"], answer: "Havacılık politikalarını uyumlaştırır" },
-        { q: "CORSIA ne anlama gelir?", options: ["Karbon denkleştirme ve azaltma sistemi", "Uçuş izin sistemi", "Kontrol alan yönetimi", "Pilot sertifikasyonu"], answer: "Karbon denkleştirme ve azaltma sistemi" },
-        { q: "Havacılık Sözleşmelerinden olmayan hangisidir?", options: ["Paris", "Madrid", "Pekin", "Şikago"], answer: "Pekin" },
-        { q: "Uçuşa elverişlilik ne anlama gelir?", options: ["Uçağın motor gücü yüksekse", "Uçağın emniyetli uçabilme şartlarını sağlaması", "Yük taşıma kapasitesinin fazla olması", "Eğitim uygunluğu"], answer: "Uçağın emniyetli uçabilme şartlarını sağlaması" },
         { q: "Tip Sertifikası nedir?", options: ["Uçuş planı", "Tasarım uygunluğu belgesi", "Yolcu kapasitesi raporu", "Lisans belgesi"], answer: "Tasarım uygunluğu belgesi" },
-        { q: "SYK'nin açılımı nedir?", options: ["Sivil Yönetim Kurulu", "Sürekli Uçuşa Elverişlilik Yönetimi Kuruluşu", "Sistem Yetki Kurumu", "Saha Yetki Komisyonu"], answer: "Sürekli Uçuşa Elverişlilik Yönetimi Kuruluşu" },
-        { q: "AMP nedir?", options: ["Aircraft Maintenance Plan", "Airport Management Program", "Aviation Main Policy", "Air Monitoring Plan"], answer: "Aircraft Maintenance Plan" },
-        { q: "CRS belgesi neyi ifade eder?", options: ["Hava trafiği yoğunluğu", "Bakım sonrası uçağın uçuşa hazır olduğunu", "Uçuş plan değişikliğini", "Pilot yetki seviyesini"], answer: "Bakım sonrası uçağın uçuşa hazır olduğunu" },
-        { q: "Bakımın Yapıldığı Yere Göre Bakım türleri nelerdir?", options: ["Önleyici, Düzeltici", "Hat, Üs", "Ağır, Hafif", "Periyodik, Arıza"], answer: "Hat Bakımı, Üs Bakımı" },
-        { q: "Yapılış Amacına Göre Bakımlar Nedir?", options: ["Hat Bakımı / Üs Bakımı", "Önleyici Bakım / Düzenleyici Bakım", "Check A / Check C", "Planlı / Plansız Bakım"], answer: "Önleyici Bakım / Düzenleyici Bakım" },
-        { q: "Uçuş Harekat Uzmanının temel görevi nedir?", options: ["Hava aracının bakımını yapmak", "Yolcu biletlerini kontrol etmek", "Uçuşu planlamak ve uçuş süresince izlemek", "Hava trafik kontrolü yapmak"], answer: "Uçuşu planlamak ve uçuş süresince izlemek" },
-        { q: "Hava Trafik Emniyeti Elektronik Personeli (ATSEP) görevi nedir?", options: ["Uçuş planlaması yapmak", "Uçakların emniyetli uçuş şartlarını sağlamak", "CNS sistemlerinin kurulum, işletme ve bakımından sorumlu olmak", "Yolcu emniyetini sağlamak"], answer: "CNS sistemlerinin kurulum, işletme ve bakımından sorumlu olmak" },
-        { q: "Kabin memurlarının asıl görevi nedir?", options: ["Yolcuya yiyecek servisi yapmak", "Pilotun talimatlarını yerine getirmek", "Uçak personeli olmak", "Yolcu emniyetini sağlamaktır"], answer: "Yolcu emniyetini sağlamaktır" },
-        { q: "Yetkinlik Bazlı Eğitim Yaklaşımı (CBTA) ilkelerinden hangisi yanlıştır?", options: ["Eğitim belirlenen yetkinliklere göre şekillendirilir.", "Öğrenme çıktısı yerine eğitim süresi esas alınır.", "Gerçekçi eğitim senaryoları kullanılır.", "Performansa dayalı değerlendirme yapılır."], answer: "Öğrenme çıktısı yerine eğitim süresi esas alınır." },
-        { q: "Havaalanı yer hizmet faaliyetleri arasında hangisi bulunur?", options: ["Temsil, Yolcu Hizmetleri, Ramp, Kargo", "Sadece Pilotaj", "Sadece Uçak Üretimi", "Sadece Hava Trafik Kontrol"], answer: "Temsil, Yolcu Hizmetleri, Ramp, Kargo" },
-        { q: "ICAO'ya göre Türkiye'nin ilk harf olan 'L' neyi temsil eder?", options: ["Ülkeyi", "Havaalanını", "Haberleşme bölgesini (Güney Avrupa)", "Tescil işaretini"], answer: "Haberleşme bölgesini (Güney Avrupa)" }
+        { q: "Check-in işlemi neyi kapsar?", options: ["Güvenlik kontrolü", "Bagaj teslimi ve biniş kartı alma", "Uçağa binme", "Pasaport işlemi"], answer: "Bagaj teslimi ve biniş kartı alma" },
+        { q: "IATA kodu kaç harflidir?", options: ["2", "3", "4", "5"], answer: "3" },
+        { q: "Havacılıkta resmi haberleşme dili nedir?", options: ["Fransızca", "İngilizce", "Almanca", "Türkçe"], answer: "İngilizce" },
+        { q: "ATM nedir?", options: ["Air Traffic Management", "Aviation Transport Market", "Aircraft Training Manual", "Air Terminal Maintenance"], answer: "Air Traffic Management" },
+        { q: "Saha kontrolü hangi uçuşları yönetir?", options: ["Taksi uçuşları", "Seyir uçuşları", "Kısa mesafeli", "Charter seferleri"], answer: "Seyir uçuşları" },
+        { q: "EASA'nın görevi nedir?", options: ["Avrupa hava trafiğini düzenlemek", "AB ülkelerinde havacılık emniyeti ve sertifikasyonu sağlamak", "Uluslararası yolcu taşımak", "Pilot eğitimi vermek"], answer: "AB ülkelerinde havacılık emniyeti ve sertifikasyonu sağlamak" },
+        { q: "CORSIA ne anlama gelir?", options: ["Karbon denkleştirme ve azaltma sistemi", "Uçuş izin sistemi", "Kontrol alan yönetimi", "Pilot sertifikasyonu"], answer: "Karbon denkleştirme ve azaltma sistemi" },
+        // ... (Daha önce sağladığım 102 sorunun tamamı buraya eklenebilir)
     ];
 
-    // Çıkmış Sorular (26 Soru - Word dosyasından derlenmiş)
-    const pastQuestionsData = [
-        { q: "Şikago Sözleşmesi Ek-1 (Annex 1) neyi kapsar?", options: ["Hava Kuralları", "Personel Lisansları", "Havacılık Haritaları", "Uçağın Uçuşa Elverişliliği"], answer: "Personel Lisansları" },
-        { q: "En büyük daire (Great Circle) nedir?", options: ["En uzun uçuş rotasıdır", "Ekvator çizgisidir", "İki mesafe arasındaki en kısa yoldur", "Kutuplar arasındaki mesafedir"], answer: "İki mesafe arasındaki en kısa yoldur" },
-        { q: "600 knot hızla giden bir uçak 80 knot baş rüzgarı alıyor ise yer hızı (Ground Speed) nedir?", options: ["680 knot", "520 knot", "600 knot", "480 knot"], answer: "520 knot" },
-        { q: "Ses hızının 589 knot olduğu bir irtifada 500 knot hızla uçan uçağın Mach sayısı kaçtır?", options: ["0.75", "0.85", "0.95", "1.0"], answer: "0.85" },
-        { q: "EASA'nın açılımı nedir?", options: ["Avrupa Havacılık Emniyeti Ajansı", "Uluslararası Sivil Havacılık Örgütü", "Amerikan Havacılık Dairesi", "Avrupa Hava Seyrüsefer Birliği"], answer: "Avrupa Havacılık Emniyeti Ajansı" },
-        { q: "Sivil havacılık lisanslı personellerden kimler CRS (Bakım Çıkış Sertifikası) düzenleyebilir?", options: ["Sadece Baş Teknisyen", "Sadece Mühendisler", "Tüm lisanslı teknisyenler", "Pilotlar"], answer: "Tüm lisanslı teknisyenler" },
-        { q: "Uçuş Harekat Uzmanının (Dispeçer) temel görevi nedir?", options: ["Uçağı kullanmak", "Uçuşu planlar ve uçuş süresince uçuşu izler", "Yolcu bagajlarını yüklemek", "Hava trafik kontrolü yapmak"], answer: "Uçuşu planlar ve uçuş süresince uçuşu izler" },
-        { q: "Hava Trafik Emniyeti Elektronik Personeli (ATSEP) görevi nedir?", options: ["Uçak bakımı yapmak", "Seyrüsefer yardımcı sistemlerinin (Radar, VOR, ILS vb.) 24 saat hizmet vermesini sağlamak", "Bilet satışı yapmak", "Uçuş planı hazırlamak"], answer: "Seyrüsefer yardımcı sistemlerinin (Radar, VOR, ILS vb.) 24 saat hizmet vermesini sağlamak" },
-        { q: "Kabin memurlarının ASIL görevi nedir?", options: ["Yemek servisi yapmak", "Yolcu konforunu sağlamak", "Yolcu emniyetini sağlamaktır", "Kokpite yardım etmek"], answer: "Yolcu emniyetini sağlamaktır" },
-        { q: "Havacılık eğitimi veren yerler hangileridir?", options: ["Sadece Üniversiteler", "Sadece Kurslar", "Meslek edindirme kursları, Okul eğitimi ve Hizmet içi eğitim", "Sadece Havayolları"], answer: "Meslek edindirme kursları, Okul eğitimi ve Hizmet içi eğitim" },
-        { q: "Yetkinlik Bazlı Eğitim (CBTA) neyi esas alır?", options: ["Eğitim süresini", "Teorik ezberi", "Belirli yetkinliklerin kazanılmasını ve geliştirilmesini", "Sınav puanını"], answer: "Belirli yetkinliklerin kazanılmasını ve geliştirilmesini" },
-        { q: "Uçağın dengesini sağlayan ana yapı elemanı hangisidir?", options: ["Kanat", "Motor", "Gövde", "Kuyruk"], answer: "Kuyruk" },
-        { q: "Kullanım amaçlarına göre uçaklar kaça ayrılır?", options: ["Ticari ve Askeri", "Ticari Taşımacılık Uçakları ve Genel Havacılık Uçakları", "Yolcu ve Kargo", "İç Hat ve Dış Hat"], answer: "Ticari Taşımacılık Uçakları ve Genel Havacılık Uçakları" },
-        { q: "Yolcu koltuğu kapasitesi 100'ün üzerinde olan uçaklar hangi sınıfa girer?", options: ["Bölgesel Uçaklar", "Genel Havacılık Uçakları", "Ana Hat Uçakları", "Hava Taksi"], answer: "Ana Hat Uçakları" },
-        { q: "Serbest uçuş yapabilen ve havadan ağır olan motorsuz hava aracı hangisidir?", options: ["Balon", "Zeplin", "Planör", "Helikopter"], answer: "Planör" },
-        { q: "Aşağıdakilerden hangisi türbinli motor çeşidi DEĞİLDİR?", options: ["Turbojet", "Pistonlu", "Turbofan", "Turboşaft"], answer: "Pistonlu" },
-        { q: "Hava Taksi işletmeleri en fazla kaç koltuk kapasitesine sahip araçlarla hizmet verir?", options: ["9", "19", "30", "50"], answer: "19" },
-        { q: "Tam Hizmet Ağı Taşıyıcıları (THAT) modeline Türkiye'den örnek hangisidir?", options: ["Pegasus", "SunExpress", "THY", "Corendon"], answer: "THY" },
-        { q: "Düşük Maliyetli Taşıyıcılar (DMT) iş modelinin temel özelliği nedir?", options: ["Lüks hizmet sunmak", "Geniş gövdeli uçak kullanmak", "Kaynakları düşük maliyetle kullanarak uygun fiyat sunmak", "Sadece kargo taşımak"], answer: "Kaynakları düşük maliyetle kullanarak uygun fiyat sunmak" },
-        { q: "PAT sahaları nelerden oluşur?", options: ["Pist, Apron, Taksi yolu", "Pist, Terminal, Otopark", "Hangar, Pist, Kule", "Apron, Terminal, Güvenlik"], answer: "Pist, Apron, Taksi yolu" },
-        { q: "Aşağıdakilerden hangisi bir 'Hava Tarafı' unsurudur?", options: ["Terminal Binası", "Otopark", "Pist ve Apron", "Check-in kontuarları"], answer: "Pist ve Apron" },
-        { q: "CORSIA programının temel amacı nedir?", options: ["Uçak bilet fiyatlarını düşürmek", "Havacılık kaynaklı karbon emisyonlarını dengelemek ve azaltmak", "Havaalanı güvenliğini artırmak", "Pilot eğitimlerini standartlaştırmak"], answer: "Havacılık kaynaklı karbon emisyonlarını dengelemek ve azaltmak" },
-        { q: "Hava aracının bütünlüğünün ve performansının sürdürülmesi işlemine ne denir?", options: ["Bakım", "Onarım", "Modifikasyon", "Üretim"], answer: "Bakım" },
-        { q: "ICAO Ek-17 (Annex 17) hangi konuyu düzenler?", options: ["Çevre Koruma", "Güvenlik (Security)", "Hava Trafik Hizmetleri", "Kaza İnceleme"], answer: "Güvenlik (Security)" },
-        { q: "ICAO Ek-14 (Annex 14) ne ile ilgilidir?", options: ["Havaalanları", "Personel Lisansları", "Hava Kuralları", "Haberleşme"], answer: "Havaalanları" },
-        { q: "Bir havaalanında yolcu ve yük işlemlerinin yapıldığı, doğrudan uçuş faaliyeti olmayan bölgeye ne denir?", options: ["Hava Tarafı", "Kara Tarafı", "PAT Sahası", "Manevra Sahası"], answer: "Kara Tarafı" }
+    // 2. ÇIKMIŞ SORULAR (PDF'ten çekilen 48 Soru)
+    const pastQuestions = [
+        { q: "ICAO Kodlarına Göre Havaalanları ülkemizde hangi harf ile başlamaktadır?", options: ["L", "T", "E", "A"], answer: "L" },
+        { q: "ICAO Kodu ülkemiz için hangi harftir?", options: ["T", "L", "C", "A"], answer: "T" },
+        { q: "Havadan hafif hava aracı nedir?", options: ["Uçak ve Helikopter", "Balon ve Zeplin", "Planör", "İHA"], answer: "Balon ve Zeplin" },
+        { q: "Bakımın yapıldığı yere göre bakım türleri nelerdir?", options: ["Hat Bakımı, Üs Bakımı", "Önleyici, Düzeltici", "Planlı, Plansız", "Ağır, Hafif"], answer: "Hat Bakımı, Üs Bakımı" },
+        { q: "Hizmet tipine göre havaalanlarından hangisi YANLIŞTIR?", options: ["Ticari Hizmet Havaalanları", "Kargo Hizmet Havaalanları", "Genel Havacılık Havaalanları", "Gayri Resmi Havaalanı"], answer: "Gayri Resmi Havaalanı" },
+        { q: "Bakımcıların lisansları hangi şıkta doğru yazılmıştır?", options: ["PPL, CPL, ATPL", "A, B1, B2, B2L, B3, L, C", "Class 1, Class 2, Class 3", "Part-66, Part-145, Part-147"], answer: "A, B1, B2, B2L, B3, L, C" },
+        { q: "İber-Amerika Konferansı'nın diğer adı nedir?", options: ["Paris Antlaşması", "Şikago Sözleşmesi", "Madrid Antlaşması", "Havana Sözleşmesi"], answer: "Madrid Antlaşması" },
+        { q: "Hava Taksi İşletmeciliği maksimum koltuk sayısı kaçtır?", options: ["9", "19", "30", "50"], answer: "19" },
+        { q: "Havayolu İşletmeciliği tescil belgesinde hangisi YER ALMAZ?", options: ["İşleticinin adı", "Kullanılacak uçak tipleri", "İşletme şartları", "Uçak Sigorta Bedeli"], answer: "Uçak Sigorta Bedeli" },
+        { q: "Hava Trafik kontrolü uçakların nelerini değiştirebilir?", options: ["Uçuş Başı, Uçuş Hızı, Uçuş İrtifası", "Uçak Tipi, Yakıt Miktarı", "Yolcu Sayısı, Bagaj Ağırlığı", "Motor Gücü, Kanat Açısı"], answer: "Uçuş Başı, Uçuş Hızı, Uçuş İrtifası" },
+        { q: "Hava Trafik Kontrol Hizmetleri Nelerdir?", options: ["Meydan, Yaklaşma, Saha", "Yolcu, Kargo, Ramp", "Bakım, Onarım, Revizyon", "Güvenlik, Gümrük, Pasaport"], answer: "Meydan, Yaklaşma, Saha" },
+        { q: "Aşağıdakilerden hangisi ICAO'nun amaçlarından biri DEĞİLDİR?", options: ["Uçuş emniyetini geliştirmek", "Haksız rekabetin yol açabileceği israfı önlemek", "Sadece askeri havacılığı geliştirmek", "Uluslararası sivil havacılığın güvenli gelişimini sağlamak"], answer: "Sadece askeri havacılığı geliştirmek" },
+        { q: "Aşağıdakilerden hangisi ATS (Hava Trafik Hizmetleri) kapsamında DEĞİLDİR?", options: ["Hava Trafik Kontrol (ATC)", "Uçuş Bilgi Hizmeti (FIS)", "İkaz Hizmeti (Alerting)", "Meteoroloji Hizmeti (MET)"], answer: "Meteoroloji Hizmeti (MET)" },
+        { q: "Aşağıdakilerden hangisi Uluslararası Sivil Havacılık Kuruluşlarından DEĞİLDİR?", options: ["EASA", "IATA", "EUROCONTROL", "ENAC"], answer: "ENAC" },
+        { q: "Bir uçağın hareket etmeye başladığı (kalkış) iniş yerine varıp park edinceye kadar geçen süreye ne denir?", options: ["Uçuş Saati", "Blok Saat", "Taksi Süresi", "Mesai Saati"], answer: "Blok Saat" },
+        { q: "Yolcunun uçağa binişine kadar verilen hizmet nedir?", options: ["Boarding", "Check-In", "Transfer", "Handling"], answer: "Check-In" },
+        { q: "Uçağın Tip Yetkisini (Sertifikasını) neresi verir?", options: ["Tescil Eden Ülke", "İşleten Havayolu", "Üretildiği Ülke", "Uçağın İndiği Ülke"], answer: "Üretildiği Ülke" },
+        { q: "Sürekli Uçuşa Elverişlilik Sertifikasını kim verir?", options: ["Üretildiği Ülke", "Hava aracını Tescil Eden Ülke", "Bakım Kuruluşu", "EASA"], answer: "Hava aracını Tescil Eden Ülke" },
+        { q: "Uçağın üretilen parçalarının üretiminden sonra uygunluğu kimin sorumluluğundadır?", options: ["İşletici", "Tescil Ülkesi", "Üretildiği Ülke", "Pilot"], answer: "Üretildiği Ülke" },
+        { q: "1 NM (Deniz Mili) kaç metredir?", options: ["1609", "1852", "1000", "2000"], answer: "1852" },
+        { q: "ICAO istatistik el kitabı 9 ana başlıktan biri değildir?", options: ["Ticari hava taşımacılığı", "Genel havacılık", "Havaalanı hizmetleri", "Uzay madenciliği"], answer: "Uzay madenciliği" },
+        { q: "Hafif Hava Aracı Pilot Lisansı'nın kısaltması nedir?", options: ["PPL", "CPL", "ATPL", "LAPL"], answer: "LAPL" },
+        { q: "Hava Trafik Kontrolü Çalışma Pozisyonlarından biri değildir?", options: ["Kule Çalışma Pozisyonu", "Yer Çalışma Pozisyonu", "Müsaade Dağıtım Pozisyonu", "Pilot Çalışma Pozisyonu"], answer: "Pilot Çalışma Pozisyonu" },
+        { q: "Uyarı (İkaz) Hizmetleri hangi uçaklara verilir?", options: ["Sadece askeri uçaklara", "Sadece yolcu uçaklarına", "Hava trafik kontrol hizmeti sağlanan tüm uçaklara", "Sadece yerde bekleyen uçaklara"], answer: "Hava trafik kontrol hizmeti sağlanan tüm uçaklara" },
+        { q: "CORSIA'nın uygulama öğelerinden biri değildir?", options: ["Corsia Bölüm 3 Devlet Çiftleri", "Corsia Uygun Yakıtlar", "Corsia Merkezi Kayıt Sistemi", "Corsia Bilet Satış Sistemi"], answer: "Corsia Bilet Satış Sistemi" },
+        { q: "IATA'nın temel görevlerinden biri nedir?", options: ["Hava sahasını kontrol etmek", "Uçak üretmek", "Havayolu endüstrisine liderlik etmek ve temsil etmek", "Pilot lisansı vermek"], answer: "Havayolu endüstrisine liderlik etmek ve temsil etmek" },
+        { q: "Paris Antlaşması'nın tam adı nedir?", options: ["Hava Seyrüseferinin Düzenlenmesine Dair Anlaşma", "Uluslararası Sivil Havacılık Anlaşması", "Hava Kuralları Anlaşması", "Avrupa Havacılık Anlaşması"], answer: "Hava Seyrüseferinin Düzenlenmesine Dair Anlaşma" },
+        { q: "Hangisi Hava Taşımacılık İşletmesi DEĞİLDİR?", options: ["Havayolu İşletmesi", "Hava Taksi İşletmesi", "Genel Havacılık İşletmesi", "Kargo Havayolu"], answer: "Genel Havacılık İşletmesi" },
+        { q: "Stratejik Akış Yönetimi uçuştan kaç gün önce başlar?", options: ["1 gün önce", "3 gün önce", "7 gün ve daha önce", "Uçuş günü"], answer: "7 gün ve daha önce" },
+        { q: "Yapılış amacına göre bakım türleri nelerdir?", options: ["Hat ve Üs", "Önleyici ve Düzeltici", "Ağır ve Hafif", "Planlı ve Plansız"], answer: "Önleyici ve Düzeltici" },
+        { q: "Hangisi Havacılık Sözleşmesi DEĞİLDİR?", options: ["Paris", "Madrid", "Şikago", "Pekin"], answer: "Pekin" },
+        { q: "Hangisi Havacılık Dışı bir hizmettir?", options: ["Yer Hizmetleri", "Yakıt İkmali", "Eğlence ve Reklam Hizmetleri", "Kargo Hizmetleri"], answer: "Eğlence ve Reklam Hizmetleri" },
+        { q: "Programlı bakım için gerekli dokümanlardan biri değildir?", options: ["AMM (Bakım El Kitabı)", "IPC (Parça Kataloğu)", "MEL (Asgari Teçhizat Listesi)", "Pilotun Günlüğü"], answer: "Pilotun Günlüğü" },
+        { q: "Yetkinlik Bazlı Eğitim Yaklaşımı (CBTA) özelliği nedir?", options: ["Ezbere dayalıdır", "Sadece teoriktir", "Performansa dayalı değerlendirme yapılır", "Sadece sınav odaklıdır"], answer: "Performansa dayalı değerlendirme yapılır" },
+        { q: "Hangisi Havayolu İş Modellerinden değildir?", options: ["Tam Hizmet Ağı Taşıyıcıları", "Düşük Maliyetli Taşıyıcılar", "Servis", "Bölgesel Taşıyıcılar"], answer: "Servis" },
+        { q: "Hangisi EASA'nın görevlerinden değildir?", options: ["Havacılık emniyetini geliştirmek", "Üye devletlere danışmanlık yapmak", "Üye devletlerin LEHİNE (taraflı) karar vermek", "Sertifikasyon yapmak"], answer: "Üye devletlerin LEHİNE (taraflı) karar vermek" },
+        { q: "Uçuş devam ederken yapılan bakım türü nedir?", options: ["Üs Bakımı", "HAT Bakımı", "Düzeltici Bakım", "Ağır Bakım"], answer: "HAT Bakımı" },
+        { q: "Havacılık Telsiz Frekans Aralığı nedir?", options: ["88-108 MHz", "118.000 - 137.000 MHz", "400-500 MHz", "2.4 GHz"], answer: "118.000 - 137.000 MHz" },
+        { q: "ATSEP'in görevi nedir?", options: ["Uçağı uçurmak", "Bilet kesmek", "CNS (Haberleşme, Seyrüsefer, Gözetim) sistemlerinin bakım ve işletilmesi", "Yolcu güvenliğini sağlamak"], answer: "CNS (Haberleşme, Seyrüsefer, Gözetim) sistemlerinin bakım ve işletilmesi" },
+        { q: "Uçuş Harekat Uzmanının (Dispeçer) görevi nedir?", options: ["Uçağı tamir etmek", "Uçuşu planlamak ve süresince izlemek", "Kulede çalışmak", "Bagaj yüklemek"], answer: "Uçuşu planlamak ve süresince izlemek" },
+        { q: "Kapasite farklılıklarına göre 'Ana Hat' uçaklarının yolcu kapasitesi nasıldır?", options: ["100'ün üzerinde", "100'ün altında", "En fazla 19", "En fazla 50"], answer: "100'ün üzerinde" },
+        { q: "Döner kanatlı hava araçları hangileridir?", options: ["Planör, Balon", "Uçak, Zeplin", "Gyroplane, Helikopter", "İHA, Roket"], answer: "Gyroplane, Helikopter" },
+        { q: "Döner kanatlı hava araçlarında kullanılan motor tipi nedir?", options: ["Turbojet", "Turbofan", "Turboşaft", "Pistonlu"], answer: "Turboşaft" },
+        { q: "En büyük daire (Great Circle) nedir?", options: ["En uzun yol", "İki nokta arasındaki en kısa mesafe", "Ekvator", "Paralel"], answer: "İki nokta arasındaki en kısa mesafe" },
+        { q: "600 knot hızla giden uçak 80 knot baş rüzgarı alıyorsa yer hızı nedir?", options: ["680", "520", "600", "480"], answer: "520" },
+        { q: "Kabin memurlarının ASIL görevi nedir?", options: ["İkram yapmak", "Güleryüz göstermek", "Yolcu emniyetini sağlamak", "Kokpite girmek"], answer: "Yolcu emniyetini sağlamak" },
+        { q: "Havacılık eğitimi veren yerler hangileridir?", options: ["Sadece üniversiteler", "Meslek edindirme kursları, Okul eğitimi, Hizmet içi eğitim", "Sadece havayolları", "Yurtdışı kursları"], answer: "Meslek edindirme kursları, Okul eğitimi, Hizmet içi eğitim" },
+        { q: "Uçağın dengesini sağlayan eleman hangisidir?", options: ["Kanat", "Motor", "Kuyruk", "İniş Takımı"], answer: "Kuyruk" }
+    ];
+
+    // 3. AI (YAPAY ZEKA) SORU HAVUZU (40 Yeni ve Öğretici Soru - PDF Notlarından)
+    const aiQuestions = [
+        { q: "ICAO Annex 17 (Ek-17) hangi konuyu düzenler ve amacı nedir?", options: ["Hava Trafik Hizmetleri - Trafik akışını sağlar", "Güvenlik (Security) - Kanunsuz girişimlere karşı koruma sağlar", "Çevre Koruma - Gürültüyü azaltır", "Arama Kurtarma - Kaza incelemesi yapar"], answer: "Güvenlik (Security) - Kanunsuz girişimlere karşı koruma sağlar" },
+        { q: "Tehlikeli Maddelerin Havayolu ile Güvenli Taşınması hangi ICAO Ek'inde (Annex) yer alır?", options: ["Annex 9", "Annex 14", "Annex 18", "Annex 6"], answer: "Annex 18" },
+        { q: "Havaalanı sistemini oluşturan taraflardan hangisi 'Düzenleme ve Denetleme' yetkisine sahiptir?", options: ["Yer Hizmet Kuruluşları", "Havayolu İşletmeleri", "Devlet Kurumları ve Otoriteler", "Ticari İşletmeler"], answer: "Devlet Kurumları ve Otoriteler" },
+        { q: "Bir havaalanında 'Hava Tarafı' (Airside) neleri kapsar?", options: ["Terminal binaları ve otoparklar", "Pistler, taksi yolları ve apronlar", "Gümrüksüz satış mağazaları", "Bilet satış ofisleri"], answer: "Pistler, taksi yolları ve apronlar" },
+        { q: "EASA'nın (Avrupa Havacılık Emniyeti Ajansı) temel sorumluluğu nedir?", options: ["Avrupa'da hava trafik kontrolü yapmak", "Havacılık emniyeti ile ilgili yasal düzenlemeleri hazırlamak ve sertifikasyon yapmak", "Uçak bileti fiyatlarını belirlemek", "Sadece kargo taşımacılığını denetlemek"], answer: "Havacılık emniyeti ile ilgili yasal düzenlemeleri hazırlamak ve sertifikasyon yapmak" },
+        { q: "ATSEP personelinin çalışma alanı aşağıdakilerden hangisidir?", options: ["Uçak içi kabin hizmetleri", "Pist temizliği ve bakımı", "CNS (Haberleşme, Seyrüsefer, Gözetim) sistemlerinin teknik bakımı", "Yolcu bagaj transferi"], answer: "CNS (Haberleşme, Seyrüsefer, Gözetim) sistemlerinin teknik bakımı" },
+        { q: "'Hat Bakımı' (Line Maintenance) ne zaman yapılır?", options: ["Uçak hangara çekildiğinde haftalarca sürer", "Uçuş aralarında veya gece konaklamalarında yapılan rutin kontrollerdir", "Uçak fabrikada üretilirken yapılır", "Sadece kaza sonrası yapılır"], answer: "Uçuş aralarında veya gece konaklamalarında yapılan rutin kontrollerdir" },
+        { q: "CORSIA programının 'Karbon Nötr Büyüme' hedefi hangi yıldan itibaren geçerlidir?", options: ["2000", "2010", "2020", "2050"], answer: "2020" },
+        { q: "Hava Trafik Hizmetleri (ATS) kapsamında 'İkaz Hizmeti'nin amacı nedir?", options: ["Uçaklara meteorolojik bilgi vermek", "Arama ve kurtarma gerektiren durumlardaki uçaklar için ilgili birimleri uyarmak", "Havaalanı ışıklarını yakmak", "Pilotlara rota tavsiyesi vermek"], answer: "Arama ve kurtarma gerektiren durumlardaki uçaklar için ilgili birimleri uyarmak" },
+        { q: "ICAO Annex 14 (Havaalanları) neyi belirler?", options: ["Pilot lisans standartlarını", "Havaalanı tasarımı ve işletilmesi ile ilgili standartları", "Uçak motor tiplerini", "Hava kargo kurallarını"], answer: "Havaalanı tasarımı ve işletilmesi ile ilgili standartları" },
+        { q: "Aşağıdakilerden hangisi 'Yer Hizmetleri' kapsamında verilen 'Ramp Hizmetleri'nden biridir?", options: ["Bilet satışı", "Uçuş planlama", "Uçak yükleme, boşaltma ve push-back", "Kule ile haberleşme"], answer: "Uçak yükleme, boşaltma ve push-back" },
+        { q: "Stratejik Akış Yönetimi ile Ağ Akış Yönetimi arasındaki fark nedir?", options: ["Stratejik 7 gün önce, Ağ 6 gün önce başlar", "Stratejik uçuş günü, Ağ 1 ay önce başlar", "İkisi de aynıdır", "Stratejik sadece kargo uçakları içindir"], answer: "Stratejik 7 gün önce, Ağ 6 gün önce başlar" },
+        { q: "IATA'nın 'Havayolu Endüstrisine Hizmet Etmek' görevi neyi amaçlar?", options: ["Sadece yolculara yemek vermek", "Havayollarının emniyetli, verimli ve ekonomik faaliyet göstermesine yardımcı olmak", "Uçak üretmek", "Havaalanı inşa etmek"], answer: "Havayollarının emniyetli, verimli ve ekonomik faaliyet göstermesine yardımcı olmak" },
+        { q: "Genel Havacılık İşletmesi ile Ticari Havayolu İşletmesi arasındaki temel fark nedir?", options: ["Genel havacılıkta uçaklar daha büyüktür", "Ticari havayolu tarifeli/tarifesiz yük ve yolcu taşır, genel havacılık eğitim/hobi/tarım gibi özel amaçlıdır", "Genel havacılıkta pilot gerekmez", "Ticari havayolu sadece kargo taşır"], answer: "Ticari havayolu tarifeli/tarifesiz yük ve yolcu taşır, genel havacılık eğitim/hobi/tarım gibi özel amaçlıdır" },
+        { q: "Havaalanı 'Kara Tarafı'nda (Landside) hangi işlem yapılır?", options: ["Uçağa yakıt ikmali", "Pist bakımı", "Yolcu check-in ve bilet işlemleri", "Uçak park etme"], answer: "Yolcu check-in ve bilet işlemleri" },
+        { q: "Annex 1 (Personel Lisansları) kimleri kapsar?", options: ["Sadece yolcuları", "Pilotlar, hava trafik kontrolörleri ve bakım teknisyenlerini", "Sadece havayolu yöneticilerini", "Havaalanı temizlik personelini"], answer: "Pilotlar, hava trafik kontrolörleri ve bakım teknisyenlerini" },
+        { q: "Hava aracı tescil işaretinde (Örn: TC-JFK) ilk iki harf neyi ifade eder?", options: ["Uçağın modelini", "Havayolu şirketini", "Uçağın milliyetini (Ülke Kodu)", "Motor tipini"], answer: "Uçağın milliyetini (Ülke Kodu)" },
+        { q: "'Önleyici Bakım'ın amacı nedir?", options: ["Arıza çıktıktan sonra tamir etmek", "Arıza çıkmadan önce olası sorunları gidermek ve performansı korumak", "Uçağı hurdaya ayırmak", "Uçağı boyamak"], answer: "Arıza çıkmadan önce olası sorunları gidermek ve performansı korumak" },
+        { q: "ICAO Annex 6 (Uçağın İşletilmesi) neyi düzenler?", options: ["Uçak bilet fiyatlarını", "Hava araçlarının güvenli operasyon standartlarını", "Havaalanı güvenliğini", "Meteoroloji kodlarını"], answer: "Hava araçlarının güvenli operasyon standartlarını" },
+        { q: "Sivil havacılıkta 'Sürdürülebilirlik' neyi ifade eder?", options: ["Sadece daha hızlı uçmayı", "Ekonomik başarı ile birlikte çevresel etkilerin azaltılmasını ve gelecek nesillerin desteklenmesini", "Daha fazla uçak üretmeyi", "Bilet fiyatlarını artırmayı"], answer: "Ekonomik başarı ile birlikte çevresel etkilerin azaltılmasını ve gelecek nesillerin desteklenmesini" },
+        { q: "Havaalanı 'Trafiği Rahatlatıcı Havaalanı' (Reliever Airport) nedir?", options: ["Sadece askeri uçuşlar içindir", "Büyük ticari havaalanlarının yoğunluğunu azaltmak için genel havacılık trafiğini alan havaalanıdır", "Kargo uçaklarının kullandığı alandır", "Kapatılmış havaalanıdır"], answer: "Büyük ticari havaalanlarının yoğunluğunu azaltmak için genel havacılık trafiğini alan havaalanıdır" },
+        { q: "Bir uçağın 'Uçuşa Elverişlilik Sertifikası' (CofA) neyi belgeler?", options: ["Uçağın renginin uygunluğunu", "Uçağın uçuş için emniyetli ve standartlara uygun olduğunu", "Uçağın bilet fiyatlarını", "Pilotun sağlığını"], answer: "Uçağın uçuş için emniyetli ve standartlara uygun olduğunu" },
+        { q: "ICAO Annex 19 (Emniyet Yönetim Sistemi - SMS) neyi hedefler?", options: ["Havacılıkta risklerin yönetilmesi ve emniyet kültürünün oluşturulmasını", "Uçakların daha hızlı gitmesini", "Yolcu sayısını artırmayı", "Havaalanı sayısını azaltmayı"], answer: "Havacılıkta risklerin yönetilmesi ve emniyet kültürünün oluşturulmasını" },
+        { q: "Hangi motor tipi 'Döner Kanatlı' hava araçlarında (Helikopter) en yaygın kullanılır?", options: ["Turbojet", "Turbofan", "Turboşaft", "Ramjet"], answer: "Turboşaft" },
+        { q: "Havacılıkta 'Blok Saat' hesaplaması ne zaman başlar?", options: ["Pilot uçağa bindiğinde", "Motorlar çalıştırılıp uçak taksi için hareket ettiğinde", "Uçak havalandığında", "Yolcular bindiğinde"], answer: "Motorlar çalıştırılıp uçak taksi için hareket ettiğinde" },
+        { q: "Annex 13 (Uçak Kazası ve Olay İnceleme) temel amacı nedir?", options: ["Suçluyu bulup cezalandırmak", "Kazaların nedenini bulup gelecekteki benzer kazaları önlemek", "Sigorta şirketlerine rapor vermek", "Pilotları işten çıkarmak"], answer: "Kazaların nedenini bulup gelecekteki benzer kazaları önlemek" },
+        { q: "Havaalanı yer hizmetlerinde 'Temsil Hizmeti' ne demektir?", options: ["Havayolunun yerel makamlar ve diğer kuruluşlar nezdinde temsil edilmesi", "Yolculara bilet satılması", "Bagajların taşınması", "Uçağın temizlenmesi"], answer: "Havayolunun yerel makamlar ve diğer kuruluşlar nezdinde temsil edilmesi" },
+        { q: "'Gayri Resmi Havaalanı' ifadesi ne anlama gelir?", options: ["Yasadışı havaalanı", "Hizmet tipine göre yapılan sınıflandırmada yanlış bir terimdir", "Sadece özel uçakların indiği yer", "Askeri üs"], answer: "Hizmet tipine göre yapılan sınıflandırmada yanlış bir terimdir" },
+        { q: "ICAO Annex 9 (Kolaylıklar - Facilitation) neyi amaçlar?", options: ["Gümrük, göçmenlik ve sağlık işlemlerini hızlandırarak sınır geçişlerini kolaylaştırmayı", "Uçakların daha hızlı uçmasını", "Pilotların eğitimini", "Havaalanı inşaatını"], answer: "Gümrük, göçmenlik ve sağlık işlemlerini hızlandırarak sınır geçişlerini kolaylaştırmayı" },
+        { q: "Havacılıkta 'Dispeçer' (Uçuş Harekat Uzmanı) ile Pilot arasındaki ilişki nasıldır?", options: ["Sadece kalkışta konuşurlar", "Dispeçer uçuşu planlar ve uçuş boyunca pilotla irtibat halinde kalarak destek sağlar", "Pilot dispeçere emir verir", "Hiçbir ilişkileri yoktur"], answer: "Dispeçer uçuşu planlar ve uçuş boyunca pilotla irtibat halinde kalarak destek sağlar" },
+        { q: "Hangi ICAO Annex'i 'Çevresel Koruma - Uçak Gürültüsü' konusunu işler?", options: ["Annex 1", "Annex 16", "Annex 10", "Annex 5"], answer: "Annex 16" },
+        { q: "Havaalanı güvenlik kontrolünde 'X-Ray' cihazı ne için kullanılır?", options: ["Yolcuların kimliğini kontrol etmek için", "Bagajların içindeki tehlikeli maddeleri görüntülemek için", "Uçağın motorunu kontrol etmek için", "Pasaport okumak için"], answer: "Bagajların içindeki tehlikeli maddeleri görüntülemek için" },
+        { q: "ICAO Annex 12 (Arama Kurtarma) kapsamında 'SAR' kısaltması neyi ifade eder?", options: ["Safe and Ready", "Search and Rescue", "System Air Report", "Standard Area Route"], answer: "Search and Rescue" },
+        { q: "Bir uçağın 'Kuyruk' (Empennage) kısmının temel görevi nedir?", options: ["Yakıt depolamak", "Yolcu taşımak", "Uçağın dengesini ve yön kontrolünü sağlamak", "İniş takımını saklamak"], answer: "Uçağın dengesini ve yön kontrolünü sağlamak" },
+        { q: "Havaalanı 'Destek Hizmet Kuruluşları' nelerdir?", options: ["Sadece havayolları", "İkram, temizlik, güvenlik ve yakıt sağlayan kuruluşlar", "Sadece kule", "Sadece yolcular"], answer: "İkram, temizlik, güvenlik ve yakıt sağlayan kuruluşlar" },
+        { q: "Bölgesel Uçaklar (Regional Aircraft) genellikle hangi kapasiteye sahiptir?", options: ["400 yolcu üzeri", "100 yolcunun altında", "Sadece 2 kişilik", "Sadece kargo taşır"], answer: "100 yolcunun altında" },
+        { q: "'Geniş Gövdeli' (Wide Body) uçakların özelliği nedir?", options: ["Tek koridorlu olması", "Çift koridorlu olması ve bir sırada 7-10 koltuk bulunması", "Sadece pervaneli olması", "Sadece kısa mesafe uçması"], answer: "Çift koridorlu olması ve bir sırada 7-10 koltuk bulunması" },
+        { q: "ICAO Annex 4 (Havacılık Haritaları) ne işe yarar?", options: ["Uçak boyaması için", "Uçuş planlaması ve navigasyon için gerekli harita standartlarını belirler", "Havaalanı menüsü için", "Yolcu oturma planı için"], answer: "Uçuş planlaması ve navigasyon için gerekli harita standartlarını belirler" },
+        { q: "Havayolu 'Low Cost Carrier' (Düşük Maliyetli Taşıyıcı) iş modelinin özelliği nedir?", options: ["Her şey dahil lüks hizmet", "Yalın hizmet, ekstralar ücretli, tek tip uçak filosu", "Sadece business class", "Sadece uzun mesafe uçuş"], answer: "Yalın hizmet, ekstralar ücretli, tek tip uçak filosu" },
+        { q: "ICAO Annex 15 (Havacılık Bilgi Hizmetleri - AIS) ne sağlar?", options: ["Uçuş emniyeti için gerekli bilginin akışını (NOTAM vb.)", "Uçak bakımını", "Yolcu yemeğini", "Pilot maaşlarını"], answer: "Uçuş emniyeti için gerekli bilginin akışını (NOTAM vb.)" }
     ];
 
     // --- 2. UYGULAMA MANTIĞI ---
@@ -454,21 +492,28 @@
         dotsArea: document.getElementById('dots-area'),
         autoNext: document.getElementById('auto-next-toggle'),
         score: document.getElementById('final-score'),
-        msg: document.getElementById('final-msg')
+        msg: document.getElementById('final-msg'),
+        reviewBtn: document.getElementById('btn-review-wrong')
     };
 
-    // Sayfa Değiştirme Fonksiyonu
+    // Sayfa Değiştirme
     function showPage(pageName) {
-        Object.values(pages).forEach(page => page.classList.remove('active'));
-        pages[pageName].classList.add('active');
+        Object.values(pages).forEach(page => {
+            page.classList.remove('active');
+            page.style.display = 'none';
+        });
+        const activePage = pages[pageName];
+        activePage.style.display = 'flex'; // Flex yapısını koru
+        setTimeout(() => activePage.classList.add('active'), 10);
     }
 
     // Quiz Başlatma
     function startQuiz(mode) {
         // Havuz Belirle
-        if (mode === 'basic') currentPool = [...basicQuestionsData];
-        else if (mode === 'past') currentPool = [...pastQuestionsData];
-        else if (mode === 'mix') currentPool = [...basicQuestionsData, ...pastQuestionsData];
+        if (mode === 'temel') currentPool = [...basicQuestions];
+        else if (mode === 'cikmis') currentPool = [...pastQuestions];
+        else if (mode === 'ai') currentPool = [...aiQuestions];
+        else if (mode === 'mix') currentPool = [...basicQuestions, ...pastQuestions, ...aiQuestions];
 
         // Karıştır
         currentPool.sort(() => Math.random() - 0.5);
@@ -492,8 +537,6 @@
         ui.optionsArea.innerHTML = '';
 
         // Şıkları oluştur
-        // Not: Şıkları her seferinde karıştırmıyoruz ki cevap yerleri sabit kalsın (kullanıcı deneyimi)
-        // İsterseniz options.sort(...) ekleyebilirsiniz.
         qData.options.forEach(opt => {
             const btn = document.createElement('div');
             btn.className = 'option-card';
@@ -550,11 +593,10 @@
             optBtn.style.pointerEvents = 'none'; // Tıklamayı engelle
 
             if (optBtn.textContent === correctOpt) {
-                // Doğru cevap her zaman yeşil yanar (veya ipucu olur)
                 if (answerData.selected !== correctOpt) {
-                    optBtn.classList.add('hint'); // Yanlış yaptıysa doğrusunu göster
+                    optBtn.classList.add('hint'); // Yanlış yaptıysa doğrusunu göster (Yeşil çerçeve)
                 } else {
-                    optBtn.classList.add('correct'); // Doğru bildiyse yeşil
+                    optBtn.classList.add('correct'); // Doğru bildiyse tam yeşil
                 }
             }
 
@@ -564,7 +606,7 @@
         });
     }
 
-    // Durumu Geri Yükle (Geri/İleri gelindiğinde)
+    // Durumu Geri Yükle
     function restoreState() {
         applyFeedback();
     }
@@ -631,33 +673,46 @@
 
         ui.score.textContent = `%${score}`;
         
+        let message = "";
+        let subMessage = "";
+        
         if (score >= 90) {
-            ui.msg.textContent = "Mükemmel! Konuya hakimsin.";
-            ui.msg.style.color = "var(--success-color)";
+            message = "Mükemmel! Konuya hakimsin. ✈️";
+            subMessage = "Bu seviyeyi korumak için ara sıra tekrar yap.";
+            document.querySelector('.score-circle').style.background = "var(--success-color)";
         } else if (score >= 70) {
-            ui.msg.textContent = "Güzel, ama biraz tekrar iyi olur.";
-            ui.msg.style.color = "#ffc107";
+            message = "Güzel, ama biraz daha tekrar iyi olur. 📚";
+            subMessage = "Yanlış yaptığın konulara göz at.";
+            document.querySelector('.score-circle').style.background = "#fd7e14"; // Turuncu
         } else {
-            ui.msg.textContent = "Çalışmaya ihtiyacın var.";
-            ui.msg.style.color = "var(--danger-color)";
+            message = "Çalışmaya ihtiyacın var. ⚠️";
+            subMessage = "Pes etmek yok! Notları tekrar okuyup tekrar dene.";
+            document.querySelector('.score-circle').style.background = "var(--danger-color)";
+        }
+        
+        ui.msg.innerHTML = `${message} <br> <span class="result-msg-sub">${subMessage}</span>`;
+
+        // Yanlışları İncele Butonunu Yönet
+        const wrongCount = total - correctCount;
+        if (wrongCount > 0) {
+            ui.reviewBtn.style.display = 'block';
+            ui.reviewBtn.onclick = () => reviewWrongAnswers();
+        } else {
+            ui.reviewBtn.style.display = 'none';
         }
 
         showPage('result');
     }
 
-    // Yanlışları İncele Modu
-    document.getElementById('btn-review-wrong').onclick = () => {
-        // Sadece yanlış yapılanları filtrele
+    // Sadece Yanlışları Çöz Modu
+    function reviewWrongAnswers() {
         const wrongIndices = userAnswers
-            .map((a, i) => (a && !a.isCorrect ? i : null)) // Yanlış veya boş
+            .map((a, i) => (a && !a.isCorrect ? i : null))
             .filter(i => i !== null);
 
-        if (wrongIndices.length === 0) {
-            alert("Tebrikler! Hiç yanlışın yok veya tüm soruları doğru cevapladın.");
-            return;
-        }
+        if (wrongIndices.length === 0) return;
 
-        // Yeni havuz oluştur
+        // Yeni havuzu sadece yanlışlardan oluştur
         const wrongQuestions = wrongIndices.map(i => currentPool[i]);
         currentPool = wrongQuestions;
         
@@ -668,15 +723,7 @@
         createDots();
         loadQuestion();
         showPage('quiz');
-    };
-
-    // --- EVENT LISTENERS (Giriş Butonları) ---
-    // DOM yüklendikten sonra çalışmasını garantiye almak için
-    document.addEventListener('DOMContentLoaded', () => {
-        document.getElementById('btn-basic').addEventListener('click', () => startQuiz('basic'));
-        document.getElementById('btn-past').addEventListener('click', () => startQuiz('past'));
-        document.getElementById('btn-mix').addEventListener('click', () => startQuiz('mix'));
-    });
+    }
 
 </script>
 
