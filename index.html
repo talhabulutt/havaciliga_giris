@@ -1482,7 +1482,11 @@
         if(score >= 90) msg.textContent = "Mükemmel! 🚀";
         else if(score >= 75) msg.textContent = "Tebrikler, Geçtiniz! 👍";
         else msg.textContent = "Tekrar Gerekli. 🧐";
+        
+        document.getElementById('res-test-title').textContent = currentQuizTitle;
+        // ---------------------------------------------------------------------
 
+        const circle = document.getElementById('result-circle');
         const wrongOnes = userAnswers.filter(a => a && !a.isCorrect);
         const retryBtn = document.getElementById('btn-retry-session');
         
@@ -1527,6 +1531,7 @@
 </script>
 </body>
 </html>
+
 
 
 
