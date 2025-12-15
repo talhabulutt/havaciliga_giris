@@ -313,10 +313,14 @@
         // ... (Buraya diğer AI sorularınızı ekleyin)
     ];
 
-    // AOF Soruları (Word Dosyasından Eklenenler)
+    // AOF Soruları (Düzenlenmiş Format)
     const aofData = {
         deneme1: [
-            { q: "Yukarıda verilenlerden hangileri düşük maliyetli havayolu işletmelerinin özelliklerindendir? I. Yolcuya yönelik kısıtlı hizmet ve düşük konfor sunarlar. II. Yolcularını genellikle noktadan noktaya taşırlar. III. Uçuşlarını uzun mesafeli hatlarda gerçekleştirirler. IV. Olabildiğince bölgesel ve ikincil havaalanlarını kullanırlar.", options: ["Yalnız I", "II ve III", "Yalnız IV", "I, II ve IV", "I, II, III ve IV"], answer: "I, II ve IV" },
+            { 
+                q: "Aşağıda verilenlerden hangileri düşük maliyetli havayolu işletmelerinin özelliklerindendir?<br><br>I. Yolcuya yönelik kısıtlı hizmet ve düşük konfor sunarlar.<br>II. Yolcularını genellikle noktadan noktaya taşırlar.<br>III. Uçuşlarını uzun mesafeli hatlarda gerçekleştirirler.<br>IV. Olabildiğince bölgesel ve ikincil havaalanlarını kullanırlar.", 
+                options: ["Yalnız I", "II ve III", "Yalnız IV", "I, II ve IV", "I, II, III ve IV"], 
+                answer: "I, II ve IV" 
+            },
             { q: "Aşağıdaki kategorilerden hangisine sahip olan bir hava aracı bakım personeli; bir uçağın tamamı üzerinde gerçekleştirilen üs bakımı sonrasında bakım çıkış sertifikası düzenleme yetkisine sahiptir?", options: ["A", "B1", "B2", "B3", "C"], answer: "C" },
             { q: "Hızlanan akışkanın basıncının düşeceğini veya yavaşlayan akışkanın basıncının artacağını, ya da basıncı azalan akışkanın hızlanacağını, veya basıncı artan akışkanın yavaşlayacağını, kütle ve enerjinin korunumu prensiplerine açıklayan fizik kanunu aşağıdakilerden hangisidir?", options: ["Newton’un Birinci Hareket Kanunu", "Newton’un İkinci Hareket Kanunu", "Newton’un Üçüncü Hareket Kanunu", "Barnoulli Prensibi", "Arşimed Prensibi"], answer: "Barnoulli Prensibi" },
             { q: "Bir hava aracı bakım personeli hava aracı üzerinde planlı küçük hat bakım ve basit arıza giderme işlemleri yapabiliyorsa bu hava aracı bakım personeli aşağıdaki kategorilerden hangisine dahildir?", options: ["B1", "A", "B2", "B3", "C"], answer: "A" },
@@ -347,7 +351,11 @@
             { q: "Aşağıdakilerden hangisinde Türkiye’deki Ticari Hava Taşıma İşletmeleri Yönetmeliği belirtilmiştir?", options: ["SHY-6B", "SHY-6A", "SHY-6C", "SHY-6D", "SHY-6F"], answer: "SHY-6A" },
             { q: "Geniş gövdeli uçaklarda (bir koridorda) en fazla kaç koltuk bulunabilmektedir?", options: ["8", "9", "10", "11", "12"], answer: "10" },
             { q: "Türkiye’de Ticari Hava Taşıma İşletmeleri Yönetmeliği’nde (SHY-6A) en fazla on dokuz koltuk kapasitesine sahip uçaklar ile ticari hava taşımacılığı ile yapılması aşağıdakilerden hangisi ile adlandırılmaktadır?", options: ["Bakım ve Onarım", "Ticari Hava Taşımacılığı", "Hava İşi", "Hava Taksi", "Genel Havacılık"], answer: "Hava Taksi" },
-            { q: "Aşağıdaki bakım işlerinden hangileri düzeltici bakım işlemidir? I. Filitre değişimi II. Uçuş öncesi kontroller III. Patlak bir lastiğin değiştirilmesi", options: ["Sadece I", "Sadece II", "Sadece III", "I ve II", "I, II ve III"], answer: "Sadece III" },
+            { 
+                q: "Aşağıdaki bakım işlerinden hangileri düzeltici bakım işlemidir?<br><br>I. Filitre değişimi<br>II. Uçuş öncesi kontroller<br>III. Patlak bir lastiğin değiştirilmesi", 
+                options: ["Sadece I", "Sadece II", "Sadece III", "I ve II", "I, II ve III"], 
+                answer: "Sadece III" 
+            },
             { q: "…........... hava aracının veya hava aracı parçasının onaylanmış standartlara uygun olarak hangar gerektirmeyen bakım, onarım, parça değiştirme ve hasar giderme işlemlerinin yapılmasını ifade eder. Cümledeki boşluğa hangisi gelmelidir?", options: ["Destek Bakım", "Önleyici Bakım", "Düzeltici Bakım", "Hat Bakım", "Büyük Bakım"], answer: "Hat Bakım" },
             { q: "Tarım, film çekimi, arama ve kurtarma hizmetleri, elektrik ve boru hatlarının muayenesi, vahşi yaşama dair sayımların yapılması gibi amaçlarla kullanılan hava araçları aşağıdakilerden hangisidir?", options: ["Planör", "İnsansız hava araçları", "Genel havacılık uçakları", "Uçurtma", "İş uçağı"], answer: "İnsansız hava araçları" },
             { q: "Türkiye’de de havayoluyla ilk resmî posta taşımacılığı hangi yılda gerçekleştirilmiştir?", options: ["1904", "1910", "1914", "1920", "1924"], answer: "1914" },
@@ -355,12 +363,16 @@
             { q: "Aşağıdakilerden hangileri hava balonunun elemanlarından biri değildir?", options: ["Kubbe", "Yolcular", "Yakıcılar", "Minare", "Pilot"], answer: "Minare" },
             { q: "Aşağıdaki seçeneklerden hangisi düşük maliyetli havayolu işletmelerinin özelliklerinden birisidir?", options: ["Çok sayıda personel istihdam ederler", "Sık uçan yolcu programları vardır", "Farklı kabin sınıflarında hizmet sunarlar", "Yolcularını genellikle noktadan noktaya taşırlar", "Karma filo yapısına sahiptirler"], answer: "Yolcularını genellikle noktadan noktaya taşırlar" },
             { q: "Duran bir cismin üzerine herhangi bir dış kuvvet etki etmedikçe durmasına devam edeceğini, hareket halinde olan bir cismin de herhangi bir dış kuvvet etki etmedikçe hareketine devam edeceğini ifade eden fizik kanunu hangisidir?", options: ["Newton’un Birinci Hareket Kanunu", "Newton’un İkinci Hareket Kanunu", "Newton’un Üçüncü Hareket Kanunu", "Barnoulli Prensibi", "Arşimed Prensibi"], answer: "Newton’un Birinci Hareket Kanunu" },
-            { q: "Döner kanatlı hava araçları ile ilgili aşağıdaki ifadelerden hangisi yanlıştır?", options: ["Rotor hava aracının motor mili tarafından döndürülen bir şafta bağlanmış kanat benzeri elemanlardan meydana gelir", "Helikopter, Otocayro ve Cayrodin döner kanatlı hava aracıdır", "Otocayro havadan ağır döner kanatlı hava aracıdır", "Otocayro ve cayrodin’de yatay uçuş pervane tarafından sağlanmaktadır", "Helikopterde rotor sadece aracın havada tutunmasını sağlar"], answer: "Helikopterde rotor sadece aracın havada tutunmasını sağlar" },
+            { 
+                q: "Döner kanatlı hava araçları ile ilgili aşağıdaki ifadelerden hangisi yanlıştır?", 
+                options: ["Rotor hava aracının motor mili tarafından döndürülen bir şafta bağlanmış kanat benzeri elemanlardan meydana gelir", "Helikopter, Otocayro ve Cayrodin döner kanatlı hava aracıdır", "Otocayro havadan ağır döner kanatlı hava aracıdır", "Otocayro ve cayrodin’de yatay uçuş pervane tarafından sağlanmaktadır", "Helikopterde rotor sadece aracın havada tutunmasını sağlar"], 
+                answer: "Helikopterde rotor sadece aracın havada tutunmasını sağlar" 
+            },
             { q: "Herhangi bir arıza oluşmadan önce yapılan bakım işlemlerine ne ad verilir?", options: ["Düzeltici bakım", "Hat bakım", "Üs bakım", "Önleyici bakım", "Arıza bakım"], answer: "Önleyici bakım" },
             { q: "Havayolu filosundaki bir uçağın gidiş kapısından hareketinden, varış kapısına ulaşıncaya kadar geçen süre aşağıdakilerden hangisi ile adlandırılmaktadır?", options: ["Seyrüsefer saat", "Taksi saat", "Uçuş saat", "Blok saat", "Yaklaşma saat"], answer: "Blok saat" }
         ],
-        final1: [], // Gelecekte eklenecek
-        final2: []  // Gelecekte eklenecek
+        final1: [], 
+        final2: []
     };
 
     /* --- 2. SİSTEM MANTIĞI --- */
@@ -709,4 +721,5 @@
 </script>
 </body>
 </html>
+
 
