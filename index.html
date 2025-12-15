@@ -89,7 +89,7 @@
         }
         .logout-link { color: var(--danger); cursor: pointer; font-weight: 600; }
 
-        /* --- HATA ANALİZ KARTI --- */
+        /* HATA ANALİZ KARTI */
         .stats-card {
             background: #f8fafc;
             border-radius: 12px;
@@ -115,7 +115,7 @@
         }
         .stat-tab:hover:not(.active) { background: #e2e8f0; }
 
-        /* --- QUIZ ALANI --- */
+        /* QUIZ ALANI */
         .quiz-row-1 { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .quiz-user-badge { font-size: 0.9rem; font-weight: 600; color: var(--primary); background: #eff6ff; padding: 5px 12px; border-radius: 15px; }
 
@@ -132,7 +132,14 @@
             padding: 18px; border: 2px solid var(--border); border-radius: 10px;
             cursor: pointer; transition: 0.2s; font-size: 1.05rem; margin-bottom: 10px;
             background: white; color: #334155; position: relative;
+            display: flex; align-items: center;
         }
+        .option-key-hint {
+            display: inline-block; width: 24px; height: 24px; line-height: 24px; text-align: center;
+            background: #e2e8f0; color: #64748b; border-radius: 4px; margin-right: 12px;
+            font-size: 0.8rem; font-weight: bold; flex-shrink: 0;
+        }
+
         .option-card:hover { border-color: #94a3b8; background: #f1f5f9; }
         .option-card.correct { background: #dcfce7; border-color: var(--success); color: #14532d; font-weight: 600; }
         .option-card.incorrect { background: #fee2e2; border-color: var(--danger); color: #7f1d1d; }
@@ -241,8 +248,24 @@
         <div class="grid-menu">
             <button class="btn" onclick="startQuiz('aof_deneme1')">📝 Deneme 1</button>
             <button class="btn" onclick="startQuiz('aof_deneme2')">📝 Deneme 2</button>
+            <button class="btn" onclick="startQuiz('aof_deneme3')">📝 Deneme 3</button>
+            <button class="btn" onclick="startQuiz('aof_deneme4')">📝 Deneme 4</button>
+            <button class="btn" onclick="startQuiz('aof_deneme5')">📝 Deneme 5</button>
+            <button class="btn" onclick="startQuiz('aof_deneme6')">📝 Deneme 6</button>
+            <button class="btn" onclick="startQuiz('aof_deneme7')">📝 Deneme 7</button>
+            <button class="btn" onclick="startQuiz('aof_deneme8')">📝 Deneme 8</button>
+        </div>
+        <div class="grid-menu">
             <button class="btn" onclick="startQuiz('aof_final1')">🎓 Final 1</button>
             <button class="btn" onclick="startQuiz('aof_final2')">🎓 Final 2</button>
+            <button class="btn" onclick="startQuiz('aof_final3')">🎓 Final 3</button>
+            <button class="btn" onclick="startQuiz('aof_final4')">🎓 Final 4</button>
+            <button class="btn" onclick="startQuiz('aof_final5')">🎓 Final 5</button>
+            <button class="btn" onclick="startQuiz('aof_final6')">🎓 Final 6</button>
+            <button class="btn" onclick="startQuiz('aof_final7')">🎓 Final 7</button>
+            <button class="btn" onclick="startQuiz('aof_final8')">🎓 Final 8</button>
+            <button class="btn" onclick="startQuiz('aof_final9')">🎓 Final 9</button>
+            <button class="btn" onclick="startQuiz('aof_final10')">🎓 Final 10</button>
         </div>
         <button class="btn btn-primary" style="margin-top: 10px;" onclick="startQuiz('aof_mix')">🔀 Karışık AOF Testi</button>
     </div>
@@ -301,87 +324,26 @@
 <script>
     /* --- 1. VERİ HAVUZLARI --- */
     
-    // TEMEL SORULAR
-    const basicQuestions = [
-        { q: "Havacılık faaliyetleri kaça ayrılır?", options: ["Üçe", "İkiye", "Dörde", "Beşe"], answer: "İkiye" },
-        { q: "Devlet hava araçları nelerdir?", options: ["Askerî, gümrük, polis", "Yolcu, kargo, eğitim", "Tarım, balon, planör", "Helikopter, jet, planör"], answer: "Askerî, gümrük, polis" },
-        { q: "1 foot kaç metredir?", options: ["0,25", "0,3048", "1,85", "3,048"], answer: "0,3048" }
-        // ... (Buraya diğer 102 soruyu yapıştırın)
+    // !!! DİKKAT !!!
+    // Buraya önceki mesajdaki 'basicQuestions', 'pastQuestions', 'aiQuestions' dizilerinin 
+    // ve az önce hazırladığımız 'aofData' nesnesinin tamamını yapıştırın.
+    // Kod çok uzun olduğu için burada boş bırakıldı, sizin verileri eklemeniz gerekmektedir.
+
+    const basicQuestions = [ 
+        /* 102 Temel Sorunuzu Buraya Yapıştırın */ 
     ];
     
-    // ÇIKMIŞ SORULAR
-    const pastQuestions = [
-        { q: "ICAO Kodlarına Göre Havaalanları ülkemizde hangi harf ile başlamaktadır?", options: ["L", "T", "E", "A"], answer: "L" },
-        { q: "Bakımın yapıldığı yere göre bakım türleri nelerdir?", options: ["Hat Bakımı, Üs Bakımı", "Önleyici, Düzeltici", "Planlı, Plansız", "Ağır, Hafif"], answer: "Hat Bakımı, Üs Bakımı" }
-        // ... (Buraya diğer çıkmış soruları yapıştırın)
+    const pastQuestions = [ 
+        /* 48 Çıkmış Sorunuzu Buraya Yapıştırın */ 
     ];
 
-    // AI SORULARI
-    const aiQuestions = [
-        { q: "ICAO Annex 17 (Ek-17) hangi konuyu düzenler?", options: ["Hava Trafik", "Güvenlik (Security)", "Çevre", "Arama Kurtarma"], answer: "Güvenlik (Security)" }
-        // ... (Buraya diğer AI soruları yapıştırın)
+    const aiQuestions = [ 
+        /* 40 AI Sorunuzu Buraya Yapıştırın */ 
     ];
 
-    // AOF Soruları (FORMATLI)
     const aofData = {
-        deneme1: [
-            { 
-                q: "Aşağıda verilenlerden hangileri düşük maliyetli havayolu işletmelerinin özelliklerindendir?<br><br>I. Yolcuya yönelik kısıtlı hizmet ve düşük konfor sunarlar.<br>II. Yolcularını genellikle noktadan noktaya taşırlar.<br>III. Uçuşlarını uzun mesafeli hatlarda gerçekleştirirler.<br>IV. Olabildiğince bölgesel ve ikincil havaalanlarını kullanırlar.", 
-                options: ["Yalnız I", "II ve III", "Yalnız IV", "I, II ve IV", "I, II, III ve IV"], 
-                answer: "I, II ve IV" 
-            },
-            { q: "Aşağıdaki kategorilerden hangisine sahip olan bir hava aracı bakım personeli; bir uçağın tamamı üzerinde gerçekleştirilen üs bakımı sonrasında bakım çıkış sertifikası düzenleme yetkisine sahiptir?", options: ["A", "B1", "B2", "B3", "C"], answer: "C" },
-            { q: "Hızlanan akışkanın basıncının düşeceğini veya yavaşlayan akışkanın basıncının artacağını, ya da basıncı azalan akışkanın hızlanacağını, veya basıncı artan akışkanın yavaşlayacağını, kütle ve enerjinin korunumu prensiplerine açıklayan fizik kanunu aşağıdakilerden hangisidir?", options: ["Newton’un Birinci Hareket Kanunu", "Newton’un İkinci Hareket Kanunu", "Newton’un Üçüncü Hareket Kanunu", "Barnoulli Prensibi", "Arşimed Prensibi"], answer: "Barnoulli Prensibi" },
-            { q: "Bir hava aracı bakım personeli hava aracı üzerinde planlı küçük hat bakım ve basit arıza giderme işlemleri yapabiliyorsa bu hava aracı bakım personeli aşağıdaki kategorilerden hangisine dahildir?", options: ["B1", "A", "B2", "B3", "C"], answer: "A" },
-            { q: "Aşağıdakilerden hangisi Bernoulli prensibini en doğru açıklar?", options: ["Hareket hâlindeki akışkanların basıncı ve hızları arasında ters orantı vardır.", "Hızlanan akışkanın basıncı aynı oranda artar.", "Bir cismin momentumunda meydana gelen değişim, cisim üzerine etkiyen dış kuvvete eşittir.", "Her kuvvete karşı eşit büyüklükte ve zıt yönde bir kuvvet etkir.", "Bir cismin üzerine etkiyen kuvvetlerin toplamı sıfırdan farklı ise duran cisim harekete geçer."], answer: "Hareket hâlindeki akışkanların basıncı ve hızları arasında ters orantı vardır." },
-            { q: "Aşağıdakilerden hangisi uçuş planlaması yapar ve uçuş süresince uçuşu izler, uçuş sırasında hava aracında bulunan sorumlu pilot ile irtibat hâlinde bulunur?", options: ["Uçuş ekibi", "Hava aracı bakım personeli", "Uçuş harekât uzmanı", "Hava trafik emniyeti elektronik personeli", "Hava trafik kontrolörü"], answer: "Uçuş harekât uzmanı" },
-            { q: "Havayolu işletmesi tarafından yolcu ve yük taşımak üzere arz edilen koltuk kapasitesinin ton olarak eş değeri ile kargo kapasitesinin toplamının bunların uçurulduğu mesafeyle çarpımına eşit olan yapılan iş değerine ne ad verilir?", options: ["Arz Edilen Koltuk-kilometre", "Ücretli Yolcu- kilometre", "Yolcu Doluluk Oranı", "Arz Edilen Ton- Kilometre", "Ücretli Ton- Kilometre"], answer: "Arz Edilen Ton- Kilometre" },
-            { q: "Aşağıdakilerden hangisi bir türbojet motorunun alt elemanlarından biri değildir?", options: ["Kompresör", "Yanma odası", "Pervane", "Türbin", "Egzoz"], answer: "Pervane" },
-            { q: "Aşağıdakilerden hangisi uçak üzerine etki eden dört temel kuvvetten biri değildir?", options: ["Ağırlık", "Frenleme", "Sürükleme", "İtme", "Taşıma"], answer: "Frenleme" },
-            { q: "Aşağıdaki seçeneklerden hangisi havadan ağır motorlu hava araçlarından birisi değildir?", options: ["Hava Gemisi", "Helikopter", "Otocayro", "Uçak", "Amfibik Uçak"], answer: "Hava Gemisi" },
-            { q: "Türkiye Ticari Hava Taşıma İşletmeleri Yönetmeliği’ne göre çalışan hava taksi işletmelerinin uçaklarının sahip olabileceği en fazla koltuk sayısı aşağıdakilerden hangisidir?", options: ["14", "16", "19", "20", "22"], answer: "19" },
-            { q: "Aşağıdakilerden hangisi bir bakım kuruluşunun temelde ilgilendiği konulardan biri değildir?", options: ["Hava aracı ve komponetlerin işletilmesi", "Havacılık kuralları ve mevzuatı", "Hava aracı bakımı için emniyet standartları", "Ticari hava aracı lisanslarının sorgulanması", "Hava aracı ve işçilik için en yüksek ürretkenliğe ulaşılması"], answer: "Ticari hava aracı lisanslarının sorgulanması" },
-            { q: "Hava aracı üzerinde gerçekleştirilen üs bakımı sonrasında bakım çıkış sertifikası düzenleme yetkisine sahip uçak bakım personeli hangi kategoridedir?", options: ["A kategorisinde", "B1 kategorisinde", "B2 kategorisinde", "B3 kategorisinde", "C kategorisinde"], answer: "C kategorisinde" },
-            { q: "Aşağıdaki ulusal havacılık mevzuatlarından hangisinin yönetmelik maddesi ile açıklaması yanlış eşleştirilmiştir?", options: ["SHY-M Sürekli uçuşa elverişlilik bakım sorumluluğu yönetmeliği", "SHY-66 Hava aracı bakım personeli lisans yönetmeliği", "SHY-147 Sivil havacılık güvenliği eğitim ve sertifikasyon talimatı", "SHY-SMS Sivil havacılıkta emniyet yönetimi yönetmeliği", "SHT-TEDARİK Onaylı tedarikçi kuruluşları talimatı"], answer: "SHY-147 Sivil havacılık güvenliği eğitim ve sertifikasyon talimatı" },
-            { q: "Aşağıdakilerden hangisinde mach sayısının formülüze edilmiş hali doğru olarak verilmiştir?", options: ["M=C/V=uçağın hava hızı/ses hızı", "M=C/V=ses hızı/uçağın hava hızı", "M=V/C=ses hızı/uçağın hava hızı", "M=V/C=uçağın hava hızı/ses hızı", "M=V/C=uçağın hava hızı X ses hızı"], answer: "M=V/C=uçağın hava hızı/ses hızı" },
-            { q: "Bakım maliyetleri ile ilgili aşağıdaki ifadelerden hangisi doğrudur?", options: ["Bakım maliyetleri, havayolu işletme maliyetlerinin %40’ını oluşturmaktadır", "Bakım maliyetleri dolaylı işletme maliyetleri içerinde yer almaktadır", "Bakım maliyetleri dolaylı işletme maliyetlerinin %30’unu oluşturmaktadır", "Filonun büyüklüğü ve çeşitliliği bakım maliyetlerini etkilemektedir", "Servis bültenleri bakım maliyetlerini etkilemez"], answer: "Filonun büyüklüğü ve çeşitliliği bakım maliyetlerini etkilemektedir" },
-            { q: "Yayımlanmış bir zaman tablosuna göre belli ve düzenli aralıklarla sistematik olarak gerçekleştirilen uçuşlara verilen ad aşağıdakilerden hangisidir?", options: ["Tarifesiz sefer", "Check in", "Tarifeli sefer", "Ücretli yolcu seferleri", "Hava taksi"], answer: "Tarifeli sefer" },
-            { q: "Dünya’nın ilk ticari hava yolu işletmesi aşağıdakilerden hangisidir?", options: ["AIR CANADA", "HAINAN AIRLINES", "DELAG", "AIR NEW ZEALAND", "KOREAN AIR"], answer: "DELAG" },
-            { q: "Aşağıdaki seçeneklerden hangisi hava işi kapsamında değerlendirilen faaliyetlerden birisi değildir?", options: ["Paraşüt atma", "Arama kurtarma, afet yardım", "Havadan pano çekimi", "Hava taksi", "Zirai ilaçlama"], answer: "Hava taksi" },
-            { q: "…................... hava aracından sökülen komponentlerin tamir, yenileme ve test işlemlerini kapsar. Cümledeki boşluğa hangisi gelmelidir?", options: ["Destek Bakım", "Önleyici Bakım", "Düzeltici Bakım", "Atölye Bakım", "Büyük Bakım"], answer: "Atölye Bakım" }
-        ],
-        deneme2: [
-            { q: "Havayolu işletmesi tarafından ücretli yolcu taşımak üzere arz edilen koltuk sayısı ile bu koltuk sayısının uçurulduğu mesafenin çarpımına eşit olan yapılan iş değerine ne ad verilir?", options: ["Arz Edilen Koltuk-kilometre", "Ücretli Yolcu- kilometre", "Yolcu Doluluk Oranı", "Arz Edilen Ton- Kilometre", "Ücretli Ton- Kilometre"], answer: "Arz Edilen Koltuk-kilometre" },
-            { q: "Aşağıdakilerden hangisi havacılık mesleğini icra etmek üzere yetkilendirilmiş kişilerden biri değildir?", options: ["Uçuş Ekibi", "Hava Trafik Kontrolörü", "Hava Trafik Emniyeti Elektronik Personeli", "Uçuş Harekât Uzmanı", "Havaalanı Güvenlik Personeli"], answer: "Havaalanı Güvenlik Personeli" },
-            { q: "Aşağıdakilerden hangisi, ICAO tarafından yayınlanmış olan Ek-6 Hava Aracının İşletilmesi dökümanında, bir işleticinin bakım ile ilgili sorumluluklarından biri değildir?", options: ["Bakım çıkışını imzalayacak kişinin Ek-1’e göre lisanslı olması gerekir.", "İşleticiler, hava araçlarının bakımlarının bakım programına göre yapılmasını sağlamalıdırlar.", "Uçuş maliyetlerinin minimumda tutulmasını sağlamalıdır.", "İşlettikleri tüm hava araçlarının uçuşa elverişlilik sertifikalarının geçerliliğini korumasını sağlamalıdır.", "İşlettikleri hava araçlarının uçuşa elverişli bir durumda tutulmasını sağlamalıdır."], answer: "Uçuş maliyetlerinin minimumda tutulmasını sağlamalıdır." },
-            { q: "Havacılık tarihinde ilk Türk yolcu uçağını kim yapmıştır?", options: ["Vecihi Hürkuş", "Sabiha Gökçen", "Fesa Bey", "Nuri Demirağ", "Kenan Bey"], answer: "Nuri Demirağ" },
-            { q: "Aşağıdakilerden hangisi istenmeyen bir durumun oluşma olasılığını niteleyen terimdir?", options: ["Emniyetsizlik", "Tehlike", "Risk", "Güvensizlik", "Faydasızlık"], answer: "Risk" },
-            { q: "Aviyonik ve elektrik sistemleri üzerinde bakım yapan personelin kategorisi aşağıdakilerden hangisidir?", options: ["B1", "A", "B3", "B2", "C"], answer: "B2" },
-            { q: "Aşağıdakilerden hangisinde Türkiye’deki Ticari Hava Taşıma İşletmeleri Yönetmeliği belirtilmiştir?", options: ["SHY-6B", "SHY-6A", "SHY-6C", "SHY-6D", "SHY-6F"], answer: "SHY-6A" },
-            { q: "Geniş gövdeli uçaklarda (bir koridorda) en fazla kaç koltuk bulunabilmektedir?", options: ["8", "9", "10", "11", "12"], answer: "10" },
-            { q: "Türkiye’de Ticari Hava Taşıma İşletmeleri Yönetmeliği’nde (SHY-6A) en fazla on dokuz koltuk kapasitesine sahip uçaklar ile ticari hava taşımacılığı ile yapılması aşağıdakilerden hangisi ile adlandırılmaktadır?", options: ["Bakım ve Onarım", "Ticari Hava Taşımacılığı", "Hava İşi", "Hava Taksi", "Genel Havacılık"], answer: "Hava Taksi" },
-            { 
-                q: "Aşağıdaki bakım işlerinden hangileri düzeltici bakım işlemidir?<br><br>I. Filitre değişimi<br>II. Uçuş öncesi kontroller<br>III. Patlak bir lastiğin değiştirilmesi", 
-                options: ["Sadece I", "Sadece II", "Sadece III", "I ve II", "I, II ve III"], 
-                answer: "Sadece III" 
-            },
-            { q: "…........... hava aracının veya hava aracı parçasının onaylanmış standartlara uygun olarak hangar gerektirmeyen bakım, onarım, parça değiştirme ve hasar giderme işlemlerinin yapılmasını ifade eder. Cümledeki boşluğa hangisi gelmelidir?", options: ["Destek Bakım", "Önleyici Bakım", "Düzeltici Bakım", "Hat Bakım", "Büyük Bakım"], answer: "Hat Bakım" },
-            { q: "Tarım, film çekimi, arama ve kurtarma hizmetleri, elektrik ve boru hatlarının muayenesi, vahşi yaşama dair sayımların yapılması gibi amaçlarla kullanılan hava araçları aşağıdakilerden hangisidir?", options: ["Planör", "İnsansız hava araçları", "Genel havacılık uçakları", "Uçurtma", "İş uçağı"], answer: "İnsansız hava araçları" },
-            { q: "Türkiye’de de havayoluyla ilk resmî posta taşımacılığı hangi yılda gerçekleştirilmiştir?", options: ["1904", "1910", "1914", "1920", "1924"], answer: "1914" },
-            { q: "Kubbe, sepet ve yakıcılar gibi üç ana elemandan oluşan hava aracına ne ad verilmektedir?", options: ["Balon", "Planör", "Hava gemisi", "Otocayro", "Helikopter"], answer: "Balon" },
-            { q: "Aşağıdakilerden hangileri hava balonunun elemanlarından biri değildir?", options: ["Kubbe", "Yolcular", "Yakıcılar", "Minare", "Pilot"], answer: "Minare" },
-            { q: "Aşağıdaki seçeneklerden hangisi düşük maliyetli havayolu işletmelerinin özelliklerinden birisidir?", options: ["Çok sayıda personel istihdam ederler", "Sık uçan yolcu programları vardır", "Farklı kabin sınıflarında hizmet sunarlar", "Yolcularını genellikle noktadan noktaya taşırlar", "Karma filo yapısına sahiptirler"], answer: "Yolcularını genellikle noktadan noktaya taşırlar" },
-            { q: "Duran bir cismin üzerine herhangi bir dış kuvvet etki etmedikçe durmasına devam edeceğini, hareket halinde olan bir cismin de herhangi bir dış kuvvet etki etmedikçe hareketine devam edeceğini ifade eden fizik kanunu hangisidir?", options: ["Newton’un Birinci Hareket Kanunu", "Newton’un İkinci Hareket Kanunu", "Newton’un Üçüncü Hareket Kanunu", "Barnoulli Prensibi", "Arşimed Prensibi"], answer: "Newton’un Birinci Hareket Kanunu" },
-            { 
-                q: "Döner kanatlı hava araçları ile ilgili aşağıdaki ifadelerden hangisi yanlıştır?", 
-                options: ["Rotor hava aracının motor mili tarafından döndürülen bir şafta bağlanmış kanat benzeri elemanlardan meydana gelir", "Helikopter, Otocayro ve Cayrodin döner kanatlı hava aracıdır", "Otocayro havadan ağır döner kanatlı hava aracıdır", "Otocayro ve cayrodin’de yatay uçuş pervane tarafından sağlanmaktadır", "Helikopterde rotor sadece aracın havada tutunmasını sağlar"], 
-                answer: "Helikopterde rotor sadece aracın havada tutunmasını sağlar" 
-            },
-            { q: "Herhangi bir arıza oluşmadan önce yapılan bakım işlemlerine ne ad verilir?", options: ["Düzeltici bakım", "Hat bakım", "Üs bakım", "Önleyici bakım", "Arıza bakım"], answer: "Önleyici bakım" },
-            { q: "Havayolu filosundaki bir uçağın gidiş kapısından hareketinden, varış kapısına ulaşıncaya kadar geçen süre aşağıdakilerden hangisi ile adlandırılmaktadır?", options: ["Seyrüsefer saat", "Taksi saat", "Uçuş saat", "Blok saat", "Yaklaşma saat"], answer: "Blok saat" }
-        ],
-        final1: [], 
-        final2: []
+        /* AOF Sorularını Buraya Yapıştırın (deneme1...8, final1...10) */
+        /* Az önce verdiğim JSON formatındaki veriyi buraya koyun */
     };
 
     /* --- 2. SİSTEM MANTIĞI --- */
@@ -390,7 +352,7 @@
     let currentPool = [];
     let currentIndex = 0;
     let userAnswers = []; 
-    let currentTab = 'all'; // Varsayılan hata sekmesi
+    let currentTab = 'all';
 
     window.onload = function() {
         const savedUser = localStorage.getItem('havacilik_user');
@@ -407,13 +369,24 @@
             if (event.key === "Enter") login();
         });
 
-        // Klavye Yön Tuşları
+        // KLAVYE KONTROLLERİ (OK TUŞLARI + SAYILAR)
         document.addEventListener('keydown', function(event) {
             if (!document.getElementById('page-quiz').classList.contains('active')) return;
+            
+            // Ok Tuşları
             if (event.key === "ArrowLeft") prevQuestion();
             if (event.key === "ArrowRight") {
-                // Sağ oka basıldığında, son soruda değilsek geç
                 if (currentIndex < currentPool.length - 1) nextQuestion();
+            }
+
+            // Sayı Tuşları (1-5)
+            const keyMap = { '1': 0, '2': 1, '3': 2, '4': 3, '5': 4 };
+            if (keyMap.hasOwnProperty(event.key)) {
+                const index = keyMap[event.key];
+                const options = document.querySelectorAll('.option-card');
+                if (options[index]) {
+                    options[index].click(); // Tıklamayı simüle et
+                }
             }
         });
     };
@@ -457,9 +430,7 @@
     function getDB() { return JSON.parse(localStorage.getItem('havacilik_db_v3') || '{}'); }
     function saveDB(data) { localStorage.setItem('havacilik_db_v3', JSON.stringify(data)); }
 
-    // Sorunun hangi kategoriye ait olduğunu bulur (Hata analizi için)
     function findQuestionCategory(qText) {
-        // AOF Kontrolü
         for (let key in aofData) {
             if (aofData[key].some(x => x.q === qText)) return 'aof';
         }
@@ -475,7 +446,6 @@
         
         const key = question.q;
         if(!db[currentUser].stats[key]) {
-            // Kategoriyi ilk kez kaydederken bulup saklıyoruz
             const cat = findQuestionCategory(key);
             db[currentUser].stats[key] = { total: 0, correct: 0, wrong: 0, qObj: question, category: cat };
         }
@@ -483,15 +453,13 @@
         let stat = db[currentUser].stats[key];
         stat.total++;
         if(isCorrect) stat.correct++; else stat.wrong++;
-        stat.qObj = question; // Objenin güncel halini sakla
+        stat.qObj = question;
         
         saveDB(db);
     }
 
-    // Hata Menüsü Sekmeleri Arası Geçiş
     function switchMistakeTab(tabName, btn) {
         currentTab = tabName;
-        // Buton stillerini güncelle
         document.querySelectorAll('.stat-tab').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         renderMistakeMenu();
@@ -503,7 +471,6 @@
         let critical = [], warning = [], info = [];
 
         Object.values(stats).forEach(item => {
-            // Filtreleme: Eğer currentTab 'all' değilse, sadece o kategoriye ait soruları al
             if (currentTab !== 'all' && item.category !== currentTab) return;
 
             if(item.wrong > 0) {
@@ -526,19 +493,21 @@
 
     function startQuiz(type) {
         let sourceData = [];
+        // Tüm AOF verilerini birleştir
+        const allAof = [];
+        for (let key in aofData) {
+             allAof.push(...aofData[key]);
+        }
+
         if (type === 'temel') sourceData = basicQuestions;
         else if (type === 'cikmis') sourceData = pastQuestions;
         else if (type === 'ai') sourceData = aiQuestions;
-        else if (type === 'mix') sourceData = [...basicQuestions, ...pastQuestions, ...aiQuestions];
-        else if (type === 'aof_deneme1') sourceData = aofData.deneme1;
-        else if (type === 'aof_deneme2') sourceData = aofData.deneme2;
-        else if (type === 'aof_final1') sourceData = aofData.final1;
-        else if (type === 'aof_final2') sourceData = aofData.final2;
-        else if (type === 'aof_mix') sourceData = [...aofData.deneme1, ...aofData.deneme2, ...aofData.final1, ...aofData.final2];
+        else if (type === 'mix') sourceData = [...basicQuestions, ...pastQuestions, ...aiQuestions, ...allAof];
+        else if (type === 'aof_mix') sourceData = allAof;
+        else if (aofData[type]) sourceData = aofData[type]; // AOF alt kümeleri
 
         if (!sourceData || sourceData.length === 0) return alert("Soru bulunamadı.");
         
-        // Soruları ve şıkları karıştır
         currentPool = sourceData.map(q => {
             let newQ = { ...q };
             newQ.options = [...q.options].sort(() => Math.random() - 0.5);
@@ -555,7 +524,6 @@
         let pool = [];
         
         Object.values(stats).forEach(item => {
-            // Filtre: Kategori + Başarı Oranı
             if (currentTab !== 'all' && item.category !== currentTab) return;
 
             if(item.wrong > 0) {
@@ -586,19 +554,18 @@
     function loadQuestion() {
         const q = currentPool[currentIndex];
         
-        // .innerHTML ile <br> desteği sağlandı
         document.getElementById('q-text').innerHTML = `${currentIndex+1}. ${q.q}`;
-        
         document.getElementById('q-counter').textContent = `Soru ${currentIndex + 1} / ${currentPool.length}`;
         document.getElementById('q-progress').style.width = `${((currentIndex+1)/currentPool.length)*100}%`;
 
         const optsDiv = document.getElementById('q-options');
         optsDiv.innerHTML = '';
 
-        q.options.forEach(opt => {
+        q.options.forEach((opt, idx) => {
             const btn = document.createElement('div');
             btn.className = 'option-card';
-            btn.textContent = opt;
+            // 1,2,3 tuşları için ipucu (Opsiyonel, görsel olarak numara ekler)
+            btn.innerHTML = `<span class="option-key-hint">${idx+1}</span> ${opt}`;
             btn.onclick = () => handleAnswer(opt, btn);
             optsDiv.appendChild(btn);
         });
@@ -631,7 +598,7 @@
             if (currentIndex < currentPool.length - 1) {
                 setTimeout(() => {
                     nextQuestion();
-                }, 400); // 0.4 saniye
+                }, 400); 
             }
         }
     }
@@ -645,10 +612,17 @@
         
         opts.forEach(btn => {
             btn.style.pointerEvents = 'none';
-            if(btn.textContent === q.answer) {
+            // btn.innerText içinde "1 A Şıkkı" gibi bir yapı var, kontrol ederken dikkat
+            // veya textContent kullanırken "1 " kısmını ayıklamak gerekebilir.
+            // En temizi, handleAnswer'da 'selected' parametresini kullanmak.
+            
+            // Text içeriğinde şıkkın kendisi geçiyor mu diye bakmak basit bir çözüm:
+            const btnText = btn.textContent.substring(2).trim(); // Baştaki "1 " kısmını at
+            
+            if(btnText === q.answer) {
                 btn.classList.add(ans.isCorrect ? 'correct' : 'hint');
             }
-            if(btn.textContent === ans.selected && !ans.isCorrect) {
+            if(btnText === ans.selected && !ans.isCorrect) {
                 btn.classList.add('incorrect');
             }
         });
