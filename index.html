@@ -77,7 +77,7 @@
         .btn-danger { background: #fee2e2; color: var(--danger); border-color: #fecaca; }
         .btn-danger:hover { background: var(--danger); color: white; border-color: var(--danger); }
 
-        .grid-menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .grid-menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px; }
 
         /* HEADER & USER */
         .user-header {
@@ -89,20 +89,19 @@
         }
         .logout-link { color: var(--danger); cursor: pointer; font-weight: 600; }
 
-        /* --- ANA MENÜ HATA ANALİZ KARTI --- */
+        /* --- HATA ANALİZ KARTI --- */
         .stats-card {
             background: #f8fafc;
             border-radius: 12px;
             padding: 20px;
             border: 1px solid #e2e8f0;
-            margin-bottom: 15px;
+            margin-top: auto;
         }
         .stats-header {
             display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;
         }
         .stats-title { font-size: 0.95rem; color: var(--text-main); font-weight: 700; text-transform: uppercase; }
         
-        /* Sekmeler (Tabs) */
         .stats-tabs {
             display: flex; gap: 5px; margin-bottom: 15px; overflow-x: auto; padding-bottom: 5px;
         }
@@ -174,6 +173,13 @@
         .score-circle.bad { border-color: var(--danger); color: var(--danger); }
         .score-label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; color: #64748b; margin-top: 5px; }
 
+        .mistake-cat { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-radius: 8px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; border: 1px solid transparent; }
+        .mistake-cat:hover { transform: translateX(5px); }
+        .cat-critical { background: #fef2f2; color: #991b1b; border-color: #fecaca; }
+        .cat-warning { background: #fffbeb; color: #92400e; border-color: #fde68a; }
+        .cat-info { background: #eff6ff; color: #1e40af; border-color: #bfdbfe; }
+        .cat-badge { font-weight: bold; padding: 4px 8px; border-radius: 12px; background: rgba(255,255,255,0.6); font-size: 0.8rem; }
+
         .access-grid::-webkit-scrollbar { width: 6px; }
         .access-grid::-webkit-scrollbar-track { background: #f1f1f1; }
         .access-grid::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
@@ -199,12 +205,16 @@
 
     <div id="page-menu" class="page">
         <h2 style="color: #1e293b; margin-bottom: 20px;">Ana Menü</h2>
+        
         <div class="grid-menu">
             <button class="btn" onclick="startQuiz('temel')">✈️ Temel Sorular (102)</button>
             <button class="btn" onclick="startQuiz('cikmis')">📜 Çıkmış Sorular (48)</button>
             <button class="btn" onclick="startQuiz('ai')">🤖 AI Öğretici (40)</button>
         </div>
-        <button class="btn btn-primary" style="margin-bottom: 20px;" onclick="showPage('page-aof')">📚 AOF Modülü (Deneme/Final)</button>
+
+        <button class="btn" style="width: 100%; margin-bottom: 20px;" onclick="startQuiz('mix')">🔀 Tümünü Karıştır</button>
+
+        <button class="btn btn-primary" style="margin-bottom: 25px;" onclick="showPage('page-aof')">📚 AOF Modülü (Deneme/Final)</button>
         
         <div class="stats-card">
             <div class="stats-header">
@@ -223,8 +233,6 @@
                 <span style="color:#94a3b8; font-size:0.9rem;">Yükleniyor...</span>
             </div>
         </div>
-
-        <button class="btn" style="width: 100%;" onclick="startQuiz('mix')">🔀 Tümünü Karıştır</button>
     </div>
 
     <div id="page-aof" class="page">
@@ -403,7 +411,10 @@
         document.addEventListener('keydown', function(event) {
             if (!document.getElementById('page-quiz').classList.contains('active')) return;
             if (event.key === "ArrowLeft") prevQuestion();
-            if (event.key === "ArrowRight") nextQuestion();
+            if (event.key === "ArrowRight") {
+                // Sağ oka basıldığında, son soruda değilsek geç
+                if (currentIndex < currentPool.length - 1) nextQuestion();
+            }
         });
     };
 
