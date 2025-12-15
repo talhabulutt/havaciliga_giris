@@ -1276,21 +1276,39 @@
     }
 
     function startMistakeQuiz(cat) {
+        // 1. GERİ DÖNÜŞ SAYFASINI AYARLA
+        // Hata analizi ana menüde olduğu için, çıkınca ana menüye dönmeli.
+        returnPageId = 'page-menu';
+
+        // 2. BAŞLIĞI AYARLA
+        let titleText = "";
+        if (cat === 'critical') titleText = "🔴 Kritik Hatalar";
+        else if (cat === 'warning') titleText = "🟠 Sık Yapılan Hatalar";
+        else if (cat === 'info') titleText = "🔵 Nadir Hatalar";
+        
+        document.getElementById('quiz-title').textContent = titleText;
+
+        // 3. HAVUZU OLUŞTUR (Eski kodun aynısı)
         let db = getDB();
-        let stats = db[currentUser].stats;
+        let stats = db[currentUser] ? db[currentUser].stats : {}; // Hata kontrolü eklendi
         let pool = [];
         
-        Object.values(stats).forEach(item => {
-            if (currentTab !== 'all' && item.category !== currentTab) return;
+        // stats verisi yoksa veya boşsa hata vermesin diye kontrol
+        if (stats) {
+            Object.values(stats).forEach(item => {
+                if (currentTab !== 'all' && item.category !== currentTab) return;
 
-            if(item.wrong > 0) {
-                let rate = (item.correct / item.total) * 100;
-                if(cat === 'critical' && rate < 50) pool.push(item.qObj);
-                if(cat === 'warning' && rate >= 50 && rate < 80) pool.push(item.qObj);
-                if(cat === 'info' && rate >= 80) pool.push(item.qObj);
-            }
-        });
+                if(item.wrong > 0) {
+                    let rate = (item.correct / item.total) * 100;
+                    if(cat === 'critical' && rate < 50) pool.push(item.qObj);
+                    if(cat === 'warning' && rate >= 50 && rate < 80) pool.push(item.qObj);
+                    if(cat === 'info' && rate >= 80) pool.push(item.qObj);
+                }
+            });
+        }
         
+        if(pool.length === 0) return alert("Bu kategoride soru yok.");
+
         currentPool = pool.map(q => {
             let newQ = { ...q };
             newQ.options = [...q.options].sort(() => Math.random() - 0.5);
@@ -1496,6 +1514,7 @@
 </script>
 </body>
 </html>
+
 
 
 
