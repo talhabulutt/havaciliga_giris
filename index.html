@@ -1130,8 +1130,11 @@
         q.options.forEach((opt, idx) => {
             const btn = document.createElement('div');
             btn.className = 'option-card';
-            // 1,2,3 tuşları için ipucu (Opsiyonel, görsel olarak numara ekler)
-            btn.innerHTML = `<span class="option-key-hint">${idx+1}</span> ${opt}`;
+            
+            // YENİ HALİ: 65 ASCII kodu 'A' harfidir. idx arttıkça B, C, D diye gider.
+            const letter = String.fromCharCode(65 + idx); 
+            btn.innerHTML = `<span class="option-key-hint">${letter}</span> ${opt}`;
+            
             btn.onclick = () => handleAnswer(opt, btn);
             optsDiv.appendChild(btn);
         });
@@ -1295,6 +1298,7 @@
 </script>
 </body>
 </html>
+
 
 
 
