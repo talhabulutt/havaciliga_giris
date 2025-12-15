@@ -423,6 +423,7 @@
 
     <div id="page-result" class="page">
         <div style="margin: auto; text-align: center;">
+            <h3 id="res-test-title" style="margin-bottom: 20px; color: var(--primary-dark); font-weight: 800;">Test Adı</h3>
             <div class="score-circle" id="result-circle">
                 <span id="res-score">%0</span>
                 <span class="score-label">BAŞARI</span>
@@ -442,6 +443,7 @@
 <script>
 
     let returnPageId = 'page-menu'; // Varsayılan olarak ana menüye döner
+    let currentQuizTitle = ''; // <-- (Test adını tutacak)
     
     /* --- 1. VERİ HAVUZLARI --- */
     
@@ -1256,6 +1258,7 @@
 
         // Başlığı HTML'e gönder
         document.getElementById('quiz-title').textContent = titleText;
+        currentQuizTitle = titleText;
         // -------------------------------------------------------
 
     let sourceData = [];
@@ -1296,6 +1299,7 @@
         else if (cat === 'info') titleText = "🔵 Nadir Hatalar";
         
         document.getElementById('quiz-title').textContent = titleText;
+        currentQuizTitle = titleText;
 
         // 3. HAVUZU OLUŞTUR (Eski kodun aynısı)
         let db = getDB();
