@@ -313,6 +313,10 @@
 
     <div id="page-menu" class="page">
         <h2 style="color: #1e293b; margin-bottom: 20px;">Ana Menü</h2>
+
+        <div style="text-align: center; margin-bottom: 20px; font-weight: 600; color: #475569; background: #f1f5f9; padding: 10px; border-radius: 8px;">
+        🏆 Toplam Çözülen Soru: <span id="total-solved-display" style="color: var(--primary); font-size: 1.2rem;">0</span>
+        </div>
         
         <div class="grid-menu">
             <button class="btn" onclick="startQuiz('temel')">✈️ Temel Sorular (96)</button>
@@ -1072,7 +1076,29 @@
             infoPanel.style.display = 'none';
         }
 
-        if(id === 'page-menu') renderMistakeMenu();
+        if(id === 'page-menu') {
+            renderMistakeMenu(); // Bu satır zaten vardı.
+            
+            // --- BURAYI EKLEYİN: TOPLAM SAYIYI HESAPLA VE GÖSTER ---
+            let db = getDB();
+            let total = 0;
+
+            if (db[currentUser]) {
+                // Eğer kullanıcı var ama 'totalSolved' verisi henüz yoksa (Eski kayıtlar için düzeltme)
+                if (typeof db[currentUser].totalSolved === 'undefined') {
+                    let calculatedTotal = 0;
+                    // Geçmişte çözülen tüm soruları topla
+                    Object.values(db[currentUser].stats).forEach(s => calculatedTotal += s.total);
+                    db[currentUser].totalSolved = calculatedTotal;
+                    saveDB(db); // Düzeltmeyi kaydet
+                }
+                total = db[currentUser].totalSolved;
+            }
+            
+            // HTML'deki yere yazdır
+            const totalEl = document.getElementById('total-solved-display');
+            if(totalEl) totalEl.textContent = total;
+            // -------------------------------------------------------
     }
 
     function login() {
@@ -1112,8 +1138,16 @@
 
     function updateStats(question, isCorrect) {
         let db = getDB();
-        if(!db[currentUser]) db[currentUser] = { stats: {} };
         
+        // Kullanıcı yoksa oluştur
+        if(!db[currentUser]) db[currentUser] = { stats: {}, totalSolved: 0 };
+
+        // Eğer eski bir kullanıcıysa ve 'totalSolved' verisi yoksa 0 olarak başlat
+        if (typeof db[currentUser].totalSolved === 'undefined') {
+            db[currentUser].totalSolved = 0;
+        }
+        
+        // Mevcut istatistik mantığı (Aynen koruyoruz)
         const key = question.q;
         if(!db[currentUser].stats[key]) {
             const cat = findQuestionCategory(key);
@@ -1125,6 +1159,10 @@
         if(isCorrect) stat.correct++; else stat.wrong++;
         stat.qObj = question;
         
+        // --- YENİ EKLENEN KISIM: GENEL SAYACI ARTTIR ---
+        db[currentUser].totalSolved++; 
+        // -----------------------------------------------
+
         saveDB(db);
     }
 
@@ -1419,6 +1457,7 @@
 </script>
 </body>
 </html>
+
 
 
 
