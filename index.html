@@ -1384,7 +1384,8 @@
     }
 
     function retrySessionMistakes() {
-        const wrongs = userAnswers.filter(a => !a.isCorrect).map(a => a.qObj);
+        // Düzeltme: 'a &&' eklendi. Null kontrolü yapıldı.
+        const wrongs = userAnswers.filter(a => a && !a.isCorrect).map(a => a.qObj);
         
         currentPool = wrongs.map(q => {
             let newQ = { ...q };
@@ -1399,6 +1400,7 @@
 </script>
 </body>
 </html>
+
 
 
 
