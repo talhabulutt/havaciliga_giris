@@ -332,6 +332,9 @@
     
     // --- 1. VERİ HAVUZLARI (TAMAMI DOLDURULDU) ---
 
+    
+    // --- 1. VERİ HAVUZLARI (TAMAMI DOLDURULDU) ---
+
     // 1. TEMEL SORU HAVUZU (102 Soru)
     const basicQuestions = [
         { q: "Havacılık faaliyetleri kaça ayrılır?", options: ["Üçe", "İkiye", "Dörde", "Beşe"], answer: "İkiye" },
@@ -539,7 +542,7 @@
 // AOF SORU HAVUZU (TÜM DENEMELER VE FİNALLER)
     const aofData = {
         // --- DENEME SINAVLARI (1-8) ---
-        deneme1: [
+        aof_deneme1: [
             { q: "Aşağıda verilenlerden hangileri düşük maliyetli havayolu işletmelerinin özelliklerindendir?<br><br>I. Yolcuya yönelik kısıtlı hizmet ve düşük konfor sunarlar.<br>II. Yolcularını genellikle noktadan noktaya taşırlar.<br>III. Uçuşlarını uzun mesafeli hatlarda gerçekleştirirler.<br>IV. Olabildiğince bölgesel ve ikincil havaalanlarını kullanırlar.", options: ["Yalnız I", "II ve III", "Yalnız IV", "I, II ve IV", "I, II, III ve IV"], answer: "I, II ve IV" },
             { q: "Aşağıdaki kategorilerden hangisine sahip olan bir hava aracı bakım personeli; bir uçağın tamamı üzerinde gerçekleştirilen üs bakımı sonrasında bakım çıkış sertifikası düzenleme yetkisine sahiptir?", options: ["A", "B1", "B2", "B3", "C"], answer: "C" },
             { q: "Hızlanan akışkanın basıncının düşeceğini veya yavaşlayan akışkanın basıncının artacağını, ya da basıncı azalan akışkanın hızlanacağını, veya basıncı artan akışkanın yavaşlayacağını, kütle ve enerjinin korunumu prensiplerine açıklayan fizik kanunu aşağıdakilerden hangisidir?", options: ["Newton’un Birinci Hareket Kanunu", "Newton’un İkinci Hareket Kanunu", "Newton’un Üçüncü Hareket Kanunu", "Barnoulli Prensibi", "Arşimed Prensibi"], answer: "Barnoulli Prensibi" },
@@ -561,7 +564,7 @@
             { q: "Aşağıdaki seçeneklerden hangisi hava işi kapsamında değerlendirilen faaliyetlerden birisi değildir?", options: ["Paraşüt atma", "Arama kurtarma, afet yardım", "Havadan pano çekimi", "Hava taksi", "Zirai ilaçlama"], answer: "Hava taksi" },
             { q: ".................... hava aracından sökülen komponentlerin tamir, yenileme ve test işlemlerini kapsar. Cümledeki boşluğa hangisi gelmelidir?", options: ["Destek Bakım", "Önleyici Bakım", "Düzeltici Bakım", "Atölye Bakım", "Büyük Bakım"], answer: "Atölye Bakım" }
         ],
-        deneme2: [
+        aof_deneme2: [
             { q: "Havayolu işletmesi tarafından ücretli yolcu taşımak üzere arz edilen koltuk sayısı ile bu koltuk sayısının uçurulduğu mesafenin çarpımına eşit olan yapılan iş değerine ne ad verilir?", options: ["Arz Edilen Koltuk-kilometre", "Ücretli Yolcu- kilometre", "Yolcu Doluluk Oranı", "Arz Edilen Ton- Kilometre", "Ücretli Ton- Kilometre"], answer: "Arz Edilen Koltuk-kilometre" },
             { q: "Aşağıdakilerden hangisi havacılık mesleğini icra etmek üzere yetkilendirilmiş kişilerden biri değildir?", options: ["Uçuş Ekibi", "Hava Trafik Kontrolörü", "Hava Trafik Emniyeti Elektronik Personeli", "Uçuş Harekât Uzmanı", "Havaalanı Güvenlik Personeli"], answer: "Havaalanı Güvenlik Personeli" },
             { q: "Aşağıdakilerden hangisi, ICAO tarafından yayınlanmış olan Ek-6 Hava Aracının İşletilmesi dökümanında, bir işleticinin bakım ile ilgili sorumluluklarından biri değildir?", options: ["Bakım çıkışını imzalayacak kişinin Ek-1’e göre lisanslı olması gerekir.", "İşleticiler, hava araçlarının bakımlarının bakım programına göre yapılmasını sağlamalıdırlar.", "Uçuş maliyetlerinin minimumda tutulmasını sağlamalıdır.", "İşlettikleri tüm hava araçlarının uçuşa elverişlilik sertifikalarının geçerliliğini korumasını sağlamalıdır.", "İşlettikleri hava araçlarının uçuşa elverişli bir durumda tutulmasını sağlamalıdır."], answer: "Uçuş maliyetlerinin minimumda tutulmasını sağlamalıdır." },
@@ -583,7 +586,7 @@
             { q: "Herhangi bir arıza oluşmadan önce yapılan bakım işlemlerine ne ad verilir?", options: ["Düzeltici bakım", "Hat bakım", "Üs bakım", "Önleyici bakım", "Arıza bakım"], answer: "Önleyici bakım" },
             { q: "Havayolu filosundaki bir uçağın gidiş kapısından hareketinden, varış kapısına ulaşıncaya kadar geçen süre aşağıdakilerden hangisi ile adlandırılmaktadır?", options: ["Seyrüsefer saat", "Taksi saat", "Uçuş saat", "Blok saat", "Yaklaşma saat"], answer: "Blok saat" }
         ],
-        deneme3: [
+        aof_deneme3: [
             { q: "Uçuşa elverişlilik (airworthiness) Amerika Birleşik Devletleri’nin ulusal havacılık otoritesi olan ve kuralları dünyanın çok büyük bir kısmında kabul gören Federal Havacılık İdaresi (FAA) tarafından ne şekilde tanımlanmaktadır?", options: ["Risk+Elverişlilik", "Emniyet+Risk", "Güvenirlik+Uygunluk", "Elverişlilik+ Emniyet", "Uygunluk+ Emniyet"], answer: "Uygunluk+ Emniyet" },
             { q: "Türkiye’de Genel Havacılık Yönetmeliği’nde (SHY-6B) ticari hava taşımacılığı kapsamında olmayan yolcu ve yük taşımacılığı ile ücret karşılığı olup olmadığına bakılmaksızın yapılacak hava işi ve eğitim faaliyetleri hangi tip faaliyetler olarak değerlendirilmektedir?", options: ["Hava İşi", "Yer Hizmetleri", "Bakım ve Onarım", "Genel Havacılık", "Hava Taksi"], answer: "Genel Havacılık" },
             { q: "İleri doğru hareketini motor tarafından tahrik edilen pervane gibi bir itme sistemiyle sağlayan, havada tutunmasını ise yine aynı yada başka bir motor tarafından tahrik edilerek döner rotorunda oluşan taşıma ile sağlayan havadan ağır döner kanatlı hava aracı aşağıdakilerden hangisidir?", options: ["Amfibik Uçak", "Uçak", "Hava Gemisi", "Cayrodin", "Helikopter"], answer: "Cayrodin" },
@@ -605,7 +608,7 @@
             { q: "Aşağıdakilerden hangisi genel havacılık faaliyetlerinde kullanılan uçak tiplerinden biridir?", options: ["Pervaneli yolcu uçağı", "Eğitim uçağı", "Kargo uçağı", "İş jeti", "Helikopter"], answer: "Eğitim uçağı" },
             { q: "Havada kabin patlaması kazalarıyla hava taşımacılığı tarihinde önemli bir dönüm noktası olan ve uçuş emniyetinde yapısal tasarımın ne kadar önemli olduğu dersini bütün dünyaya öğreten uçak tipi aşağıdakilerden hangisidir?", options: ["Airbus 300", "Boeing 727", "Airbus 340", "Boeing 747", "Comet"], answer: "Comet" }
         ],
-        deneme4: [
+        aof_deneme4: [
             { q: "Ticari hava taşımacılığında kullanılan hava araçlarının bakımlarını gerçekleştirecek kuruluşun sahip olması gereken yetki aşağıdakilerden hangisidir?", options: ["Part145", "Part121", "Part125", "Part110", "Part147"], answer: "Part145" },
             { q: "Teorik olarak ulaşılabilecek en yüksek güvenilirlik seviyesi aşağıdakilerden hangisidir?", options: ["Durağan güvenilirlik", "Erişilebilir güvenilirlik", "Öngörülebilir güvenilirlik", "Doğal güvenilirlik", "Risk içerem güvenilirlik"], answer: "Doğal güvenilirlik" },
             { q: "Pilotun verdiği kumandaya göre uçağın yükselme veya alçalma hareketi yapmasını sağlayan irtifa dümeni uçağın hangi bölümünde bulunur?", options: ["Dikey kuyruk", "Sağ kanat", "Kanatçık", "Yatay kuyruk", "Uçak gövdesi"], answer: "Yatay kuyruk" },
@@ -627,7 +630,7 @@
             { q: "Hava trafik yönetimi kapsamında haberleşme, seyrüsefer ve gözetim sistemlerinin çalıştırılması ve bakımından sorumlu olan havacılık personeli aşağıdakilerden hangisidir?", options: ["Uçuş ekibi", "Hava aracı bakım personeli", "Hava trafik emniyeti elektronik personeli", "Hava trafik kontrolörü", "Uçuş harekat uzmanı"], answer: "Hava trafik emniyeti elektronik personeli" },
             { q: "Havadan hafif hava araçları batmazlık prensibine göre çalışmaktadır. Bu yüzden hava araçları aşağıdaki hangi adla da anılmaktadır?", options: ["Aeroflot", "Aerostat", "Aeroplane", "Aerospace", "Aeronautic"], answer: "Aerostat" }
         ],
-        deneme5: [
+        aof_deneme5: [
             { q: "Bir hava aracının sürekli uçuşa elverişliliğini sağlamak amacıyla yenileme, kontrol, değişim, kusurların düzeltilmesi gibi kombinasyonlarının uygulanması işlemine ne ad verililr?", options: ["Bakım", "Koruma", "Gözden geçirme", "Sistemsellik", "Ekipman yükleme"], answer: "Bakım" },
             { q: "Türkiye’nin sivil havacılık personeli yetiştirmek amacıyla kurulan ilk yükseköğretim kurumu aşağıdaki kurumlardan hangisidir?", options: ["Anadolu Üniversitesi", "Kocaeli Üniversitesi", "Erciyes Üniversitesi", "Türk Hava Kurumu Üniversitesi", "Necmettin Erbakan Üniversitesi"], answer: "Anadolu Üniversitesi" },
             { q: "Aşağıdakilerden hangisi uçağın başlıca elemanlarından biri değildir?", options: ["Şaft", "Gövde", "Kanat", "İniş Takımları", "Kumanda Yüzeyleri"], answer: "Şaft" },
@@ -649,7 +652,7 @@
             { q: "Hava aracı tarifesi kapsamındaki uçuş operasyonlarını gerçekleştirirken yapılan bakım işlemlerine ne ad verilir?", options: ["Genel bakım", "Hat bakım", "Üs bakım", "Düzeltici bakım", "Önleyici bakım"], answer: "Hat bakım" },
             { q: "Aşağıdakilerden hangisi bakım türleri arasında gösterilemez?", options: ["Önleyici bakım", "Düzeltici bakım", "Hat bakım", "Atölye bakımı", "İşlevsel bakım"], answer: "İşlevsel bakım" }
         ],
-        deneme6: [
+        aof_deneme6: [
             { q: "Aşağıdakilerden hangisi yolculara doğrudan doğruya birer birer bilet satmak yerine, uçaklarındaki koltuk kapasitesinin büyük bir bölümünü veya tamamını tur operatörlerine veya turizm acentelerine satarlar?", options: ["Geleneksel havayolu işletmeleri", "Düşük maliyetli havayolu işletmeleri", "Charter havayolu işletmeleri", "Bölgesel havayolu işletmeleri", "Sadece kargo taşıyan havayolu işletmeleri"], answer: "Charter havayolu işletmeleri" },
             { q: "Aşağıdakilerden hangisi yolcu potansiyeli düşük küçük yerleşimlerle büyük merkezler veya yeterli talep olduğunda diğer küçük yerleşimler arasında hava taşımacılığı hizmeti verirler?", options: ["Geleneksel havayolu işletmeleri", "Düşük maliyetli havayolu işletmeleri", "Charter havayolu işletmeleri", "Bölgesel havayolu işletmeleri", "Sadece kargo taşıyan havayolu işletmeleri"], answer: "Bölgesel havayolu işletmeleri" },
             { q: "Aşağıdaki seçeneklerden hangisi bir bakım kuruluşunda bulunması gereken temel birimlerden birisi değildir?", options: ["Eğitim", "Bilgi Teknolojileri", "Teknik Kütüphane", "Emniyet", "Güvenlik"], answer: "Güvenlik" },
@@ -671,7 +674,7 @@
             { q: "Aerodinamik kuvvetin nasıl oluştuğunu anlamak için aşağıdakilerden hangi kanun ve prensiplerin bilinmesi gerekmektedir?", options: ["Evrensel Çekim Kanunu – Arşimet Prensibi", "Kütle Çekim Kanunu - Varyasyon Prensibi", "Viskosite Kanunu - Radar Prensibi", "Yer Çekimi Kanunu – Newton Prensibi", "Hareket Kanunu – Bernoulli Prensibi"], answer: "Hareket Kanunu – Bernoulli Prensibi" },
             { q: "Aşağıdaki seçeneklerden hangisi bölgesel havayolu işletmelerinin özelliklerinden birisi değildir?", options: ["Yolcu potansiyeli düşük küçük yerleşim yerleri ile büyük merkezler arasında hava taşımacılığı yaparlar", "Geleneksel havayollarının alt şirketleri olarak faaliyet gösterirler", "Uçuş ekiplerine daha düşük maaş öderler", "Sefer düzenledikleri yerlerin ticari, turizm ve ekonomik olarak kalkınmasına katkıda bulunurlar", "Farklı kabin sınıflarında hizmet sunarlar"], answer: "Farklı kabin sınıflarında hizmet sunarlar" }
         ],
-        deneme7: [
+        aof_deneme7: [
             { q: "Ülkemizde faaliyet gösteren onaylı hava aracı bakım kuruluşlarının yetkilendirilmesi için gerekli nitelikler ile kuruluşun faaliyetleri ile ilgili usul ve esaslar SHGM tarafından yayınlanan hangi yönetmeliğe göre düzenlenmiştir?", options: ["SHT-129", "SHY-M", "SHY-145", "SHY-33", "SHT-DENETİM"], answer: "SHY-145" },
             { q: "Aşağıda verilenlerden hangileri güvenirliği arttırır?<br><br>I. Sistem ve komponentlerin daha iyi tasarlanması<br>II. Yedeklemelerin yapılması<br>III. Önleyici bakım yapılması", options: ["Yalnız I", "I ve II", "II ve III", "Yalnız III", "I, II ve III"], answer: "I, II ve III" },
             { q: "Dispeçer ile ilgili aşağıdaki ifadelerden hangisi yanlıştır?", options: ["Uçuş planlaması yapar", "Uçuş süresince uçuşu izler", "Hava aracı ile ilgili acil durumları yetkililere iletir", "Uçuş sırasında pilota bilgi verir.", "Uçuşun planlanması ile ilgili faaliyetlerde sadece kabin ekibi ile koordineli çalışır"], answer: "Uçuşun planlanması ile ilgili faaliyetlerde sadece kabin ekibi ile koordineli çalışır" },
@@ -682,7 +685,7 @@
             { q: "Hava aracı bakım eğitimi kuruluşları yönetmeliği hangi ulusal havacılık mevzuatımızda yer almaktadır?", options: ["SHY-66", "SHY-147", "SHY-145", "SHY-33B", "SHY-M"], answer: "SHY-147" },
             { q: "Uçuş ekibi ile ilgili aşağıdaki ifadelerden hangisi doğrudur?", options: ["Hususi pilotlar ticari uçuş faaliyetlerinde havaaracı kullanamazlar", "Hususi pilotlar her türlü hava aracında uçabilirler", "Ticari pilot yetkilendirildiği hava aracında hususi pilot olarak uçamaz", "Ticari pilot, tek araca sertifikalı hava aracında uçamaz", "Balon pilotu, planör uçurma yetkisine de sahiptir."], answer: "Hususi pilotlar ticari uçuş faaliyetlerinde havaaracı kullanamazlar" }
         ],
-        deneme8: [
+        aof_deneme8: [
             { q: "Aşağıdakilerden hangisi taşımayı üreterek uçağın uçmasını sağlayan, diğer taraftan motorların çalışması için gereken yakıtı taşıyan elemandır?", options: ["Kanat", "Gövde", "Kuyruk", "Motor", "Kumanda yüzeyi"], answer: "Kanat" },
             { q: "Aşağıdakilerden hangisi Sivil Havacılık Genel Müdürlüğü tarafından havayolu işletmelerine verilen işletme ruhsatının adıdır?", options: ["FTO", "AOC", "AMC", "İHA", "AMM"], answer: "AOC" },
             { q: "Türkiye’nin sivil havacılık personeli yetiştirmek amacıyla kurulan ilk yükseköğretim kurumu olan Sivil Havacılık Meslek Yüksekokulu Anadolu Üniversitesi tarafından kaç yılında kurulmuştur?", options: ["1980", "1982", "1983", "1985", "1986"], answer: "1986" },
@@ -706,7 +709,7 @@
         ],
 
         // --- FİNAL SINAVLARI (1-10) ---
-        final1: [
+        aof_final1: [
             { q: "Amacı üye havayolu işletmelerinin ticari sorunlarına çözüm bulmak, işbirliği sağlayarak üyelerin haklarını korumak ve ticari havacılığı teşvik etmek olan kuruluş aşağıdakilerden hangisidir?", options: ["AHM", "SGHA", "IATA", "ISAGO", "ICAO"], answer: "IATA" },
             { q: "Aşağıdakilerden hangisi farklı görev uçuşu olarak tanımlanan uçuşlardan değildir?", options: ["VFR–IFR kurallarına bağlı olarak sürdürülen uçuşlar", "Eğitim uçuşları", "Tarifeli uçuşlar", "Askeri uçuşlar", "Genel havacılık amaçlı uçuşlar"], answer: "VFR–IFR kurallarına bağlı olarak sürdürülen uçuşlar" },
             { q: "Aşağıdaki seçeneklerden hangisi meydan kontrol hizmetlerinde çalışan hava trafik kontrolörlerinin çalışma pozisyonlarından birisi değildir?", options: ["Kule Çalışma Pozisyonu", "Yer Çalışma Pozisyonu", "Yardımcı Çalışma Pozisyonu", "Apron Çalışma Pozisyonu", "Müsaade dağıtım Çalışma Pozisyonu"], answer: "Apron Çalışma Pozisyonu" },
@@ -728,7 +731,7 @@
             { q: "Amacı üye havayolu işletmelerinin ticari sorunlarına çözüm bulmak, işbirliği sağlayarak üyelerin haklarını korumak ve ticari havacılığı teşvik etmek olan birliğin kısa adı aşağıdakileren hangisidir?", options: ["ICAO", "ISAGO", "AHM", "IATA", "IGHC"], answer: "IATA" },
             { q: "Inflight Service olarak adlandırılan hizmetler aşağıdakilerden hangisidir?", options: ["Akaryakıt Sağlama Hizmetleri", "İkram Hizmetleri", "Güvenlik Hizmetleri", "Ramp Hizmetleri", "Kargo ve Posta Hizmetleri"], answer: "İkram Hizmetleri" }
         ],
-        final2: [
+        aof_final2: [
             { q: "2002 yılında kurularak Avrupa Birliği’nin (AB) havacılık emniyeti otoritesi sayılan ve sadece AB üyelerinin üye olabileceği kuruluş aşağıdakilerden hangisidir?", options: ["ICAO", "ECAC", "IATA", "EASA", "EUROCONTROL"], answer: "EASA" },
             { q: "Aşağıdakilerden hangisi hava trafik hizmetlerinin amaçlarından değildir?", options: ["Uçakların güvenliğini sağlamak", "Uçaklar arasında çarpışmaları önlemek", "Düzenli bir trafik akışını sürdürmek ve hızlandırmak", "Uçuş emniyeti için faydalı bilgiler sağlamak", "Arama kurtarmaya ihtiyaç duyan uçak için ilgili kuruluşları uyarmak"], answer: "Uçakların güvenliğini sağlamak" },
             { q: "Bir adayın hava trafik kontrolörü lisans sınavına girebilmesi için kaç yaşından gün almamış olması gerekir?", options: ["30", "31", "32", "33", "34"], answer: "30" },
@@ -750,7 +753,7 @@
             { q: "İniş yönü göstergesi rengi aşağıdakilerden hangisidir?", options: ["Mavi", "Mor", "Sarı", "Kırmızı", "Turuncu"], answer: "Turuncu" },
             { q: "Aşağıdaki seçeneklerden hangisi havaalanlarında kara tarafı tesislerinden birisidir?", options: ["PAT sahası", "Hangar", "Apron", "Kapılar", "Terminal binası"], answer: "Terminal binası" }
         ],
-        final3: [
+        aof_final3: [
             { q: "Havaalanlarının hava tarafı doğrudan uçak operasyonlarının gerçekleştiği; pist, apron ve taksi yolu sisteminden oluşur. Adı geçen bu üçlünün diğer adı aşağıdakilerden hangisidir?", options: ["PAT sahası", "Katı alan", "Terminal binası", "Taksi yolu", "Bilet kontuarları"], answer: "PAT sahası" },
             { q: "Yer hizmetleri faaliyetlerini havayolu işletmeleri adına takip ve denetim yetkisi ne olarak adlandırılır?", options: ["Temsil hizmeti", "Ramp hizmetleri", "Güvenlik hizmetleri", "Yönetim ve gözetim hizmeti", "Destek hizmeti"], answer: "Yönetim ve gözetim hizmeti" },
             { q: "Temel havaalanlarının yıllık yolcu kapasitesi yaklaşık kaçtır?", options: ["250000", "400000", "650000", "850000", "1000000"], answer: "1000000" },
@@ -772,7 +775,7 @@
             { q: "Uluslararası Sivil Havacılık Sözleşmesi’nin Eklerinin hazırlanması ve güncellenmesi görevlerini üstlenen uluslararası kurum aşağıdakilerden hangisidir?", options: ["IATA", "DHMİ", "ICAO", "ECAC", "EASA"], answer: "ICAO" },
             { q: "Arama-kurtarma hizmetine ihtiyaç duyan hava araçlarıyla ilgili olarak gerekli kuruluşları uyarmak ve gerektiğinde bu kuruluşlara yardımcı olmak amacıyla FIR içerisinde verilen hizmete ne ad verilir?", options: ["Arama Kurtarma Hizmeti", "Uçuş Bilgi Hizmeti", "Uyarı Hizmeti", "FIR Hizmeti", "Hava Trafik Hizmeti"], answer: "Uyarı Hizmeti" }
         ],
-        final4: [
+        aof_final4: [
             { q: "Havaaalanı yer hizmeti işletmesinin organizasyon yapısında kalite müdürlüğü aşağıdakilerden hangisine bağlıdır?", options: ["İşletme genel müdür yardımcısı", "Satış genel müdür yardımcısı", "Bilgi sistemleri müdürü", "Genel müdür", "İstasyon müdürü"], answer: "Genel müdür" },
             { q: "Havacılık alfabesine göre “Ufak” kelimesi aşağıdakilerden hangisinde doğru olarak kodlanmıştır?", options: ["Unisex – Fok – Aircraft – Kind", "Uniform – Foxtrot – Alpha – Kilo", "University – Fax – Action – Key", "Unique – Fair – Alphabet – Keyboard", "Unit – Fox – Address – Kitchen"], answer: "Uniform – Foxtrot – Alpha – Kilo" },
             { q: "Varşova Sözleşmesinin yerini alan, Türkiye’de 26 Mart 2011'de yürürlüğe giren Resmî başlığı Hava Yoluyla Uluslararası Taşımacılığa İlişkin Belirli Kuralların Birleştirilmesine Dair olan sözleşme hangisidir?", options: ["Havana Sözleşmesi", "Varşova Sözleşmesi", "Şikago Sözleşmesi", "Montreal Sözleşmesi", "Madrid Sözleşmesi"], answer: "Montreal Sözleşmesi" },
@@ -794,10 +797,10 @@
             { q: "Havaalanı yer hizmet işletmeleri ile havayolu işletmeleri arasındaki anlaşmalar aşağıdaki hangi anlaşma çerçevesinde yapılmaktadır?", options: ["AHM", "SGHA", "SGHM", "ISAGO", "CAVOK"], answer: "SGHA" },
             { q: "Hava tarafında uçak, yolcu ve kargoya verilen hizmetler ne olarak adlandırılır?", options: ["Destek hizmeti", "Temsil hizmeti", "Yolcu hizmetleri", "Ekipman hizmeti", "Ramp hizmetleri"], answer: "Ramp hizmetleri" }
         ],
-        final5: [
+        aof_final5: [
             { q: "Belli bir frekans aralığında çalışan havacılık ve denizcilikte kullanılan yön bulma amaçlı radyo vericisine ne ad verilir?", options: ["VFR", "VOR", "DME", "ILS", "NDB"], answer: "NDB" }
         ],
-        final6: [
+        aof_final6: [
             { q: "Uluslararası Sivil Havacılık Teşkilatı’na göre, maksimum kalkış ağırlığı kaç kg ve daha fazla olan uçakları ağır uçaklar kategorisindedir?", options: ["96000", "106000", "116000", "126000", "136000"], answer: "136000" },
             { q: "Aşağıda verilenlerden hangisi havaalanı yer hizmetleri işletmelerinin organizasyon yapısında genel müdürün altında bulunmamaktadır?<br><br>I. Kalite müdürü<br>II. Hukuk müşaviri<br>III. Bilgi Sistemleri müdürü<br>IV. İşletme müdürü", options: ["I", "II", "I,II", "III", "IV"], answer: "IV" },
             { q: "Hava trafik yönetimi hangi kapsamda değerlendirilir?", options: ["Havacılık yönetimi", "Hava seyrüsefer hizmetleri", "Güvenlik yönetimi", "Emniyet yönetimi", "Tarife güvenilirliği"], answer: "Hava seyrüsefer hizmetleri" },
@@ -819,7 +822,7 @@
             { q: "Bir uçağın havaalanına inişinden kalkışına kadar geçen süre içerisinde uluslararası havacılık kuruluşları ve sivil havacılık yönetmeliğine göre belirlenmiş standartlar çerçevesinde uçağa, yolculara, bagaja ve kargoya sağlanan hizmetlere ne ad verilir?", options: ["Havaalanı yer hizmetleri", "Kargo", "Karayolu taşımacılığı", "Demiryolu taşımacılığı", "Uçuş sistemi"], answer: "Havaalanı yer hizmetleri" },
             { q: "Aşağıdaki seçeneklerden hangisi hava trafik hizmetlerinin amaçlarından birisi değildir?", options: ["Uçaklar arasındaki çarpışmaları önlemek", "Manevra sahasındaki uçakların o sahadaki manialarla çarpışmasını önlemek", "Düzenli bir trfik akışını sürdürmek ve hızlandırmak", "Arama kurtarmaya ihtiyaç duyan uçakla ilgili olarak ilgili kuruluşa yardımcı olmak", "Uçakların uçuşuna yardımcı olmak"], answer: "Uçakların uçuşuna yardımcı olmak" }
         ],
-        final7: [
+        aof_final7: [
             { q: "Uçaklara seyahat uçuşu sırasında verilen hava trafik kontrol hizmeti aşağıdakilerden hangisidir?", options: ["Yaklaşma Kontrol", "Saha Kontrol", "Meydan Kontrol", "Bakım Hizmetleri", "Seyahat Kontrol"], answer: "Saha Kontrol" },
             { q: "Havaalanında uçakla ilgili sunulan hizmetlerden en önemlileri yük kontrol, haberleşme ve uçuş operasyondur. Aşağıdakilerden hangisi yük kontrolü faaliyetlerinden biri değildir?", options: ["Yükleme formaları", "Kaptan yük bilgisi", "W&B", "Manifesto", "Motor çalıştırma"], answer: "Motor çalıştırma" },
             { q: "Cumhuriyetin ilk yıllarında 1933’te kurulan Devlet Hava Yolları İşletmesi günümüzde hangi işletmeye dönüştürülmüştür?", options: ["Türk Hava Yolları Anonim Ortaklığı (THY)", "AnadoluJet", "Atlasjet", "Pegasus Airlines", "Devlet Hava Meydanları İşletmesi"], answer: "Türk Hava Yolları Anonim Ortaklığı (THY)" },
@@ -841,7 +844,7 @@
             { q: "Aşağıdakilerden hangisi meydan kontrol hizmetinde çalışan bir kontrolörün görev alabileceği pozisyonlardan biri değildir?", options: ["Kule Çalışma Pozisyonu", "Yer Çalışma Pozisyonu", "Müsaade Dağıtım Çalışma Pozisyonu", "Kalkış Çalışma Pozisyonu", "Yardımcı Çalışma Pozisyonu"], answer: "Kalkış Çalışma Pozisyonu" },
             { q: "Motor çalıştırma zamanından en geç kaç saat öncesinde uçak işletmecileri tarafından uçuş planları doldurulup gönderilir?", options: ["1 saat", "2 saat", "3 saat", "4 saat", "5 saat"], answer: "3 saat" }
         ],
-        final8: [
+        aof_final8: [
             { q: "Hava araçları arasındaki çarpışmaları önlemek, manevra sahasındaki hava araçlarının o sahadaki mânialarla çarpışmasını önlemek ve düzenli bir trafik akısını sürdürüp hızlandırmak amacı ile hava alanları üzerinde yerde ve üzerindeki boyutları belirli hava sahalarında sunulan hizmetlere ne ad verilir?", options: ["Hava Trafik Hizmeti", "Meydan Konrol Hizmeti", "Yaklaşma Konrrol Hizmeti", "Yol Kontrol Hizmeti", "Saha Kontrol Hizmeti"], answer: "Meydan Konrol Hizmeti" },
             { q: "Jet motorlu uçaklar aşağıda bulunan hangi tür yakıtı kullanmaktadır?<br><br>I. Jet A-1<br>II. Jet B<br>III. Avgas", options: ["Sadece I", "Sadece II", "Sadece III", "I,II", "I,III"], answer: "I,II" },
             { q: "Aşağıdakilerden hangisi ICAO’nun yönetim yapısında yer alır?", options: ["Hava Seyrüseferi Bürosu", "Hava Taşımacılığı Bürosu", "Hukuk ve Dış İlişkiler Bürosu", "Teknik İşbirliği Bürosu", "Uçuş Komitesi"], answer: "Uçuş Komitesi" },
@@ -863,7 +866,7 @@
             { q: "Aşağıdakilerden hangisi kontrol kulelerinde çalışan hava trafik kontrolörlerinin çalışma pozisyonlarından değildir?", options: ["Kule çalışma pozisyonu", "Dispeç pozisyonu", "Yer çalışma pozisyonu", "Müsaade dağıtım çalışma pozisyonu", "Yardımcı çalışma pozisyonu"], answer: "Dispeç pozisyonu" },
             { q: "Aşağıdakilerden hangisi 180-359 derecedeki uçuş başlarına uçan IFR uçaklara tahsis edilebilecek standart bir uçuş seviyesidir?", options: ["360", "350", "330", "235", "245"], answer: "360" }
         ],
-        final9: [
+        aof_final9: [
             { q: "Aşağıdakilerden hangisi hava alanlarının hizmet verdikleri trafik türüne göre yapılan sınıflandırmalarından biridir?", options: ["Uluslararası havaalanları", "Sivil havaalanları", "Askeri havaalanları", "Sivil-askeri havaalanları", "Özel statülü havaalanları"], answer: "Uluslararası havaalanları" },
             { q: "Havaalanı yer hizmeti işletmesinin uygulaması tavsiye edilen tüm standartlar hangi dokümanda yer almaktadır?", options: ["AHM (Airport Handling Manuel)", "ISAGO (Safety Audit Ground Operations Manual)", "SGHA (Standart Ground Handling Agreement)", "ICAO Doküman 9137-AN/898", "ADRM (Airport Development Reference Manuel)"], answer: "AHM (Airport Handling Manuel)" },
             { q: "Güvenirlikle ilgili verilenlerden hangileri doğrudur?<br><br>I. Nicel anlamda bir nesnenin işlevsel kalma yeteneğidir.<br>II. Nitel anlamda, belirli bir zaman aralığında herhangi bir operasyonel aksaklığın oluşmaması olasılığıdır.<br>III. Teknik anlamda bir sistemin ya da bir komponentin standartları ne kadar yakaladığının ölçüsüdür.", options: ["Yalnız I", "I ve II", "Yalnız III", "II ve III", "I,II ve III"], answer: "Yalnız III" },
@@ -885,7 +888,7 @@
             { q: "İşletmenin 12, 18 ve 24 ton kargo taşıma kapasitesine sahip üç uçağı vardır. 12 ton kargo taşıma kapasitesine sahip uçak 500 km’lik mesafeye gidişinde 10, dönüşünde 12 ton kargo taşımıştır. 18 ton taşıma kapasitesine sahip uçak 600 km’lik mesafeye gidişinde 18 ton dönüşünde 15 ton kargo taşımıştır. 24 ton kargo taşıma kapasitesine sahip uçak 800 km mesafeye gidişinde 20, dönüşünde 22 ton kargo taşımıştır. Ücretli kargo-ton km aşağıdakilerden hangisidir?", options: ["56400", "58400", "60400", "62400", "64400"], answer: "64400" },
             { q: "Pist genişliğine bağlı olarak 45m genişlikte kaç şerit bulunur?", options: ["4", "6", "8", "12", "16"], answer: "12" }
         ],
-        final10: [
+        aof_final10: [
             { q: "Aşağıdakilerden hangisi Sivil Havacılık Genel Müdürlüğü hakkında doğru bilgilerden biridir?", options: ["Ulaştırma Bakanlığı bünyesinde Sivil Havacılık Dairesi Başkanlığı kurulmuştur.", "1986 yılında 2920 sayılı Türk Sivil Havacılık Kanunun yürürlüğe girmesinden sonra... SHGM kurulmuştur.", "10 Kasım 2001 tarihinde kabul edilen 5431 sayılı Kanun ile... özerk bir hâle getirmiştir.", "İç İşleri Bakanlığı bünyesinde Sivil Havacılık Dairesi Başkanlığı kurulmuştur.", "10 Kasım 2001 tarihinde kabul edilen 5430 sayılı Kanun ile... özerk bir hâle getirmiştir."], answer: "Ulaştırma Bakanlığı bünyesinde Sivil Havacılık Dairesi Başkanlığı kurulmuştur." },
             { q: "Aşağıdakilerden hangisi IATA’nın genel müdürlüğünün yönetim birimlerinden biridir?", options: ["İnsan, Performans ve Geliştirme", "Üye ve Dış İlişkiler Hizmetleri", "Finansman ve Dağıtım Hizmetleri", "Havaalanları, Yolcu, Kargo ve Güvenlik Hizmetleri", "Emniyet ve Uçuş Operasyonları"], answer: "İnsan, Performans ve Geliştirme" },
             { q: "Aşağıdakilerden hangisi havaalanlarının kara tarafını oluşturan bölümlerinin birinde yer almaz?", options: ["Yolcu indirme ve bekleme alanları", "Pistler", "Bilet kontuarları", "Bagaj işleme alanları", "Araba kiralama büroları"], answer: "Pistler" },
@@ -1292,4 +1295,5 @@
 </script>
 </body>
 </html>
+
 
