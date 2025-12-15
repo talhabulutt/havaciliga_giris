@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Havacılık & AOF Sınav Sistemi</title>
+    <title>Havacılık & AOF Akıllı Sınav Sistemi</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
@@ -12,10 +12,10 @@
             --primary-dark: #1e40af;
             --secondary: #64748b;
             --success: #22c55e;
+            --warning: #f59e0b;
             --danger: #ef4444;
-            --bg: #f8fafc;
+            --bg: #f1f5f9;
             --card: #ffffff;
-            --input-bg: #f1f5f9;
         }
 
         * { box-sizing: border-box; }
@@ -29,46 +29,47 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 10px;
+            padding: 20px;
         }
 
         .app-container {
             background: var(--card);
             width: 100%;
             max-width: 900px;
-            min-height: 650px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.1);
+            min-height: 700px;
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             display: flex;
             flex-direction: column;
             overflow: hidden;
             position: relative;
         }
 
-        /* --- SAYFA GEÇİŞLERİ --- */
+        /* --- SAYFA YAPISI --- */
         .page {
             display: none;
             flex-grow: 1;
             padding: 40px;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.4s ease-out;
+            flex-direction: column;
         }
-        .page.active { display: flex; flex-direction: column; }
+        .page.active { display: flex; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- 1. LOGIN EKRANI --- */
-        .login-content {
+        /* --- LOGIN --- */
+        .login-wrapper {
             margin: auto;
             text-align: center;
+            width: 100%;
             max-width: 400px;
         }
-        .login-content h1 { font-size: 2rem; color: var(--primary); margin-bottom: 10px; }
         .login-input {
             width: 100%;
-            padding: 15px;
+            padding: 16px;
             border-radius: 12px;
             border: 2px solid #e2e8f0;
-            background: var(--input-bg);
+            background: #f8fafc;
             font-size: 1.1rem;
             margin-bottom: 20px;
             text-align: center;
@@ -87,101 +88,118 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
         }
-        .btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
         .btn-primary { background: var(--primary); color: white; border: none; }
         .btn-primary:hover { background: var(--primary-dark); color: white; }
         
+        .btn-danger { border-color: #fecaca; color: var(--danger); }
+        .btn-danger:hover { background: #fef2f2; border-color: var(--danger); }
+
+        /* --- MENÜ GRID --- */
         .grid-menu {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 15px;
-            margin-top: 20px;
+            margin-bottom: 30px;
         }
 
-        /* --- AOF MENU --- */
-        .back-btn {
-            align-self: flex-start;
-            background: none; border: none;
-            color: var(--secondary);
-            font-size: 0.9rem;
-            cursor: pointer;
-            margin-bottom: 20px;
-            display: flex; align-items: center; gap: 5px;
+        .stats-card {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 15px;
         }
-        .back-btn:hover { color: var(--primary); }
+        .stats-title { font-size: 0.9rem; color: var(--secondary); margin-bottom: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
 
-        .section-title { font-size: 1.5rem; font-weight: 700; color: #1e293b; margin-bottom: 20px; }
-
-        /* --- QUIZ ALANI --- */
+        /* --- QUIZ EKRANI --- */
         .quiz-header {
             display: flex; justify-content: space-between; align-items: center;
-            padding-bottom: 20px; border-bottom: 2px solid #f1f5f9; margin-bottom: 30px;
+            padding-bottom: 20px; border-bottom: 2px solid #f1f5f9; margin-bottom: 25px;
         }
-        .progress-badge {
-            background: #e0f2fe; color: #0284c7;
-            padding: 6px 12px; border-radius: 20px; font-weight: 600; font-size: 0.9rem;
+        .progress-bar-container {
+            flex-grow: 1; margin: 0 20px; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden;
         }
-        .question-text { font-size: 1.35rem; font-weight: 600; line-height: 1.5; margin-bottom: 30px; color: #334155; }
+        .progress-bar { height: 100%; background: var(--primary); width: 0%; transition: width 0.3s; }
         
-        .options-list { display: flex; flex-direction: column; gap: 12px; }
+        .question-text { font-size: 1.4rem; font-weight: 700; color: #1e293b; margin-bottom: 25px; line-height: 1.5; }
+        
         .option-card {
-            padding: 18px; border: 2px solid #f1f5f9; border-radius: 12px;
-            cursor: pointer; transition: 0.2s; font-size: 1.05rem; position: relative;
+            padding: 20px; border: 2px solid #f1f5f9; border-radius: 12px;
+            cursor: pointer; transition: 0.2s; font-size: 1.1rem; margin-bottom: 12px;
+            background: white; color: #334155; position: relative;
         }
-        .option-card:hover { border-color: #cbd5e1; background: #f8fafc; }
+        .option-card:hover { border-color: #94a3b8; background: #f8fafc; }
         
-        .option-card.correct { background: #dcfce7; border-color: var(--success); color: #166534; }
-        .option-card.incorrect { background: #fee2e2; border-color: var(--danger); color: #991b1b; }
+        .option-card.correct { background: #dcfce7; border-color: var(--success); color: #14532d; }
+        .option-card.incorrect { background: #fee2e2; border-color: var(--danger); color: #7f1d1d; }
         .option-card.hint { border-color: var(--success); background: #f0fdf4; color: var(--success); font-weight: 600; }
 
+        /* Navigasyon Butonları */
+        .nav-area {
+            display: flex; justify-content: space-between; gap: 15px;
+            margin-top: 30px; padding-top: 20px; border-top: 2px solid #f1f5f9;
+        }
+        .nav-btn {
+            flex: 1; padding: 15px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; font-size: 1rem;
+        }
+        .nav-prev { background: #e2e8f0; color: #475569; }
+        .nav-next { background: var(--primary); color: white; }
+        .nav-prev:disabled { opacity: 0.5; cursor: not-allowed; }
+
         /* Switch */
-        .switch-container { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--secondary); }
-        .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+        .switch-container { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; font-weight: 500; color: var(--secondary); }
+        .switch { position: relative; display: inline-block; width: 48px; height: 26px; }
         .switch input { display:none; }
         .slider { position: absolute; cursor: pointer; top:0; left:0; right:0; bottom:0; background-color: #cbd5e1; transition:.3s; border-radius: 34px; }
-        .slider:before { position: absolute; content:""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition:.3s; border-radius: 50%; }
+        .slider:before { position: absolute; content:""; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: white; transition:.3s; border-radius: 50%; }
         input:checked + .slider { background-color: var(--success); }
-        input:checked + .slider:before { transform: translateX(20px); }
+        input:checked + .slider:before { transform: translateX(22px); }
 
         /* Hızlı Erişim */
-        .dots-area {
+        .dots-grid {
             display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
-            margin-top: auto; padding-top: 20px; border-top: 2px solid #f1f5f9;
-            max-height: 120px; overflow-y: auto;
+            max-height: 100px; overflow-y: auto; margin-top: 20px;
         }
         .dot {
-            width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
-            border-radius: 6px; background: #f1f5f9; color: #64748b; font-size: 0.8rem; cursor: pointer;
+            width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+            border-radius: 8px; background: #f1f5f9; color: #64748b; font-size: 0.85rem; cursor: pointer; border: 1px solid transparent;
         }
-        .dot.current { border: 2px solid var(--primary); color: var(--primary); font-weight: bold; background: white; }
+        .dot.current { border-color: var(--primary); color: var(--primary); font-weight: bold; background: white; }
         .dot.correct { background: var(--success); color: white; }
         .dot.incorrect { background: var(--danger); color: white; }
 
-        /* Sonuç Ekranı */
-        .result-box {
-            text-align: center; margin: auto;
-            padding: 40px; border-radius: 20px; background: #f8fafc;
-        }
+        /* Sonuç */
         .score-circle {
-            width: 150px; height: 150px; border-radius: 50%;
+            width: 160px; height: 160px; border-radius: 50%;
             background: var(--primary); color: white;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            margin: 0 auto 20px; font-size: 3rem; font-weight: 700;
+            margin: 0 auto 20px; font-size: 3.5rem; font-weight: 800;
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
         }
-        .score-label { font-size: 1rem; opacity: 0.8; font-weight: normal; }
 
-        /* Kullanıcı Bilgisi (Header) */
+        /* Kullanıcı Header */
         .user-header {
-            position: absolute; top: 20px; right: 20px;
-            display: flex; align-items: center; gap: 10px;
-            font-size: 0.9rem; color: var(--secondary);
+            position: absolute; top: 20px; right: 20px; z-index: 10;
+            display: flex; align-items: center; gap: 15px;
+            background: rgba(255,255,255,0.8); backdrop-filter: blur(4px);
+            padding: 8px 16px; border-radius: 20px; border: 1px solid #e2e8f0;
         }
-        .logout-btn { color: var(--danger); cursor: pointer; text-decoration: underline; }
+        .logout-link { color: var(--danger); font-size: 0.85rem; cursor: pointer; text-decoration: underline; }
+
+        /* Hata Kategorileri */
+        .mistake-cat {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 12px; border-radius: 8px; margin-bottom: 8px; cursor: pointer; transition: 0.2s;
+            border: 1px solid transparent;
+        }
+        .mistake-cat:hover { transform: translateX(5px); }
+        .cat-critical { background: #fef2f2; color: #991b1b; border-color: #fecaca; }
+        .cat-warning { background: #fffbeb; color: #92400e; border-color: #fde68a; }
+        .cat-info { background: #eff6ff; color: #1e40af; border-color: #bfdbfe; }
+        .cat-badge { font-weight: bold; padding: 4px 8px; border-radius: 12px; background: rgba(255,255,255,0.6); font-size: 0.8rem; }
 
     </style>
 </head>
@@ -190,22 +208,21 @@
 <div class="app-container">
     
     <div id="user-info-panel" class="user-header" style="display: none;">
-        <span>Merhaba, <b id="display-username">Kullanıcı</b></span>
-        <span class="logout-btn" onclick="logout()">Çıkış</span>
+        <span style="font-weight: 600; color: #334155;">👤 <span id="display-username">Misafir</span></span>
+        <span class="logout-link" onclick="logout()">Çıkış</span>
     </div>
 
     <div id="page-login" class="page active">
-        <div class="login-content">
-            <h1>Sınav Sistemi</h1>
-            <p style="color:#64748b; margin-bottom: 30px;">İlerlemeni kaydetmek için bir kullanıcı adı belirle.</p>
-            <input type="text" id="username-input" class="login-input" placeholder="Kullanıcı Adı / Rumuz">
-            <button class="btn btn-primary" style="width:100%" onclick="login()">Giriş Yap</button>
+        <div class="login-wrapper">
+            <h1 style="color: var(--primary); margin-bottom: 10px;">Akıllı Sınav Sistemi</h1>
+            <p style="color: var(--secondary); margin-bottom: 30px;">Havacılık & AOF Çalışma Platformu</p>
+            <input type="text" id="username-input" class="login-input" placeholder="Adınız / Kullanıcı Adı">
+            <button class="btn btn-primary" style="width:100%" onclick="login()">🚀 Başla</button>
         </div>
     </div>
 
     <div id="page-menu" class="page">
-        <h2 style="text-align: center; color: var(--primary);">Soru Havuzları</h2>
-        <p style="text-align: center; color: var(--secondary); margin-bottom: 30px;">Hangi alanda çalışmak istersin?</p>
+        <h2 style="color: #1e293b; margin-bottom: 20px;">Soru Havuzları</h2>
         
         <div class="grid-menu">
             <button class="btn" onclick="startQuiz('temel')">✈️ Temel Sorular (102)</button>
@@ -213,20 +230,25 @@
             <button class="btn" onclick="startQuiz('ai')">🤖 AI Öğretici (40)</button>
         </div>
 
-        <button class="btn btn-primary" style="margin-top: 15px;" onclick="showPage('page-aof')">📚 AOF Sorular (Deneme/Final)</button>
+        <button class="btn btn-primary" style="margin-bottom: 25px;" onclick="showPage('page-aof')">
+            📚 AOF Modülü (Deneme & Final)
+        </button>
         
-        <div style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #f1f5f9;">
-            <h4 style="margin: 0 0 10px 0; color: #334155;">Kişisel İlerleme</h4>
-            <button class="btn" style="border-color: var(--danger); color: var(--danger);" onclick="startMistakeQuiz()">
-                ⚠️ Hatalarımı Çöz (<span id="mistake-count">0</span>)
-            </button>
-            <button class="btn" style="margin-top: 10px; width: 100%;" onclick="startQuiz('mix')">🔀 Tümünü Karıştır (Maraton)</button>
+        <div class="stats-card">
+            <div class="stats-title">📊 Performans Analizi & Hatalar</div>
+            <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 15px;">Yanlış yaptığın sorular başarı oranına göre sınıflandırılır.</p>
+            
+            <div id="mistake-categories">
+                <div style="text-align: center; color: #94a3b8; padding: 10px;">Henüz hata kaydı yok.</div>
+            </div>
         </div>
+
+        <button class="btn" style="width: 100%;" onclick="startQuiz('mix')">🔀 Karışık Maraton (Tümü)</button>
     </div>
 
     <div id="page-aof" class="page">
-        <button class="back-btn" onclick="showPage('page-menu')">← Ana Menü</button>
-        <h2 class="section-title">Açıköğretim (AOF) Testleri</h2>
+        <button class="btn" style="width: auto; align-self: flex-start; padding: 8px 16px; margin-bottom: 20px;" onclick="showPage('page-menu')">← Geri</button>
+        <h2 style="margin-bottom: 20px;">AOF Sınavları</h2>
         
         <div class="grid-menu">
             <button class="btn" onclick="startQuiz('aof_deneme1')">📝 Deneme 1</button>
@@ -234,17 +256,17 @@
             <button class="btn" onclick="startQuiz('aof_final1')">🎓 Final 1</button>
             <button class="btn" onclick="startQuiz('aof_final2')">🎓 Final 2</button>
         </div>
-        
-        <button class="btn btn-primary" style="margin-top: 20px; width: 100%;" onclick="startQuiz('aof_mix')">🔀 Karışık AOF Soruları</button>
+        <button class="btn btn-primary" style="margin-top: 15px;" onclick="startQuiz('aof_mix')">🔀 Karışık AOF Testi</button>
     </div>
 
     <div id="page-quiz" class="page">
-        <button class="back-btn" onclick="endQuiz()">← Testten Çık</button>
-        
         <div class="quiz-header">
-            <span class="progress-badge" id="q-progress">Soru: 1/10</span>
+            <button onclick="endQuiz()" style="background:none; border:none; color:#94a3b8; font-weight:bold; cursor:pointer;">✕ Çık</button>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="q-bar"></div>
+            </div>
             <div class="switch-container">
-                Otomatik Geç
+                Otomatik
                 <label class="switch">
                     <input type="checkbox" id="auto-next" checked>
                     <span class="slider"></span>
@@ -252,24 +274,34 @@
             </div>
         </div>
 
-        <div class="question-text" id="q-text">Soru metni...</div>
-        <div class="options-list" id="q-options"></div>
+        <div style="display:flex; justify-content: space-between; margin-bottom:10px; font-size:0.9rem; color:var(--secondary);">
+            <span id="q-counter">Soru 1</span>
+            <span id="q-category">Genel</span>
+        </div>
+
+        <div class="question-text" id="q-text">Soru yükleniyor...</div>
+        <div id="q-options"></div>
         
-        <div class="dots-area" id="q-dots"></div>
+        <div class="nav-area">
+            <button class="nav-btn nav-prev" id="btn-prev" onclick="prevQuestion()">← Önceki</button>
+            <button class="nav-btn nav-next" id="btn-next" onclick="nextQuestion()">Sonraki →</button>
+        </div>
+
+        <div class="dots-grid" id="q-dots"></div>
     </div>
 
     <div id="page-result" class="page">
-        <div class="result-box">
-            <h2>Test Tamamlandı!</h2>
+        <div style="margin: auto; text-align: center;">
             <div class="score-circle">
-                <span id="res-score">%80</span>
+                <span id="res-score">%0</span>
                 <span class="score-label">BAŞARI</span>
             </div>
-            <p id="res-msg" style="font-size: 1.2rem; color: #475569; margin-bottom: 30px;">Tebrikler!</p>
+            <h2 id="res-msg">Sonuç</h2>
+            <p style="color: #64748b; margin-bottom: 30px;">Hatalar analiz sistemine kaydedildi.</p>
             
-            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-                <button class="btn" onclick="showPage('page-menu')">Ana Menü</button>
-                <button class="btn btn-primary" onclick="restartQuiz()">Tekrar Çöz</button>
+            <div class="grid-menu" style="max-width: 500px; margin: 0 auto;">
+                <button class="btn" onclick="showPage('page-menu')">🏠 Ana Menü</button>
+                <button class="btn btn-primary" onclick="restartQuiz()">🔄 Tekrar Çöz</button>
             </div>
         </div>
     </div>
@@ -278,156 +310,180 @@
 
 <script>
     /* --- 1. VERİ HAVUZLARI --- */
-    // Buradaki veriler daha önceki konuşmalardan alındı.
-    // AOF kısmına word dosyasını attığınızda ekleme yapacağız.
-
+    // Buraya önceki 190 sorunun tamamını ve AOF sorularını ekleyeceksiniz.
+    
+    // ÖRNEK VERİ (Siz burayı dolduracaksınız)
     const basicQuestions = [
-        { q: "Havacılık faaliyetleri kaça ayrılır?", options: ["Üçe", "İkiye", "Dörde", "Beşe"], answer: "İkiye" },
+        { q: "Dünyadaki tüm havacılık faaliyetleri temelde hangi iki ana gruba ayrılır?", options: ["Sadece sivil havacılık", "Sivil havacılık ve Devlet havacılığı", "Uluslararası ve Ulusal havacılık", "Askeri ve Ticari havacılık"], answer: "Sivil havacılık ve Devlet havacılığı" },
+        { q: "Sivil havacılık faaliyetlerinin temel amacı aşağıdakilerden hangisidir?", options: ["Sadece hızlı ulaşım sağlamak", "Uçak üretimini artırmak", "İnsanların emniyetli, ekonomik, hızlı ve çevreye duyarlı bir şekilde ulaşımı", "Askerî operasyonları desteklemek"], answer: "İnsanların emniyetli, ekonomik, hızlı ve çevreye duyarlı bir şekilde ulaşımı" },
+        { q: "Havadan ağır, motor gücüyle seyreden ve aerodinamik kuvvetlerden destek alan sabit kanatlı hava aracı nedir?", options: ["Balon", "Helikopter", "Planör", "Uçak"], answer: "Uçak" },
         { q: "ICAO'nun tam açılımı nedir?", options: ["International Civil Aviation Organization", "International Cargo Air Organization", "Industrial Civil Air Operations", "International Control of Air Operations"], answer: "International Civil Aviation Organization" },
-        // ... (Kod çok uzamasın diye örnek 2 tane bıraktım, önceki 102 soruyu buraya yapıştırabiliriz)
-        // NOT: Tam entegrasyon için önceki cevabımdaki tüm basicQuestions, pastQuestions ve aiQuestions dizilerini buraya kopyalamanız gerekir.
-        // Şimdilik sistemin çalışması için örnek veri koyuyorum.
-        { q: "1 foot kaç metredir?", options: ["0,25", "0,3048", "1,85", "3,048"], answer: "0,3048" }, 
-        { q: "Knot hangi büyüklüğü ölçer?", options: ["Yükseklik", "Basınç", "Hız", "Mesafe"], answer: "Hız" }
+        { q: "1 foot kaç metredir?", options: ["0,25", "0,3048", "1,85", "3,048"], answer: "0,3048" }
     ];
-
+    
+    // Çıkmış ve AI sorularını önceki koddan buraya kopyalayabilirsiniz.
     const pastQuestions = [
-         { q: "ICAO Kodlarına Göre Havaalanları ülkemizde hangi harf ile başlamaktadır?", options: ["L", "T", "E", "A"], answer: "L" },
-         { q: "ICAO Kodu ülkemiz için hangi harftir?", options: ["T", "L", "C", "A"], answer: "T" }
+        { q: "ICAO Kodlarına Göre Havaalanları ülkemizde hangi harf ile başlamaktadır?", options: ["L", "T", "E", "A"], answer: "L" },
+        { q: "Bakımın yapıldığı yere göre bakım türleri nelerdir?", options: ["Hat Bakımı, Üs Bakımı", "Önleyici, Düzeltici", "Planlı, Plansız", "Ağır, Hafif"], answer: "Hat Bakımı, Üs Bakımı" }
     ];
 
     const aiQuestions = [
-        { q: "ICAO Annex 17 (Ek-17) hangi konuyu düzenler?", options: ["Hava Trafik", "Güvenlik (Security)", "Çevre", "Arama Kurtarma"], answer: "Güvenlik (Security)" }
+        { q: "ICAO Annex 17 (Ek-17) hangi konuyu düzenler?", options: ["Hava Trafik", "Güvenlik (Security)", "Çevre", "Arama Kurtarma"], answer: "Güvenlik (Security)" },
+        { q: "CORSIA programının 'Karbon Nötr Büyüme' hedefi hangi yıldan itibaren geçerlidir?", options: ["2000", "2010", "2020", "2050"], answer: "2020" }
     ];
 
-    // --- AOF SORULARI (BURAYA WORD'DEN GELECEKLER EKLENECEK) ---
-    // Şimdilik boş kalmasın diye örnek veriler:
+    // AOF Soruları (Buraya word dosyasındaki soruları ekleyin)
     const aofData = {
-        deneme1: [
-            { q: "AOF Deneme 1 - Soru 1 Örneği?", options: ["A Şıkkı", "B Şıkkı", "C Şıkkı", "D Şıkkı"], answer: "A Şıkkı" },
-            { q: "AOF Deneme 1 - Soru 2 Örneği?", options: ["A Şıkkı", "B Şıkkı", "C Şıkkı", "D Şıkkı"], answer: "B Şıkkı" }
-        ],
-        deneme2: [
-            { q: "AOF Deneme 2 - Soru 1?", options: ["X", "Y", "Z", "Q"], answer: "X" }
-        ],
-        final1: [
-            { q: "AOF Final 1 - Soru 1?", options: ["1", "2", "3", "4"], answer: "1" }
-        ],
-        final2: [
-            { q: "AOF Final 2 - Soru 1?", options: ["Evet", "Hayır"], answer: "Evet" }
-        ]
+        deneme1: [ { q: "AOF Deneme 1 Örnek Soru?", options: ["A", "B", "C", "D"], answer: "A" } ],
+        deneme2: [ { q: "AOF Deneme 2 Örnek Soru?", options: ["X", "Y", "Z", "Q"], answer: "X" } ],
+        final1: [ { q: "AOF Final 1 Örnek Soru?", options: ["1", "2", "3", "4"], answer: "1" } ],
+        final2: [ { q: "AOF Final 2 Örnek Soru?", options: ["Evet", "Hayır"], answer: "Evet" } ]
     };
 
-    /* --- 2. SİSTEM MANTIĞI --- */
 
+    /* --- 2. SİSTEM MANTIĞI --- */
     let currentUser = null;
     let currentPool = [];
     let currentIndex = 0;
     let userAnswers = [];
-    
-    // Uygulama Başlangıcı
+
+    // Başlangıç
     window.onload = function() {
-        const savedUser = localStorage.getItem('havacilik_current_user');
+        const savedUser = localStorage.getItem('havacilik_user');
         if (savedUser) {
             currentUser = savedUser;
-            updateUserInfo();
+            updateUIUser();
             showPage('page-menu');
-            updateMistakeCount();
+            renderMistakeMenu();
         } else {
             showPage('page-login');
         }
     };
 
-    // Sayfa Geçiş
     function showPage(id) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         document.getElementById(id).classList.add('active');
-        if (id === 'page-login') {
-            document.getElementById('user-info-panel').style.display = 'none';
-        } else {
-            document.getElementById('user-info-panel').style.display = 'flex';
-        }
+        document.getElementById('user-info-panel').style.display = (id === 'page-login') ? 'none' : 'flex';
+        if(id === 'page-menu') renderMistakeMenu();
     }
 
-    // Login İşlemleri
+    // Login / Logout
     function login() {
-        const input = document.getElementById('username-input');
-        const username = input.value.trim();
-        if (username) {
-            currentUser = username;
-            localStorage.setItem('havacilik_current_user', username);
-            
-            // Kullanıcı veritabanını başlat (yoksa)
-            let db = getDB();
-            if (!db[username]) {
-                db[username] = { mistakes: [] };
-                saveDB(db);
-            }
-            
-            updateUserInfo();
-            showPage('page-menu');
-            updateMistakeCount();
-        } else {
-            alert("Lütfen bir isim giriniz.");
+        const val = document.getElementById('username-input').value.trim();
+        if(!val) return alert("İsim giriniz.");
+        currentUser = val;
+        localStorage.setItem('havacilik_user', val);
+        
+        // Veritabanı başlat
+        let db = getDB();
+        if(!db[currentUser]) {
+            db[currentUser] = { stats: {} }; // Soru bazlı istatistikler
+            saveDB(db);
         }
+        
+        updateUIUser();
+        showPage('page-menu');
     }
 
     function logout() {
-        localStorage.removeItem('havacilik_current_user');
-        currentUser = null;
-        showPage('page-login');
+        if(confirm("Çıkış yapmak istiyor musunuz?")) {
+            localStorage.removeItem('havacilik_user');
+            currentUser = null;
+            showPage('page-login');
+        }
     }
 
-    function updateUserInfo() {
+    function updateUIUser() {
         document.getElementById('display-username').textContent = currentUser;
     }
 
-    // Veritabanı (LocalStorage) İşlemleri
-    function getDB() {
-        const data = localStorage.getItem('havacilik_db_v1');
-        return data ? JSON.parse(data) : {};
-    }
+    // Veritabanı
+    function getDB() { return JSON.parse(localStorage.getItem('havacilik_db_v2') || '{}'); }
+    function saveDB(data) { localStorage.setItem('havacilik_db_v2', JSON.stringify(data)); }
 
-    function saveDB(data) {
-        localStorage.setItem('havacilik_db_v1', JSON.stringify(data));
-    }
-
-    function addMistake(questionObj) {
+    // İstatistik Güncelleme (Soruyu çözünce çalışır)
+    function updateQuestionStats(question, isCorrect) {
         let db = getDB();
-        let userMistakes = db[currentUser].mistakes || [];
+        if (!db[currentUser].stats) db[currentUser].stats = {};
         
-        // Zaten listede var mı kontrol et (Soru metni üzerinden)
-        const exists = userMistakes.some(q => q.q === questionObj.q);
-        if (!exists) {
-            userMistakes.push(questionObj);
-            db[currentUser].mistakes = userMistakes;
-            saveDB(db);
+        // Sorunun metni unique ID olarak kullanılır
+        const qKey = question.q; 
+        
+        if (!db[currentUser].stats[qKey]) {
+            db[currentUser].stats[qKey] = { total: 0, correct: 0, wrong: 0, lastCorrect: false, questionObj: question };
+        }
+        
+        let stat = db[currentUser].stats[qKey];
+        stat.total++;
+        if (isCorrect) {
+            stat.correct++;
+            stat.lastCorrect = true;
+        } else {
+            stat.wrong++;
+            stat.lastCorrect = false;
+        }
+        stat.questionObj = question; // Objenin güncel halini sakla
+        
+        saveDB(db);
+    }
+
+    // Hata Kategorilerini Hesapla ve Menüyü Çiz
+    function getMistakeCategories() {
+        let db = getDB();
+        let stats = db[currentUser] ? db[currentUser].stats : {};
+        let critical = [], warning = [], info = [];
+
+        Object.values(stats).forEach(item => {
+            // Sadece en az 1 kez yanlış yapılmış soruları al
+            if (item.wrong > 0) {
+                let successRate = (item.correct / item.total) * 100;
+                
+                // Kategorize Et
+                if (successRate < 50) critical.push(item.questionObj);      // %0 - %49 (En Çok Yanlış)
+                else if (successRate < 80) warning.push(item.questionObj);  // %50 - %79 (Sık Hata)
+                else info.push(item.questionObj);                           // %80+ (Nadir Hata)
+            }
+        });
+
+        return { critical, warning, info };
+    }
+
+    function renderMistakeMenu() {
+        const cats = getMistakeCategories();
+        const container = document.getElementById('mistake-categories');
+        container.innerHTML = '';
+
+        if (cats.critical.length === 0 && cats.warning.length === 0 && cats.info.length === 0) {
+            container.innerHTML = `<div style="text-align: center; color: #94a3b8; padding: 10px;">Harika! Kayıtlı hata yok.</div>`;
+            return;
+        }
+
+        if (cats.critical.length > 0) {
+            container.innerHTML += `
+            <div class="mistake-cat cat-critical" onclick="startMistakeQuiz('critical')">
+                <span>🔴 En Çok Yanlış Yapılanlar (%0-%49)</span>
+                <span class="cat-badge">${cats.critical.length} Soru</span>
+            </div>`;
+        }
+        if (cats.warning.length > 0) {
+            container.innerHTML += `
+            <div class="mistake-cat cat-warning" onclick="startMistakeQuiz('warning')">
+                <span>🟠 Sık Hata Yapılanlar (%50-%79)</span>
+                <span class="cat-badge">${cats.warning.length} Soru</span>
+            </div>`;
+        }
+        if (cats.info.length > 0) {
+            container.innerHTML += `
+            <div class="mistake-cat cat-info" onclick="startMistakeQuiz('info')">
+                <span>🔵 Nadir Hatalar (%80+)</span>
+                <span class="cat-badge">${cats.info.length} Soru</span>
+            </div>`;
         }
     }
 
-    function removeMistake(questionObj) {
-        let db = getDB();
-        let userMistakes = db[currentUser].mistakes || [];
-        
-        // Listeden çıkar
-        const newList = userMistakes.filter(q => q.q !== questionObj.q);
-        
-        if (newList.length !== userMistakes.length) {
-            db[currentUser].mistakes = newList;
-            saveDB(db);
-        }
-    }
-
-    function updateMistakeCount() {
-        let db = getDB();
-        let count = db[currentUser] && db[currentUser].mistakes ? db[currentUser].mistakes.length : 0;
-        document.getElementById('mistake-count').textContent = count;
-    }
-
-    // Quiz Başlatma
+    // Quiz Başlatıcılar
     function startQuiz(type) {
         currentPool = [];
-        
         if (type === 'temel') currentPool = [...basicQuestions];
         else if (type === 'cikmis') currentPool = [...pastQuestions];
         else if (type === 'ai') currentPool = [...aiQuestions];
@@ -437,167 +493,167 @@
         else if (type === 'aof_final1') currentPool = [...aofData.final1];
         else if (type === 'aof_final2') currentPool = [...aofData.final2];
         else if (type === 'aof_mix') currentPool = [...aofData.deneme1, ...aofData.deneme2, ...aofData.final1, ...aofData.final2];
-        
-        if (currentPool.length === 0) {
-            alert("Bu kategoride henüz soru yok.");
-            return;
-        }
+
+        if (currentPool.length === 0) return alert("Bu kategoride soru bulunamadı.");
 
         // Karıştır
         currentPool.sort(() => Math.random() - 0.5);
         
-        currentIndex = 0;
-        userAnswers = new Array(currentPool.length).fill(null);
-        showPage('page-quiz');
-        loadQuestion();
-        renderDots();
+        initQuizUI();
     }
 
-    function startMistakeQuiz() {
-        let db = getDB();
-        let mistakes = db[currentUser].mistakes || [];
+    function startMistakeQuiz(category) {
+        const cats = getMistakeCategories();
+        if (category === 'critical') currentPool = cats.critical;
+        else if (category === 'warning') currentPool = cats.warning;
+        else if (category === 'info') currentPool = cats.info;
         
-        if (mistakes.length === 0) {
-            alert("Harika! Kayıtlı bir yanlışın yok.");
-            return;
-        }
-        
-        currentPool = [...mistakes];
-        // Hataları karıştır
         currentPool.sort(() => Math.random() - 0.5);
-        
+        initQuizUI();
+    }
+
+    function initQuizUI() {
         currentIndex = 0;
         userAnswers = new Array(currentPool.length).fill(null);
         showPage('page-quiz');
         loadQuestion();
         renderDots();
+        updateProgressBar();
     }
 
+    // Soru Yükleme
     function loadQuestion() {
-        const qData = currentPool[currentIndex];
-        document.getElementById('q-text').textContent = `${currentIndex + 1}. ${qData.q}`;
-        document.getElementById('q-progress').textContent = `Soru: ${currentIndex + 1} / ${currentPool.length}`;
-        
-        const optsContainer = document.getElementById('q-options');
-        optsContainer.innerHTML = '';
+        const q = currentPool[currentIndex];
+        document.getElementById('q-text').textContent = q.q;
+        document.getElementById('q-counter').textContent = `Soru ${currentIndex + 1} / ${currentPool.length}`;
+        document.getElementById('q-category').textContent = "Test Modu";
 
-        qData.options.forEach(opt => {
+        const optsDiv = document.getElementById('q-options');
+        optsDiv.innerHTML = '';
+
+        q.options.forEach(opt => {
             const btn = document.createElement('div');
             btn.className = 'option-card';
             btn.textContent = opt;
             btn.onclick = () => handleAnswer(opt, btn);
-            optsContainer.appendChild(btn);
+            optsDiv.appendChild(btn);
         });
 
+        // Varsa eski cevabı yükle
+        if (userAnswers[currentIndex]) restoreState();
+
+        // Buton durumları
+        document.getElementById('btn-prev').disabled = (currentIndex === 0);
+        document.getElementById('btn-next').textContent = (currentIndex === currentPool.length - 1) ? 'Bitir' : 'Sonraki →';
+        
+        updateProgressBar();
         updateDots();
     }
 
     function handleAnswer(selected, btn) {
-        if (userAnswers[currentIndex]) return; // Zaten cevaplanmış
+        if (userAnswers[currentIndex]) return;
 
-        const currentQ = currentPool[currentIndex];
-        const isCorrect = (selected === currentQ.answer);
+        const q = currentPool[currentIndex];
+        const isCorrect = (selected === q.answer);
         
         userAnswers[currentIndex] = { selected, isCorrect };
 
-        // Şıkları boya
-        const allOpts = document.querySelectorAll('.option-card');
-        allOpts.forEach(optDiv => {
-            optDiv.style.pointerEvents = 'none';
-            if (optDiv.textContent === currentQ.answer) {
-                if (!isCorrect) optDiv.classList.add('hint');
-                else optDiv.classList.add('correct');
-            }
-            if (optDiv.textContent === selected && !isCorrect) {
-                optDiv.classList.add('incorrect');
-            }
-        });
+        // İstatistik Kaydet
+        updateQuestionStats(q, isCorrect);
 
-        // Veritabanı Güncelleme (Hata Havuzu)
-        if (isCorrect) {
-            removeMistake(currentQ); // Doğru bildiyse havuzdan sil (varsa)
-        } else {
-            addMistake(currentQ); // Yanlışsa havuza ekle
-        }
-        updateMistakeCount();
+        // UI Güncelle
+        applyFeedback();
+        updateDots();
 
         // Otomatik Geçiş
-        const autoNext = document.getElementById('auto-next').checked;
-        if (isCorrect && autoNext) {
+        if (document.getElementById('auto-next').checked && isCorrect) {
             setTimeout(() => {
-                if (currentIndex < currentPool.length - 1) {
-                    currentIndex++;
-                    loadQuestion();
-                } else {
-                    finishQuiz();
-                }
-            }, 300); // 300ms hızlı geçiş
+                if (currentIndex < currentPool.length - 1) nextQuestion();
+                else finishQuiz();
+            }, 300);
         }
-        updateDots();
+    }
+
+    function applyFeedback() {
+        const ans = userAnswers[currentIndex];
+        if (!ans) return;
+        
+        const q = currentPool[currentIndex];
+        const opts = document.querySelectorAll('.option-card');
+        
+        opts.forEach(btn => {
+            btn.style.pointerEvents = 'none';
+            if (btn.textContent === q.answer) {
+                btn.classList.add(ans.isCorrect ? 'correct' : 'hint');
+            }
+            if (btn.textContent === ans.selected && !ans.isCorrect) {
+                btn.classList.add('incorrect');
+            }
+        });
+    }
+
+    function restoreState() { applyFeedback(); }
+
+    // Navigasyon
+    function nextQuestion() {
+        if (currentIndex < currentPool.length - 1) {
+            currentIndex++;
+            loadQuestion();
+        } else {
+            finishQuiz();
+        }
+    }
+
+    function prevQuestion() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            loadQuestion();
+        }
+    }
+
+    function endQuiz() {
+        if(confirm("Testi sonlandırmak istiyor musunuz?")) showPage('page-menu');
+    }
+
+    function updateProgressBar() {
+        const percent = ((currentIndex + 1) / currentPool.length) * 100;
+        document.getElementById('q-bar').style.width = `${percent}%`;
     }
 
     function renderDots() {
-        const container = document.getElementById('q-dots');
-        container.innerHTML = '';
+        const div = document.getElementById('q-dots');
+        div.innerHTML = '';
         currentPool.forEach((_, i) => {
             const dot = document.createElement('div');
             dot.className = 'dot';
             dot.textContent = i + 1;
-            
             if (i === currentIndex) dot.classList.add('current');
-            
-            if (userAnswers[i]) {
-                if (userAnswers[i].isCorrect) dot.classList.add('correct');
-                else dot.classList.add('incorrect');
-            }
-            
-            dot.onclick = () => {
-                currentIndex = i;
-                loadQuestion();
-            };
-            container.appendChild(dot);
+            if (userAnswers[i]) dot.classList.add(userAnswers[i].isCorrect ? 'correct' : 'incorrect');
+            dot.onclick = () => { currentIndex = i; loadQuestion(); };
+            div.appendChild(dot);
         });
     }
 
     function finishQuiz() {
-        const correctCount = userAnswers.filter(a => a && a.isCorrect).length;
-        const total = currentPool.length;
-        const score = Math.round((correctCount / total) * 100);
-
-        document.getElementById('res-score').textContent = `%${score}`;
+        const correct = userAnswers.filter(a => a && a.isCorrect).length;
+        const score = Math.round((correct / currentPool.length) * 100);
         
+        document.getElementById('res-score').textContent = `%${score}`;
         const msg = document.getElementById('res-msg');
-        if (score >= 90) {
-            msg.textContent = "Mükemmel performans! 🚀";
-            document.querySelector('.score-circle').style.background = "var(--success)";
-        } else if (score >= 70) {
-            msg.textContent = "Güzel gidiyorsun. 👍";
-            document.querySelector('.score-circle').style.background = "#f59e0b";
-        } else {
-            msg.textContent = "Hatalarını gözden geçirmelisin. 🧐";
-            document.querySelector('.score-circle').style.background = "var(--danger)";
-        }
+        
+        if (score >= 90) msg.textContent = "Mükemmel! 🚀";
+        else if (score >= 70) msg.textContent = "Gayet İyi! 👍";
+        else msg.textContent = "Biraz Daha Tekrar Gerekli. 🧐";
 
         showPage('page-result');
     }
 
-    function endQuiz() {
-        if(confirm("Testi bitirmek istediğine emin misin?")) {
-            showPage('page-menu');
-        }
-    }
-
     function restartQuiz() {
-        // Aynı havuzla tekrar başla
+        // Aynı havuz, yeniden karıştır
         currentPool.sort(() => Math.random() - 0.5);
-        currentIndex = 0;
-        userAnswers = new Array(currentPool.length).fill(null);
-        showPage('page-quiz');
-        loadQuestion();
-        renderDots();
+        initQuizUI();
     }
 
 </script>
-
 </body>
 </html>
