@@ -192,84 +192,101 @@
         .access-grid::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
 
         
-        /* --- MOBİL İÇİN GÜNCELLENMİŞ (DAHA KÜÇÜK) AYARLAR --- */
-        
+        /* --- MOBİL İÇİN KOMPAKT VE YOĞUN GÖRÜNÜM (6-8 KELİME SIĞACAK ŞEKİLDE) --- */
     @media screen and (max-width: 768px) {
+
+        /* 1. EKRAN KENAR BOŞLUKLARINI SIFIRLA */
+        body {
+            padding: 0 !important; /* Dış boşluğu yok et */
+            background-color: white; /* Arka planı beyaz yap, kart gibi durmasın */
+        }
         
-        /* Sayfa kenar boşluklarını iyice daralt */
         .app-container {
             width: 100%;
-            border-radius: 0; /* Mobilde köşeleri sivri yap, tam otursun */
-            box-shadow: none;
-            min-height: 100vh; /* Tüm ekranı kaplasın */
-            padding: 10px 5px; /* Kenarlardan çok az boşluk */
+            max-width: 100%;
+            border: none;       /* Çerçeveyi kaldır */
+            border-radius: 0;   /* Köşeleri düzle */
+            box-shadow: none;   /* Gölgeyi kaldır */
+            padding: 10px 12px; /* İçeriği kenara çok yapıştırma ama az boşluk ver */
+            min-height: 100vh;
         }
 
         .page {
-            padding: 15px 10px; /* İçeriği kenarlara yaklaştır */
+            padding: 0; /* Sayfa içi ekstra boşluğu sil */
         }
 
-        /* Başlıkları daha orantılı küçült */
-        h1 { font-size: 1.3rem !important; margin-bottom: 5px; }
-        h2 { font-size: 1.1rem !important; margin-bottom: 15px; }
-
-        /* "Canlı Kişi Sayısı" kutusunu küçült */
-        .live-status {
-            font-size: 0.75rem; /* Daha küçük yazı */
-            padding: 5px 10px;
-            margin-bottom: 15px;
-        }
-        .live-dot { width: 8px; height: 8px; }
-
-        /* SORU METNİ: Okunabilir ama daha küçük */
+        /* 2. SORU METNİNİ İYİCE KÜÇÜLT VE SIKIŞTIR */
         .question-text {
-            font-size: 0.95rem; /* Yaklaşık 15px */
-            line-height: 1.35;  /* Satırları birbirine yaklaştır */
-            margin-bottom: 15px;
+            font-size: 0.9rem !important; /* Yaklaşık 14px (İdeal okuma boyutu) */
+            line-height: 1.35;            /* Satırları birbirine yaklaştır */
+            font-weight: 600;             /* Çok kalın olmasın, orta kalınlık */
+            margin-bottom: 12px;
+            color: #0f172a;               /* Tam siyah yerine koyu lacivert (göz yormaz) */
         }
 
-        /* ŞIKLAR: Daha ince ve kompakt */
+        /* 3. ŞIKLARI DAHA KOMPAKT YAP */
         .option-card {
-            font-size: 0.85rem; /* Yaklaşık 13.5px */
-            padding: 10px;      /* İç boşluğu azalttık */
-            margin-bottom: 8px; /* Şıklar arası mesafeyi azalttık */
-            min-height: 40px;
+            font-size: 0.85rem !important; /* Yaklaşık 13px */
+            padding: 8px 10px;             /* Şık kutusunun iç boşluğunu azalt */
+            margin-bottom: 6px;            /* Şıklar arası mesafeyi azalt */
+            border-radius: 6px;
+            min-height: auto;              /* Yükseklik zorlamasını kaldır */
         }
-        
-        /* Şık harfleri (A, B, C...) kutusu */
+
         .option-key-hint {
-            width: 20px;
-            height: 20px;
-            line-height: 20px;
-            font-size: 0.75rem;
-            margin-right: 8px;
+            width: 18px;
+            height: 18px;
+            line-height: 18px;
+            font-size: 0.7rem;
+            margin-right: 6px;
         }
 
-        /* BUTONLAR: Daha kibar */
+        /* 4. DİĞER ÖGELERİ KÜÇÜLT */
+        /* Başlıklar */
+        h1 { font-size: 1.2rem !important; margin-top: 5px; margin-bottom: 5px; }
+        h2 { font-size: 1rem !important; margin-bottom: 10px; }
+
+        /* Canlı Kişi Sayısı */
+        .live-status {
+            font-size: 0.7rem;
+            padding: 4px 8px;
+            margin-bottom: 10px;
+        }
+        .live-dot { width: 6px; height: 6px; }
+
+        /* Butonlar */
         .btn {
-            font-size: 0.85rem;
-            padding: 10px 10px;
+            font-size: 0.8rem;
+            padding: 8px;
+            height: auto;
         }
         
-        /* Grid menü (Ana menüdeki butonlar) aralığını daralt */
+        /* Grid Menü (Ana ekrandaki butonlar) */
         .grid-menu {
-            gap: 10px; 
-            grid-template-columns: 1fr; /* Mobilde butonlar alt alta tam genişlik olsun */
+            gap: 8px;
+            grid-template-columns: 1fr; /* Mobilde tam genişlik */
         }
+        
+        /* İleri Geri Butonları */
+        .nav-buttons { margin-top: 15px; gap: 10px; }
+        .nav-btn { font-size: 0.8rem; padding: 8px; }
 
-        /* İleri/Geri butonları */
-        .nav-btn {
-            font-size: 0.85rem;
-            padding: 10px;
+        /* Hata Analiz Sekmeleri */
+        .stat-tab {
+            padding: 4px 8px;
+            font-size: 0.7rem;
         }
-
-        /* Hızlı erişim kutularını küçült */
-        .access-btn {
-            height: 30px;
-            font-size: 0.75rem;
-        }
-        .access-grid {
-            grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+        
+        /* Kullanıcı başlığı (Sağ üst) */
+        .user-header {
+            position: relative; /* Sabit durmasın akışta kalsın */
+            top: 0; right: 0;
+            margin-bottom: 10px;
+            justify-content: flex-end;
+            border: none;
+            background: none;
+            box-shadow: none;
+            padding: 0;
         }
     }
         /* --- MOBİL İÇİN ÖZEL AYARLAR --- */
@@ -1382,6 +1399,7 @@
 </script>
 </body>
 </html>
+
 
 
 
