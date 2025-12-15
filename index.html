@@ -415,7 +415,7 @@
             <div style="display:flex; flex-direction:column; gap:15px; max-width:400px; margin:0 auto;">
                 <button id="btn-retry-session" class="btn btn-danger" style="display:none;" onclick="retrySessionMistakes()">⚠️ Bu Testteki Yanlışları Çöz</button>
                 <button class="btn btn-primary" onclick="restartQuiz()">🔄 Aynı Testi Tekrarla</button>
-                <button class="btn" onclick="showPage('page-menu')">🏠 Ana Menü</button>
+                <button class="btn" onclick="goBackToMenu()">🏠 Menüye Dön</button>
             </div>
         </div>
     </div>
@@ -423,6 +423,9 @@
 </div>
 
 <script>
+
+    let returnPageId = 'page-menu'; // Varsayılan olarak ana menüye döner
+    
     /* --- 1. VERİ HAVUZLARI --- */
     
     // !!! DİKKAT !!!
@@ -1159,7 +1162,17 @@
     }
 
     function startQuiz(type) {
-        let sourceData = [];
+        
+        // --- BU KISMI EKLEYİN ---
+    // Eğer test türü 'aof' ile başlıyorsa (örn: aof_deneme1, aof_mix vs.) dönüş AOF sayfası olsun
+    if (type.startsWith('aof')) {
+        returnPageId = 'page-aof';
+    } else {
+        returnPageId = 'page-menu';
+    }
+    // ------------------------
+
+    let sourceData = [];
         // Tüm AOF verilerini birleştir
         const allAof = [];
         for (let key in aofData) {
@@ -1341,7 +1354,9 @@
     }
 
     function endQuiz() {
-        if(confirm("Testi bitirmek istiyor musunuz?")) showPage('page-menu');
+    if(confirm("Testi bitirmek istiyor musunuz?")) {
+        showPage(returnPageId); // page-menu yerine returnPageId yazdık
+        }
     }
 
     function finishQuiz() {
@@ -1397,9 +1412,14 @@
         initQuizUI();
     }
 
+    function goBackToMenu() {
+    showPage(returnPageId);
+    }
+    
 </script>
 </body>
 </html>
+
 
 
 
