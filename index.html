@@ -192,51 +192,84 @@
         .access-grid::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
 
         
-        /* --- MOBİL İÇİN ÖZEL AYARLAR --- */
+        /* --- MOBİL İÇİN GÜNCELLENMİŞ (DAHA KÜÇÜK) AYARLAR --- */
+        
     @media screen and (max-width: 768px) {
         
-        /* Genel yazı boyutunu biraz küçült */
-        body {
-            font-size: 14px; 
+        /* Sayfa kenar boşluklarını iyice daralt */
+        .app-container {
+            width: 100%;
+            border-radius: 0; /* Mobilde köşeleri sivri yap, tam otursun */
+            box-shadow: none;
+            min-height: 100vh; /* Tüm ekranı kaplasın */
+            padding: 10px 5px; /* Kenarlardan çok az boşluk */
         }
 
-        /* Başlıkları küçült */
-        h1 { font-size: 1.5rem !important; }
-        h2 { font-size: 1.2rem !important; }
+        .page {
+            padding: 15px 10px; /* İçeriği kenarlara yaklaştır */
+        }
 
-        /* Soru metnini küçült (Masaüstünde 1.3rem idi) */
+        /* Başlıkları daha orantılı küçült */
+        h1 { font-size: 1.3rem !important; margin-bottom: 5px; }
+        h2 { font-size: 1.1rem !important; margin-bottom: 15px; }
+
+        /* "Canlı Kişi Sayısı" kutusunu küçült */
+        .live-status {
+            font-size: 0.75rem; /* Daha küçük yazı */
+            padding: 5px 10px;
+            margin-bottom: 15px;
+        }
+        .live-dot { width: 8px; height: 8px; }
+
+        /* SORU METNİ: Okunabilir ama daha küçük */
         .question-text {
-            font-size: 1rem; 
-            line-height: 1.4;
+            font-size: 0.95rem; /* Yaklaşık 15px */
+            line-height: 1.35;  /* Satırları birbirine yaklaştır */
             margin-bottom: 15px;
         }
 
-        /* Şıkların yazı boyutunu ve iç boşluğunu küçült */
+        /* ŞIKLAR: Daha ince ve kompakt */
         .option-card {
-            font-size: 0.9rem; /* Masaüstünde 1.05rem idi */
-            padding: 12px;     /* Masaüstünde 18px idi, yer tasarrufu sağlar */
-        }
-
-        /* Butonları biraz daha kompakt yap */
-        .btn {
-            font-size: 0.9rem;
-            padding: 10px;
-        }
-
-        /* İleri/Geri butonlarını küçült */
-        .nav-btn {
-            font-size: 0.9rem;
-            padding: 10px;
-        }
-
-        /* Uygulama kutusunun kenar boşluklarını mobilde daralt */
-        .app-container {
-            min-height: auto; /* Mobilde sabit yükseklik yerine içeriğe göre uzasın */
-            padding-bottom: 20px;
+            font-size: 0.85rem; /* Yaklaşık 13.5px */
+            padding: 10px;      /* İç boşluğu azalttık */
+            margin-bottom: 8px; /* Şıklar arası mesafeyi azalttık */
+            min-height: 40px;
         }
         
-        .page {
-            padding: 15px; /* Mobilde kenar boşluğunu azalt */
+        /* Şık harfleri (A, B, C...) kutusu */
+        .option-key-hint {
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            font-size: 0.75rem;
+            margin-right: 8px;
+        }
+
+        /* BUTONLAR: Daha kibar */
+        .btn {
+            font-size: 0.85rem;
+            padding: 10px 10px;
+        }
+        
+        /* Grid menü (Ana menüdeki butonlar) aralığını daralt */
+        .grid-menu {
+            gap: 10px; 
+            grid-template-columns: 1fr; /* Mobilde butonlar alt alta tam genişlik olsun */
+        }
+
+        /* İleri/Geri butonları */
+        .nav-btn {
+            font-size: 0.85rem;
+            padding: 10px;
+        }
+
+        /* Hızlı erişim kutularını küçült */
+        .access-btn {
+            height: 30px;
+            font-size: 0.75rem;
+        }
+        .access-grid {
+            grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
         }
     }
         /* --- MOBİL İÇİN ÖZEL AYARLAR --- */
@@ -1349,6 +1382,7 @@
 </script>
 </body>
 </html>
+
 
 
 
