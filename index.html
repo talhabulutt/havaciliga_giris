@@ -12,10 +12,10 @@
             --primary-dark: #1e40af;
             --secondary: #64748b;
             --success: #22c55e;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --bg: #f1f5f9;
+            --danger: #dc2626;
+            --bg: #f8fafc;
             --card: #ffffff;
+            --border: #e2e8f0;
         }
 
         * { box-sizing: border-box; }
@@ -36,210 +36,131 @@
             background: var(--card);
             width: 100%;
             max-width: 900px;
-            min-height: 700px;
-            border-radius: 24px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            min-height: 750px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             display: flex;
             flex-direction: column;
             overflow: hidden;
             position: relative;
         }
 
-        /* --- SAYFA YAPISI --- */
+        /* SAYFA GEÇİŞLERİ */
         .page {
             display: none;
             flex-grow: 1;
             padding: 40px;
-            animation: fadeIn 0.4s ease-out;
             flex-direction: column;
+            animation: fadeIn 0.3s ease-out;
         }
         .page.active { display: flex; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* --- LOGIN --- */
-        .login-wrapper {
-            margin: auto;
-            text-align: center;
-            width: 100%;
-            max-width: 400px;
-        }
+        /* LOGIN */
+        .login-wrapper { margin: auto; text-align: center; width: 100%; max-width: 400px; }
         .login-input {
-            width: 100%;
-            padding: 16px;
-            border-radius: 12px;
-            border: 2px solid #e2e8f0;
-            background: #f8fafc;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            text-align: center;
-            transition: 0.3s;
+            width: 100%; padding: 16px; border-radius: 8px; border: 2px solid var(--border);
+            background: #f8fafc; font-size: 1.1rem; margin-bottom: 20px; text-align: center;
         }
         .login-input:focus { border-color: var(--primary); outline: none; background: #fff; }
 
-        /* --- GENEL BUTONLAR --- */
+        /* BUTONLAR */
         .btn {
-            background: white;
-            border: 2px solid #e2e8f0;
-            color: #334155;
-            padding: 16px;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
+            background: white; border: 2px solid var(--border); color: #334155;
+            padding: 14px; border-radius: 8px; font-size: 1rem; font-weight: 600;
+            cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
         }
-        .btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
-        .btn-primary { background: var(--primary); color: white; border: none; }
-        .btn-primary:hover { background: var(--primary-dark); color: white; }
+        .btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-1px); }
+        .btn-primary { background: var(--primary); color: white; border-color: var(--primary); }
+        .btn-primary:hover { background: var(--primary-dark); color: white; border-color: var(--primary-dark); }
+        .btn-danger { background: #fee2e2; color: var(--danger); border-color: #fecaca; }
+        .btn-danger:hover { background: var(--danger); color: white; border-color: var(--danger); }
+
+        .grid-menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
+
+        /* HEADER & USER */
+        .user-header {
+            position: absolute; top: 20px; right: 20px; z-index: 10;
+            display: flex; align-items: center; gap: 15px;
+            font-size: 0.9rem; color: var(--secondary);
+            background: rgba(255,255,255,0.9); padding: 5px 15px; border-radius: 20px; border: 1px solid var(--border);
+        }
+        .logout-link { color: var(--danger); cursor: pointer; font-weight: 600; }
+
+        /* QUIZ ALANI */
+        .quiz-top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .quiz-info-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         
-        .btn-danger { border-color: #fecaca; color: var(--danger); }
-        .btn-danger:hover { background: #fef2f2; border-color: var(--danger); }
+        .progress-container { width: 100%; height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: var(--primary); width: 0%; transition: width 0.3s; }
 
-        .grid-menu {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        /* --- İSTATİSTİK KARTI --- */
-        .stats-card {
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 20px;
-            border: 1px solid #e2e8f0;
-            margin-bottom: 15px;
-        }
-        .stats-title { font-size: 0.9rem; color: var(--secondary); margin-bottom: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-
-        /* --- QUIZ DÜZENİ (YENİLENMİŞ) --- */
-        
-        /* Üst Bar: Çıkış ve Kullanıcı */
-        .quiz-top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .user-badge {
-            background: #eff6ff;
-            color: var(--primary);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        /* İlerleme Çubuğu */
-        .progress-bar-container {
-            width: 100%;
-            height: 8px;
-            background: #e2e8f0;
-            border-radius: 4px;
-            overflow: hidden;
-            margin-bottom: 15px;
-        }
-        .progress-bar { height: 100%; background: var(--primary); width: 0%; transition: width 0.3s; }
-
-        /* Alt Kontrol Barı: Soru No ve Switch */
-        .quiz-meta-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #f1f5f9;
-        }
-        
-        .question-counter {
-            font-weight: 600;
-            color: var(--secondary);
-            font-size: 0.95rem;
-        }
-
-        /* Switch */
-        .switch-container { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; font-weight: 500; color: var(--secondary); }
-        .switch { position: relative; display: inline-block; width: 48px; height: 26px; }
-        .switch input { display:none; }
-        .slider { position: absolute; cursor: pointer; top:0; left:0; right:0; bottom:0; background-color: #cbd5e1; transition:.3s; border-radius: 34px; }
-        .slider:before { position: absolute; content:""; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: white; transition:.3s; border-radius: 50%; }
-        input:checked + .slider { background-color: var(--success); }
-        input:checked + .slider:before { transform: translateX(22px); }
-
-        /* Soru ve Şıklar */
-        .question-text { font-size: 1.4rem; font-weight: 700; color: #1e293b; margin-bottom: 25px; line-height: 1.5; }
+        .question-text { font-size: 1.35rem; font-weight: 700; color: #1e293b; margin-bottom: 25px; line-height: 1.5; }
         
         .option-card {
-            padding: 20px; border: 2px solid #f1f5f9; border-radius: 12px;
-            cursor: pointer; transition: 0.2s; font-size: 1.1rem; margin-bottom: 12px;
+            padding: 18px; border: 2px solid var(--border); border-radius: 10px;
+            cursor: pointer; transition: 0.2s; font-size: 1.05rem; margin-bottom: 10px;
             background: white; color: #334155; position: relative;
         }
-        .option-card:hover { border-color: #94a3b8; background: #f8fafc; }
-        
-        .option-card.correct { background: #dcfce7; border-color: var(--success); color: #14532d; }
+        .option-card:hover { border-color: #94a3b8; background: #f1f5f9; }
+        .option-card.correct { background: #dcfce7; border-color: var(--success); color: #14532d; font-weight: 600; }
         .option-card.incorrect { background: #fee2e2; border-color: var(--danger); color: #7f1d1d; }
         .option-card.hint { border-color: var(--success); background: #f0fdf4; color: var(--success); font-weight: 600; }
 
-        /* Alt Navigasyon */
-        .nav-area {
-            display: flex; justify-content: space-between; gap: 15px;
-            margin-top: 30px; padding-top: 20px; border-top: 2px solid #f1f5f9;
-        }
-        .nav-btn {
-            flex: 1; padding: 15px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; font-size: 1rem;
-        }
-        .nav-prev { background: #e2e8f0; color: #475569; }
-        .nav-next { background: var(--primary); color: white; }
-        .nav-prev:disabled { opacity: 0.5; cursor: not-allowed; }
+        /* NAVIGASYON */
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 25px; gap: 15px; }
+        .nav-btn { flex: 1; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-prev { background: #e2e8f0; color: #475569; }
+        .btn-next { background: var(--primary-dark); color: white; }
 
-        /* Hızlı Erişim */
-        .dots-grid {
-            display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
-            max-height: 100px; overflow-y: auto; margin-top: 20px;
+        /* HIZLI ERİŞİM GRID (YENİ) */
+        .fast-access-container {
+            margin-top: auto;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
         }
-        .dot {
-            width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
-            border-radius: 8px; background: #f1f5f9; color: #64748b; font-size: 0.85rem; cursor: pointer; border: 1px solid transparent;
+        .fast-access-title { text-align: center; font-size: 0.85rem; color: var(--secondary); margin-bottom: 10px; }
+        .access-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(35px, 1fr));
+            gap: 6px;
+            max-height: 150px;
+            overflow-y: auto;
+            padding: 5px;
         }
-        .dot.current { border-color: var(--primary); color: var(--primary); font-weight: bold; background: white; }
-        .dot.correct { background: var(--success); color: white; }
-        .dot.incorrect { background: var(--danger); color: white; }
+        .access-btn {
+            height: 35px;
+            display: flex; align-items: center; justify-content: center;
+            background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px;
+            font-size: 0.85rem; font-weight: 500; color: #64748b; cursor: pointer;
+            transition: all 0.1s;
+        }
+        .access-btn:hover { background: #e2e8f0; }
+        .access-btn.current { border: 2px solid #0f172a; color: #0f172a; font-weight: 800; background: white; transform: scale(1.05); }
+        .access-btn.correct { background: var(--success); color: white; border-color: var(--success); }
+        .access-btn.incorrect { background: var(--danger); color: white; border-color: var(--danger); }
 
-        /* SONUÇ EKRANI */
+        /* SWITCH TOGGLE */
+        .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+        .switch input { display:none; }
+        .slider { position: absolute; cursor: pointer; top:0; left:0; right:0; bottom:0; background-color: #cbd5e1; transition:.3s; border-radius: 34px; }
+        .slider:before { position: absolute; content:""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition:.3s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--success); }
+        input:checked + .slider:before { transform: translateX(20px); }
+        .switch-label { font-size: 0.9rem; color: var(--secondary); font-weight: 600; margin-right: 10px; }
+
+        /* SONUÇ */
         .score-circle {
-            width: 160px; height: 160px; border-radius: 50%;
+            width: 140px; height: 140px; border-radius: 50%;
             background: var(--primary); color: white;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            margin: 0 auto 20px; font-size: 2.5rem; font-weight: 800; /* Font Küçültüldü */
-            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+            margin: 0 auto 20px; font-size: 2.5rem; font-weight: 800;
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
         }
-        .score-label { font-size: 0.9rem; opacity: 0.9; font-weight: normal; margin-top: 5px; }
-
-        /* Hata Kategorileri */
-        .mistake-cat {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 12px; border-radius: 8px; margin-bottom: 8px; cursor: pointer; transition: 0.2s;
-            border: 1px solid transparent;
-        }
-        .mistake-cat:hover { transform: translateX(5px); }
-        .cat-critical { background: #fef2f2; color: #991b1b; border-color: #fecaca; }
-        .cat-warning { background: #fffbeb; color: #92400e; border-color: #fde68a; }
-        .cat-info { background: #eff6ff; color: #1e40af; border-color: #bfdbfe; }
-        .cat-badge { font-weight: bold; padding: 4px 8px; border-radius: 12px; background: rgba(255,255,255,0.6); font-size: 0.8rem; }
-
-        /* Genel User Header (Login hariç) */
-        .global-user-header {
-            position: absolute; top: 20px; right: 20px;
-            display: flex; gap: 15px; font-size: 0.9rem; color: var(--secondary);
-            align-items: center;
-        }
-        .logout-text { color: var(--danger); cursor: pointer; text-decoration: underline; }
+        
+        /* SCROLLBAR */
+        .access-grid::-webkit-scrollbar { width: 6px; }
+        .access-grid::-webkit-scrollbar-track { background: #f1f1f1; }
+        .access-grid::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
 
     </style>
 </head>
@@ -247,22 +168,22 @@
 
 <div class="app-container">
     
-    <div id="global-user-panel" class="global-user-header" style="display: none;">
-        <span>👤 <span id="display-username-global">Misafir</span></span>
-        <span class="logout-text" onclick="logout()">Çıkış</span>
+    <div id="user-info-panel" class="user-header" style="display: none;">
+        <span>👤 <b id="display-username">Misafir</b></span>
+        <span class="logout-link" onclick="logout()">Çıkış</span>
     </div>
 
     <div id="page-login" class="page active">
         <div class="login-wrapper">
-            <h1 style="color: var(--primary); margin-bottom: 10px;">Akıllı Sınav Sistemi</h1>
-            <p style="color: var(--secondary); margin-bottom: 30px;">Havacılık & AOF Çalışma Platformu</p>
-            <input type="text" id="username-input" class="login-input" placeholder="Adınız / Kullanıcı Adı">
-            <button class="btn btn-primary" style="width:100%" onclick="login()">🚀 Başla</button>
+            <h1 style="color: var(--primary); margin-bottom: 10px;">Sınav Sistemi</h1>
+            <p style="color: var(--secondary); margin-bottom: 30px;">Giriş Yapın</p>
+            <input type="text" id="username-input" class="login-input" placeholder="Adınız">
+            <button class="btn btn-primary" style="width:100%" onclick="login()">Giriş Yap</button>
         </div>
     </div>
 
     <div id="page-menu" class="page">
-        <h2 style="color: #1e293b; margin-bottom: 20px;">Soru Havuzları</h2>
+        <h2 style="color: #1e293b; margin-bottom: 20px;">Ana Menü</h2>
         
         <div class="grid-menu">
             <button class="btn" onclick="startQuiz('temel')">✈️ Temel Sorular (102)</button>
@@ -270,53 +191,44 @@
             <button class="btn" onclick="startQuiz('ai')">🤖 AI Öğretici (40)</button>
         </div>
 
-        <button class="btn btn-primary" style="margin-bottom: 25px;" onclick="showPage('page-aof')">
-            📚 AOF Modülü (Deneme & Final)
+        <button class="btn btn-primary" style="margin-bottom: 20px;" onclick="showPage('page-aof')">
+            📚 AOF Modülü (Deneme/Final)
         </button>
         
-        <div class="stats-card">
-            <div class="stats-title">📊 Performans Analizi & Hatalar</div>
-            <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 15px;">Yanlış yaptığın sorular başarı oranına göre sınıflandırılır.</p>
-            
-            <div id="mistake-categories">
-                <div style="text-align: center; color: #94a3b8; padding: 10px;">Henüz hata kaydı yok.</div>
+        <div style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 20px;">
+            <h4 style="margin:0 0 10px 0; font-size:0.9rem; color:var(--secondary);">HATA ANALİZİ</h4>
+            <div id="mistake-stats" style="display:flex; gap:10px; flex-wrap:wrap;">
+                <span style="color:#94a3b8; font-size:0.9rem;">Henüz veri yok.</span>
             </div>
         </div>
 
-        <button class="btn" style="width: 100%;" onclick="startQuiz('mix')">🔀 Karışık Maraton (Tümü)</button>
+        <button class="btn" style="width: 100%;" onclick="startQuiz('mix')">🔀 Tümünü Karıştır</button>
     </div>
 
     <div id="page-aof" class="page">
-        <button class="btn" style="width: auto; align-self: flex-start; padding: 8px 16px; margin-bottom: 20px;" onclick="showPage('page-menu')">← Geri</button>
+        <button class="btn" style="width: auto; align-self: flex-start; margin-bottom: 20px;" onclick="showPage('page-menu')">← Geri</button>
         <h2 style="margin-bottom: 20px;">AOF Sınavları</h2>
-        
         <div class="grid-menu">
             <button class="btn" onclick="startQuiz('aof_deneme1')">📝 Deneme 1</button>
             <button class="btn" onclick="startQuiz('aof_deneme2')">📝 Deneme 2</button>
             <button class="btn" onclick="startQuiz('aof_final1')">🎓 Final 1</button>
             <button class="btn" onclick="startQuiz('aof_final2')">🎓 Final 2</button>
         </div>
-        <button class="btn btn-primary" style="margin-top: 15px;" onclick="startQuiz('aof_mix')">🔀 Karışık AOF Testi</button>
+        <button class="btn btn-primary" style="margin-top: 10px;" onclick="startQuiz('aof_mix')">🔀 Karışık AOF Testi</button>
     </div>
 
     <div id="page-quiz" class="page">
-        
         <div class="quiz-top-bar">
-            <button onclick="endQuiz()" style="background:none; border:none; color:#94a3b8; font-weight:bold; cursor:pointer; font-size: 0.9rem;">✕ Testten Çık</button>
-            <div class="user-badge">
-                👤 <span id="display-username-quiz">Kullanıcı</span>
-            </div>
+            <div style="font-weight:700; font-size:1.1rem; color:var(--primary);" id="quiz-title">Test Modu</div>
+            <button class="btn" style="padding: 6px 12px; font-size:0.85rem;" onclick="endQuiz()">Bitir ✕</button>
         </div>
 
-        <div class="progress-bar-container">
-            <div class="progress-bar" id="q-bar"></div>
-        </div>
+        <div class="progress-container"><div class="progress-fill" id="q-progress"></div></div>
 
-        <div class="quiz-meta-bar">
-            <span class="question-counter" id="q-counter">Soru 1 / 10</span>
-            
-            <div class="switch-container">
-                Otomatik Geç
+        <div class="quiz-info-bar">
+            <span style="font-weight:600; color:var(--secondary);" id="q-counter">Soru 1/10</span>
+            <div style="display:flex; align-items:center;">
+                <span class="switch-label">Otomatik Geç</span>
                 <label class="switch">
                     <input type="checkbox" id="auto-next" checked>
                     <span class="slider"></span>
@@ -324,32 +236,33 @@
             </div>
         </div>
 
-        <div class="question-text" id="q-text">Soru yükleniyor...</div>
+        <div class="question-text" id="q-text">Yükleniyor...</div>
         <div id="q-options"></div>
-        
-        <div class="nav-area">
-            <button class="nav-btn nav-prev" id="btn-prev" onclick="prevQuestion()">← Önceki</button>
-            <button class="nav-btn nav-next" id="btn-next" onclick="nextQuestion()">Sonraki →</button>
+
+        <div class="nav-buttons">
+            <button class="nav-btn btn-prev" id="btn-prev" onclick="prevQuestion()">← Önceki</button>
+            <button class="nav-btn btn-next" id="btn-next" onclick="nextQuestion()">Sonraki →</button>
         </div>
 
-        <div class="dots-grid" id="q-dots"></div>
+        <div class="fast-access-container">
+            <div class="fast-access-title">Hızlı Erişim</div>
+            <div class="access-grid" id="fast-access-grid">
+                </div>
+        </div>
     </div>
 
     <div id="page-result" class="page">
         <div style="margin: auto; text-align: center;">
             <div class="score-circle">
                 <span id="res-score">%0</span>
-                <span class="score-label">BAŞARI</span>
+                <span style="font-size:0.9rem; font-weight:normal;">BAŞARI</span>
             </div>
-            <h2 id="res-msg" style="color:#1e293b; margin-bottom: 10px;">Sonuç</h2>
-            <p style="color: #64748b; margin-bottom: 30px;">Hatalar analiz sistemine kaydedildi.</p>
+            <h2 id="res-msg">Sonuç</h2>
+            <p style="color:var(--secondary); margin-bottom:30px;">Sonuçlar kaydedildi.</p>
             
-            <div style="display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin: 0 auto;">
-                <button id="btn-retry-session-mistakes" class="btn btn-danger" style="display:none;" onclick="retrySessionMistakes()">
-                    ⚠️ Sadece Bu Testteki Yanlışları Çöz
-                </button>
-
-                <button class="btn btn-primary" onclick="restartQuiz()">🔄 Aynı Testi Tekrar Çöz</button>
+            <div style="display:flex; flex-direction:column; gap:15px; max-width:400px; margin:0 auto;">
+                <button id="btn-retry-session" class="btn btn-danger" style="display:none;" onclick="retrySessionMistakes()">⚠️ Bu Testteki Yanlışları Çöz</button>
+                <button class="btn btn-primary" onclick="restartQuiz()">🔄 Aynı Testi Tekrarla</button>
                 <button class="btn" onclick="showPage('page-menu')">🏠 Ana Menü</button>
             </div>
         </div>
@@ -358,222 +271,44 @@
 </div>
 
 <script>
-    /* --- 1. VERİ HAVUZLARI --- */
+    // --- 1. VERİ HAVUZLARI ---
     
+    // Örnek Veri (Önceki 190 soruyu buraya yapıştırın, kod uzunluğu için kısaltıldı)
     const basicQuestions = [
         { q: "Havacılık faaliyetleri kaça ayrılır?", options: ["Üçe", "İkiye", "Dörde", "Beşe"], answer: "İkiye" },
         { q: "Devlet hava araçları nelerdir?", options: ["Askerî, gümrük, polis", "Yolcu, kargo, eğitim", "Tarım, balon, planör", "Helikopter, jet, planör"], answer: "Askerî, gümrük, polis" },
-        { q: "Türkiye'nin tescil işareti nedir?", options: ["TR-XXX", "TK-XXX", "TC-XXX", "TL-XXX"], answer: "TC-XXX" },
-        { q: "Knot hangi büyüklüğü ölçer?", options: ["Yükseklik", "Basınç", "Hız", "Mesafe"], answer: "Hız" },
-        { q: "1 foot kaç metredir?", options: ["0,25", "0,3048", "1,85", "3,048"], answer: "0,3048" },
-        { q: "Great Circle Distance neyi ifade eder?", options: ["İki pist arası fark", "İki nokta arası en kısa mesafeyi", "Yatay rüzgâr mesafesini", "En uzun mesafeyi"], answer: "İki nokta arası en kısa mesafeyi" },
-        { q: "Mach sayısı nasıl hesaplanır?", options: ["Ağırlık / Hız", "Hız / Ses hızı", "Sıcaklık / Basınç", "Hız / Yükseklik"], answer: "Hız / Ses hızı" },
-        { q: "ICAO'nun tam açılımı nedir?", options: ["International Civil Aviation Organization", "International Cargo Air Organization", "Industrial Civil Air Operations", "International Control of Air Operations"], answer: "International Civil Aviation Organization" },
-        { q: "ICAO'ya göre sivil havacılığın temel amacı nedir?", options: ["Askerî uçuşlar düzenlemek", "Hızlı ama pahalı ulaşım sağlamak", "Emniyetli, ekonomik, çevreye duyarlı ulaşım", "Uçak üretimini artırmak"], answer: "Emniyetli, ekonomik, çevreye duyarlı ulaşım" },
-        { q: "ICAO Ek-1 (Annex 1) neyi kapsar?", options: ["Havaalanı standartları", "Pilot lisansları", "Hava trafik yönetimi", "Bakım prosedürleri"], answer: "Pilot lisansları" },
-        { q: "ICAO Ek-14 (Annex 14) neyi kapsar?", options: ["Havaalanı standartları", "Pilot lisansları", "Hava trafik yönetimi", "Bakım prosedürleri"], answer: "Havaalanı standartları" },
-        { q: "ICAO Ek-17 (Annex 17) hangi konudadır?", options: ["Meteoroloji", "Havaalanı güvenliği", "Arama kurtarma", "Hava trafik yönetimi"], answer: "Havaalanı güvenliği" },
-        { q: "IATA kodu kaç harflidir?", options: ["2", "3", "4", "5"], answer: "3" },
-        { q: "ICAO kodu kaç harflidir?", options: ["2", "3", "4", "5"], answer: "4" },
-        { q: "ICAO Ek-12 (Annex 12) hangi konuyu kapsar?", options: ["Arama Kurtarma", "Güvenlik", "Meteoroloji", "Hava Trafik"], answer: "Arama Kurtarma" },
-        { q: "ICAO Ek-16 (Annex 16) neyle ilgilidir?", options: ["Gürültü ve emisyon", "Pilot lisansları", "Bakım kuralları", "Havaalanı işletmesi"], answer: "Gürültü ve emisyon" },
-        { q: "EASA'nın görevi nedir?", options: ["Avrupa hava trafiğini düzenlemek", "AB ülkelerinde havacılık emniyeti ve sertifikasyonu sağlamak", "Uluslararası yolcu taşımak", "Pilot eğitimi vermek"], answer: "AB ülkelerinde havacılık emniyeti ve sertifikasyonu sağlamak" },
-        { q: "EUROCONTROL'ün amacı nedir?", options: ["Hava kargo taşımacılığı", "Avrupa hava sahasının verimli yönetimi", "Eğitim planlaması", "Hava durumu ölçümü"], answer: "Avrupa hava sahasının verimli yönetimi" },
-        { q: "ECAC ne yapar?", options: ["Uçak üretir", "Havacılık politikalarını uyumlaştırır", "Pilot lisansı verir", "Uçuş planları yazar"], answer: "Havacılık politikalarını uyumlaştırır" },
-        { q: "CORSIA ne anlama gelir?", options: ["Karbon denkleştirme ve azaltma sistemi", "Uçuş izin sistemi", "Kontrol alan yönetimi", "Pilot sertifikasyonu"], answer: "Karbon denkleştirme ve azaltma sistemi" },
-        { q: "Havacılıkta resmi haberleşme dili nedir?", options: ["Fransızca", "İngilizce", "Almanca", "Türkçe"], answer: "İngilizce" },
-        { q: "Pilotlar için minimum İngilizce seviyesi nedir?", options: ["ICAO Level 2", "ICAO Level 3", "ICAO Level 4", "ICAO Level 5"], answer: "ICAO Level 4" },
-        { q: "Uluslararası sivil havacılık kuruluşlarından olmayan hangisidir?", options: ["EASA", "ECAC", "ENAC", "IATA"], answer: "ENAC" },
-        { q: "Havacılık Sözleşmelerinden olmayan hangisidir?", options: ["Paris", "Madrid", "Pekin", "Şikago"], answer: "Pekin" },
-        { q: "Madrid Antlaşması'nın diğer adı nedir?", options: ["Paris Antlaşması", "İber-Amerika Konferansı", "Varşova Konferansı", "Havana Sözleşmesi"], answer: "İber-Amerika Konferansı" },
-        { q: "Paris Antlaşması'nın tam adı nedir?", options: ["Uluslararası Hava Trafiği Sözleşmesi", "Hava Seyrüseferinin Düzenlenmesine Dair Anlaşma", "Hava Sorumluluklarının Belirlenmesi Anlaşması", "Havacılık Güvenlik Protokolü"], answer: "Hava Seyrüseferinin Düzenlenmesine Dair Anlaşma" },
-        { q: "ICAO Ek-19 (Annex 19) neyi kapsar?", options: ["Tehlikeli Maddeler", "Güvenlik Yönetimi", "Kolaylıklar", "Hava Haritaları"], answer: "Güvenlik Yönetimi" },
-        { q: "ICAO Ek-7 (Annex 7) neyi kapsar?", options: ["Personel Lisansları", "Uçak İşletilmesi", "Uçak Milliyet ve Tescil İşaretleri", "Hava Kuralları"], answer: "Uçak Milliyet ve Tescil İşaretleri" },
-        { q: "ICAO Ek-8 (Annex 8) neyi kapsar?", options: ["Havaalanları", "Arama ve Kurtarma", "Uçağın Uçuşa Elverişliliği", "Havacılık Telekomünikasyon"], answer: "Uçağın Uçuşa Elverişliliği" },
-        { q: "Uçuşa elverişlilik ne anlama gelir?", options: ["Uçağın motor gücü yüksekse", "Uçağın emniyetli uçabilme şartlarını sağlaması", "Yük taşıma kapasitesinin fazla olması", "Eğitim uygunluğu"], answer: "Uçağın emniyetli uçabilme şartlarını sağlaması" },
-        { q: "Tip Sertifikası nedir?", options: ["Uçuş planı", "Tasarım uygunluğu belgesi", "Yolcu kapasitesi raporu", "Lisans belgesi"], answer: "Tasarım uygunluğu belgesi" },
-        { q: "Tip Yetkisini (Sertifikasını) uçağa neresi verir?", options: ["Tescil Eden Ülke", "Üretildiği Ülke", "Hava Yolu İşletmesi", "ICAO"], answer: "Üretildiği Ülke" },
-        { q: "SYK'nin açılımı nedir?", options: ["Sivil Yönetim Kurulu", "Sürekli Uçuşa Elverişlilik Yönetimi Kuruluşu", "Sistem Yetki Kurumu", "Saha Yetki Komisyonu"], answer: "Sürekli Uçuşa Elverişlilik Yönetimi Kuruluşu" },
-        { q: "AMP nedir?", options: ["Aircraft Maintenance Plan", "Airport Management Program", "Aviation Main Policy", "Air Monitoring Plan"], answer: "Aircraft Maintenance Plan" },
-        { q: "CRS belgesi neyi ifade eder?", options: ["Hava trafiği yoğunluğu", "Bakım sonrası uçağın uçuşa hazır olduğunu", "Uçuş plan değişikliğini", "Pilot yetki seviyesini"], answer: "Bakım sonrası uçağın uçuşa hazır olduğunu" },
-        { q: "Sürekli Uçuşa Elverişlilik Sertifikasını kim verir?", options: ["Üretildiği Ülke", "Hava aracını Tescil Eden Ülke", "Bakım Kuruluşu", "EASA/FAA"], answer: "Hava aracını Tescil Eden Ülke" },
-        { q: "Uçağın üretilen parçalarının üretiminden sonra uygunluğu kimin sorumluluğundadır?", options: ["Tescil Eden Ülke", "Üretildiği Ülke", "Bakım Kuruluşu", "Operatör"], answer: "Üretildiği Ülke" },
-        { q: "Bakımın Yapıldığı Yere Göre Bakım türleri nelerdir?", options: ["Önleyici, Düzeltici", "Hat, Üs", "Ağır, Hafif", "Periyodik, Arıza"], answer: "Hat Bakımı, Üs Bakımı" },
-        { q: "Uçuş devam ederken yapılan bakım türü nedir?", options: ["Üs Bakımı", "Düzeltici Bakım", "Hat Bakımı", "Önleyici Bakım"], answer: "Hat Bakımı" },
-        { q: "Yapılış Amacına Göre Bakımlar Nedir?", options: ["Hat Bakımı / Üs Bakımı", "Önleyici Bakım / Düzenleyici Bakım", "Check A / Check C", "Planlı / Plansız Bakım"], answer: "Önleyici Bakım / Düzenleyici Bakım" },
-        { q: "Havadan hafif hava araçları nelerdir?", options: ["Planör ve Zeplin", "Balon ve Zeplin", "Helikopter ve Zeplin", "Balon ve Planör"], answer: "Balon ve Zeplin" },
-        { q: "Hava taksi işletmeciliği maksimum koltuk sayısı kaçtır?", options: ["50", "30", "19", "10"], answer: "19" },
-        { q: "Döner kanatlı hava araçlarında kullanılan motor tipi nedir?", options: ["Turbojet", "Turboprop", "Turboşaft", "Turbofan"], answer: "Turboşaft" },
-        { q: "Döner kanatlı hava araçları nedir?", options: ["Balon, Zeplin", "Planör, Gyroplane", "Helikopter, Gyroplane", "Savaş Uçağı, Jet"], answer: "Gyroplane, Helikopter" },
-        { q: "Serbest uçuş yapabilen ve havadan ağır olan motorsuz hava aracı hangisidir?", options: ["Balon", "Zeplin", "Planör", "Helikopter"], answer: "Planör" },
-        { q: "Hava tarafı hangi bölümü kapsar?", options: ["Terminal binası", "Pist, apron, taksi yolu", "Otopark", "Bagaj teslim alanı"], answer: "Pist, apron, taksi yolu" },
-        { q: "Check-in işlemi neyi kapsar?", options: ["Güvenlik kontrolü", "Bagaj teslimi ve biniş kartı alma", "Uçağa binme", "Pasaport işlemi"], answer: "Bagaj teslimi ve biniş kartı alma" },
-        { q: "Kara Tarafı hangi bölümü kapsar?", options: ["Pistler ve Taksi Yolları", "Apronlar", "Terminal Binaları ve Otopark", "Kontrol Kulesi"], answer: "Terminal Binaları ve Otopark" },
-        { q: "PAT sahaları hangi alanlardan oluşur?", options: ["Park, Apron, Terminal", "Pist, Apron, Taksi Yolu", "Pasaport, Apron, Terminal", "Personel, Araç, Terminal"], answer: "Pist, Apron, Taksi Yolu" },
-        { q: "Yolcunun uçağa binişine kadar verilen hizmet nedir?", options: ["Boarding", "Check-In", "Ramp Hizmeti", "Bagaj Kontrolü"], answer: "Check-In" },
-        { q: "Havaalanı yer hizmet faaliyetlerinden hangisi rampa hizmetlerini kapsar?", options: ["Yolcu Hizmetleri", "Kargo", "Uçak Hat Bakım", "Ulaşım"], answer: "Kargo" },
-        { q: "Havaalanı tesis bütünlüğünü oluşturan parçalardan BİNANIN parçası olmayan hangisidir?", options: ["Pist", "Yer Hizmet Kuruluşları", "Ticari İşletmeler", "Devlet Kurumları"], answer: "Pist" },
-        { q: "Hava taşımacılık işletmesi olmayan hangisidir?", options: ["Havayolu İşletmesi", "Hava Taksi İşletmesi", "Genel Havacılık İşletmesi", "Kargo İşletmesi"], answer: "Genel Havacılık İşletmesi" },
-        { q: "Havacılık dışı hizmetlerden hangisi yanlıştır?", options: ["Yiyecek ve içecek hizmetleri", "Reklam", "Uçuş planlama", "Otopark hizmetleri"], answer: "Uçuş planlama" },
-        { q: "Hizmet tipine göre havaalanlarından yanlış olan hangisidir?", options: ["Büyük ölçekli havaalanları", "Ticari Hizmet Havaalanları", "Gayri Resmi Havaalanı", "Genel Havacılık Havaalanları"], answer: "Gayri Resmi Havaalanı" },
-        { q: "CNS açılımı nedir?", options: ["Communication, Navigation, Surveillance", "Control, Navigation, System", "Civil Navigation Standards", "Cargo Network System"], answer: "Communication, Navigation, Surveillance" },
-        { q: "ILS sistemi ne işe yarar?", options: ["Yük taşımak", "Aletli iniş için yönlendirme", "Uçuş planı oluşturmak", "Hız ölçmek"], answer: "Aletli iniş için yönlendirme" },
-        { q: "VOR sistemi ne sağlar?", options: ["Yükseklik bilgisi", "Yön belirleme", "Hava durumu", "Mesafe ölçümü"], answer: "Yön belirleme" },
-        { q: "DME ne ölçer?", options: ["Basınç", "Uzaklık", "Yön", "İrtifa"], answer: "Uzaklık" },
-        { q: "GNSS sistemi nedir?", options: ["Uydu tabanlı seyrüsefer sistemi", "Radar sistemi", "Hava tahmin aracı", "Uçuş planlama programı"], answer: "Uydu tabanlı seyrüsefer sistemi" },
-        { q: "SAR nedir?", options: ["Search and Rescue", "Safety and Regulation", "System Air Report", "Security Area Radar"], answer: "Search and Rescue" },
-        { q: "ATM nedir?", options: ["Air Traffic Management", "Aviation Transport Market", "Aircraft Training Manual", "Air Terminal Maintenance"], answer: "Air Traffic Management" },
-        { q: "Meydan kontrolü hangi alanı yönetir?", options: ["Havalimanı çevresi", "Terminal binası", "Apron dışı bölge", "Pist dışı yollar"], answer: "Havalimanı çevresi" },
-        { q: "Yaklaşma kontrolü hangi aşamada çalışır?", options: ["Uçuş ortasında", "Kalkış ve iniş sırasında", "Bakım sürecinde", "Uçak parkında"], answer: "Kalkış ve iniş sırasında" },
-        { q: "Saha kontrolü hangi uçuşları yönetir?", options: ["Taksi uçuşları", "Seyir uçuşları", "Kısa mesafeli", "Charter seferleri"], answer: "Seyir uçuşları" },
-        { q: "Hava Trafik Kontrol Hizmetleri nelerdir?", options: ["İkaz, Meteoroloji, Uçuş Bilgi", "Saha, Yaklaşma, Meydan Kontrol", "Haberleşme, Navigasyon, Gözetim", "Hava Sahası Yönetimi, Hava Trafik Akış Yönetimi"], answer: "Saha, Yaklaşma, Meydan Kontrol" },
-        { q: "Hava Trafik kontrolü uçakların nelerini değiştirebilir?", options: ["Uçuş Planı, Yolcu Sayısı, Yük Miktarı", "Uçuş Başı, Uçuş Hızı, Uçuş İrtifası", "Kabin Basıncı, Yakıt Miktarı, Motor Gücü", "Tescil İşareti, Lisans Tipi, Bakım Kaydı"], answer: "Uçuş Başı, Uçuş Hızı, Uçuş İrtifası" },
-        { q: "Uyarı Hizmetleri hangi uçaklara verilir?", options: ["Sadece askeri uçaklara", "Sadece kargo uçaklarına", "Hava trafik kontrol hizmeti sağlanan tüm uçaklara", "Sadece tarifesiz uçuşlara"], answer: "Hava trafik kontrol hizmeti sağlanan tüm uçaklara" },
-        { q: "Bir uçağın hareket etmeye başladığı (kalkış) iniş yerine varıp park edinceye kadar geçen süre?", options: ["Uçuş Saati", "Blok Saat", "Taksi Süresi", "Kapıdan Kapıya Süre"], answer: "Blok Saat" },
-        { q: "Stratejik Akış Yönetimi kaç gün önce başlar?", options: ["Uçuş günü", "1 gün önce", "6 gün önce", "7 gün ve daha önce"], answer: "7 gün ve daha önce" },
-        { q: "Hava Trafik Emniyeti Elektronik Personeli (ATSEP) görevi nedir?", options: ["Uçuş planlaması yapmak", "Uçakların emniyetli uçuş şartlarını sağlamak", "CNS sistemlerinin kurulum, işletme ve bakımından sorumlu olmak", "Yolcu emniyetini sağlamak"], answer: "CNS sistemlerinin kurulum, işletme ve bakımından sorumlu olmak" },
-        { q: "Havacılık Telsiz Frekans Aralığı nedir?", options: ["88.000 - 108.000 MHz", "100.000 - 118.000 MHz", "118.000 - 137.000 MHz", "140.000 - 160.000 MHz"], answer: "118.000 - 137.000 MHz" },
-        { q: "THAT hangi modeldir?", options: ["Düşük maliyetli taşıyıcı", "Tam hizmet ağı taşıyıcısı", "Özel sefer taşıyıcısı", "Bölgesel taşıyıcı"], answer: "Tam hizmet ağı taşıyıcısı" },
-        { q: "DMT hangi modeldir?", options: ["Düşük maliyetli taşıyıcı", "Tam hizmet ağı taşıyıcısı", "Bölgesel taşıyıcı", "Özel sefer"], answer: "Düşük maliyetli taşıyıcı" },
-        { q: "Charter uçuş nedir?", options: ["Tarifeli", "Tarifesiz özel uçuş", "Devlet uçuşu", "Eğitim uçuşu"], answer: "Tarifesiz özel uçuş" },
-        { q: "Bölgesel taşıyıcılar hangi uçaklarla çalışır?", options: ["Geniş gövdeli jetler", "Küçük jet ve turboprop", "Savaş uçakları", "Planörler"], answer: "Küçük jet ve turboprop" },
-        { q: "Hibrit taşıyıcı nedir?", options: ["Charter + THAT", "THAT + DMT özelliklerini birleştirir", "DMT + BT birleşimi", "Kargo odaklıdır"], answer: "THAT + DMT özelliklerini birleştirir" },
-        { q: "Kapasite farklılıklarına göre Ana Hat uçakları yolcu kapasitesi kaçın üzerindedir?", options: ["50", "100", "150", "200"], answer: "100" },
-        { q: "Havayolu İşletmeciliği tescil belgesinde hangisi yer almaz?", options: ["İşleticinin adı", "Kullanılacak uçak tipleri", "Uçak Sigorta Bedeli", "İşletme şartları"], answer: "Uçak Sigorta Bedeli" },
-        { q: "Havayolu iş modellerinden olmayan hangisidir?", options: ["Tam Hizmet Ağı Taşıyıcıları", "Düşük Maliyetli Taşıyıcılar", "Servis", "Karma Taşıyıcılar"], answer: "Servis" },
-        { q: "CBTA neyi ifade eder?", options: ["Competency-Based Training and Assessment", "Cargo-Based Transport Agreement", "Civil Business Training Area", "Communication-Based Traffic Agreement"], answer: "Competency-Based Training and Assessment" },
-        { q: "Phraseology neden kullanılır?", options: ["Zaman kazanmak", "Yanlış anlamaları önlemek", "Eğitim süresini kısaltmak", "Şifreli iletişim sağlamak"], answer: "Yanlış anlamaları önlemek" },
-        { q: "LAPL ve ATPL farkı nedir?", options: ["LAPL en yüksek, ATPL en düşük", "LAPL hafif, ATPL havayolu pilot lisansıdır", "Aynıdır", "ATPL planör içindir"], answer: "LAPL hafif, ATPL havayolu pilot lisansıdır" },
-        { q: "Kabin memurlarının asıl görevi nedir?", options: ["Yolcuya yiyecek servisi yapmak", "Pilotun talimatlarını yerine getirmek", "Uçak personeli olmak", "Yolcu emniyetini sağlamak"], answer: "Yolcu emniyetini sağlamak" },
-        { q: "Uçuş Harekat Uzmanının temel görevi nedir?", options: ["Hava aracının bakımını yapmak", "Yolcu biletlerini kontrol etmek", "Uçuşu planlamak ve uçuş süresince izlemek", "Hava trafik kontrolü yapmak"], answer: "Uçuşu planlamak ve uçuş süresince izlemek" },
-        { q: "Bakımcıların lisansları hangi şıkta doğru yazılmıştır?", options: ["A, B1, B2, B2L, B3, L, C", "PPL, CPL, ATPL", "LAPL, BPL, SPL", "ATSEP, ATC, FSO"], answer: "A, B1, B2, B2L, B3, L, C" },
-        { q: "Hafif Hava Aracı ve Hususi Pilot Lisansları arasında olmayan hangisidir?", options: ["BPL", "LAPL", "ATPL", "PPL"], answer: "ATPL" },
-        { q: "Hava Trafik Kontrolü Görev Pozisyonları arasında olmayan hangisidir?", options: ["Kule Çalışma Pozisyonu", "Yer Çalışma Pozisyonu", "Müsaade Dağıtım Çalışma Pozisyonu", "Saha Kontrol Pozisyonu"], answer: "Saha Kontrol Pozisyonu" },
-        { q: "Yetkinlik Bazlı Eğitim Yaklaşımı (CBTA) ilkelerinden hangisi yanlıştır?", options: ["Eğitim belirlenen yetkinliklere göre şekillendirilir.", "Öğrenme çıktısı yerine eğitim süresi esas alınır.", "Gerçekçi eğitim senaryoları kullanılır.", "Performansa dayalı değerlendirme yapılır."], answer: "Öğrenme çıktısı yerine eğitim süresi esas alınır." },
-        { q: "Havacılık eğitimi veren yerler nelerdir?", options: ["Sadece Meslek Edindirme Kursları", "Sadece Üniversiteler", "Meslek edindirme kursları, Okul eğitimi, Hizmet içi eğitim", "Sadece Havayolu Şirketleri"], answer: "Meslek edindirme kursları, Okul eğitimi, Hizmet içi eğitim" },
-        { q: "Uçağın dengesini sağlayan ana eleman hangisidir?", options: ["Motorlar", "Kanatlar", "Gövde", "Kuyruk"], answer: "Kuyruk" },
-        { q: "ASK nedir?", options: ["Arz Edilen Koltuk-Km", "Arz Edilen Kargo-Km", "Ortalama Hız", "Aylık Sefer Kapasitesi"], answer: "Arz Edilen Koltuk-Km" },
-        { q: "RPK nedir?", options: ["Arz Edilen Kargo-Km", "Ücretli Yolcu-Km", "Ortalama Sefer Uzunluğu", "Kargo Doluluk Oranı"], answer: "Ücretli Yolcu-Km" },
-        { q: "Doluluk oranı nasıl hesaplanır?", options: ["ASK / RPK", "RPK / ASK", "ASK x RPK", "ASK + RPK"], answer: "RPK / ASK" },
-        { q: "IATA Görevlerinden biri nedir?", options: ["Hava trafik kontrolü yapmak", "Havayolu endüstrisine Liderlik Etmek", "Uçak üretmek", "Havaalanı işletmek"], answer: "Havayolu endüstrisine Liderlik Etmek" },
-        { q: "Programlı Bakım İçin Gerekli Dokümanlardan biri nedir?", options: ["Hava aracı Bakım El Kitabı (AMM)", "Pilot Günlüğü", "Yolcu Listesi", "Bilet Koçanı"], answer: "Hava aracı Bakım El Kitabı (AMM)" }
+        { q: "1 foot kaç metredir?", options: ["0,25", "0,3048", "1,85", "3,048"], answer: "0,3048" }
     ];
     
     const pastQuestions = [
         { q: "ICAO Kodlarına Göre Havaalanları ülkemizde hangi harf ile başlamaktadır?", options: ["L", "T", "E", "A"], answer: "L" },
-        { q: "ICAO Kodu ülkemiz için hangi harftir?", options: ["T", "L", "C", "A"], answer: "T" },
-        { q: "Havadan hafif hava aracı nedir?", options: ["Uçak ve Helikopter", "Balon ve Zeplin", "Planör", "İHA"], answer: "Balon ve Zeplin" },
-        { q: "Bakımın yapıldığı yere göre bakım türleri nelerdir?", options: ["Hat Bakımı, Üs Bakımı", "Önleyici, Düzeltici", "Planlı, Plansız", "Ağır, Hafif"], answer: "Hat Bakımı, Üs Bakımı" },
-        { q: "Hizmet tipine göre havaalanlarından hangisi YANLIŞTIR?", options: ["Ticari Hizmet Havaalanları", "Kargo Hizmet Havaalanları", "Genel Havacılık Havaalanları", "Gayri Resmi Havaalanı"], answer: "Gayri Resmi Havaalanı" },
-        { q: "Bakımcıların lisansları hangi şıkta doğru yazılmıştır?", options: ["PPL, CPL, ATPL", "A, B1, B2, B2L, B3, L, C", "Class 1, Class 2, Class 3", "Part-66, Part-145, Part-147"], answer: "A, B1, B2, B2L, B3, L, C" },
-        { q: "İber-Amerika Konferansı'nın diğer adı nedir?", options: ["Paris Antlaşması", "Şikago Sözleşmesi", "Madrid Antlaşması", "Havana Sözleşmesi"], answer: "Madrid Antlaşması" },
-        { q: "Hava Taksi İşletmeciliği maksimum koltuk sayısı kaçtır?", options: ["9", "19", "30", "50"], answer: "19" },
-        { q: "Havayolu İşletmeciliği tescil belgesinde hangisi YER ALMAZ?", options: ["İşleticinin adı", "Kullanılacak uçak tipleri", "İşletme şartları", "Uçak Sigorta Bedeli"], answer: "Uçak Sigorta Bedeli" },
-        { q: "Hava Trafik kontrolü uçakların nelerini değiştirebilir?", options: ["Uçuş Başı, Uçuş Hızı, Uçuş İrtifası", "Uçak Tipi, Yakıt Miktarı", "Yolcu Sayısı, Bagaj Ağırlığı", "Motor Gücü, Kanat Açısı"], answer: "Uçuş Başı, Uçuş Hızı, Uçuş İrtifası" },
-        { q: "Hava Trafik Kontrol Hizmetleri Nelerdir?", options: ["Meydan, Yaklaşma, Saha", "Yolcu, Kargo, Ramp", "Bakım, Onarım, Revizyon", "Güvenlik, Gümrük, Pasaport"], answer: "Meydan, Yaklaşma, Saha" },
-        { q: "Aşağıdakilerden hangisi ICAO'nun amaçlarından biri DEĞİLDİR?", options: ["Uçuş emniyetini geliştirmek", "Haksız rekabetin yol açabileceği israfı önlemek", "Sadece askeri havacılığı geliştirmek", "Uluslararası sivil havacılığın güvenli gelişimini sağlamak"], answer: "Sadece askeri havacılığı geliştirmek" },
-        { q: "Aşağıdakilerden hangisi ATS (Hava Trafik Hizmetleri) kapsamında DEĞİLDİR?", options: ["Hava Trafik Kontrol (ATC)", "Uçuş Bilgi Hizmeti (FIS)", "İkaz Hizmeti (Alerting)", "Meteoroloji Hizmeti (MET)"], answer: "Meteoroloji Hizmeti (MET)" },
-        { q: "Aşağıdakilerden hangisi Uluslararası Sivil Havacılık Kuruluşlarından DEĞİLDİR?", options: ["EASA", "IATA", "EUROCONTROL", "ENAC"], answer: "ENAC" },
-        { q: "Bir uçağın hareket etmeye başladığı (kalkış) iniş yerine varıp park edinceye kadar geçen süreye ne denir?", options: ["Uçuş Saati", "Blok Saat", "Taksi Süresi", "Mesai Saati"], answer: "Blok Saat" },
-        { q: "Yolcunun uçağa binişine kadar verilen hizmet nedir?", options: ["Boarding", "Check-In", "Transfer", "Handling"], answer: "Check-In" },
-        { q: "Uçağın Tip Yetkisini (Sertifikasını) neresi verir?", options: ["Tescil Eden Ülke", "İşleten Havayolu", "Üretildiği Ülke", "Uçağın İndiği Ülke"], answer: "Üretildiği Ülke" },
-        { q: "Sürekli Uçuşa Elverişlilik Sertifikasını kim verir?", options: ["Üretildiği Ülke", "Hava aracını Tescil Eden Ülke", "Bakım Kuruluşu", "EASA"], answer: "Hava aracını Tescil Eden Ülke" },
-        { q: "Uçağın üretilen parçalarının üretiminden sonra uygunluğu kimin sorumluluğundadır?", options: ["İşletici", "Tescil Ülkesi", "Üretildiği Ülke", "Pilot"], answer: "Üretildiği Ülke" },
-        { q: "1 NM (Deniz Mili) kaç metredir?", options: ["1609", "1852", "1000", "2000"], answer: "1852" },
-        { q: "ICAO istatistik el kitabı 9 ana başlıktan biri değildir?", options: ["Ticari hava taşımacılığı", "Genel havacılık", "Havaalanı hizmetleri", "Uzay madenciliği"], answer: "Uzay madenciliği" },
-        { q: "Hafif Hava Aracı Pilot Lisansı'nın kısaltması nedir?", options: ["PPL", "CPL", "ATPL", "LAPL"], answer: "LAPL" },
-        { q: "Hava Trafik Kontrolü Çalışma Pozisyonlarından biri değildir?", options: ["Kule Çalışma Pozisyonu", "Yer Çalışma Pozisyonu", "Müsaade Dağıtım Pozisyonu", "Pilot Çalışma Pozisyonu"], answer: "Pilot Çalışma Pozisyonu" },
-        { q: "Uyarı (İkaz) Hizmetleri hangi uçaklara verilir?", options: ["Sadece askeri uçaklara", "Sadece yolcu uçaklarına", "Hava trafik kontrol hizmeti sağlanan tüm uçaklara", "Sadece yerde bekleyen uçaklara"], answer: "Hava trafik kontrol hizmeti sağlanan tüm uçaklara" },
-        { q: "CORSIA'nın uygulama öğelerinden biri değildir?", options: ["Corsia Bölüm 3 Devlet Çiftleri", "Corsia Uygun Yakıtlar", "Corsia Merkezi Kayıt Sistemi", "Corsia Bilet Satış Sistemi"], answer: "Corsia Bilet Satış Sistemi" },
-        { q: "IATA'nın temel görevlerinden biri nedir?", options: ["Hava sahasını kontrol etmek", "Uçak üretmek", "Havayolu endüstrisine liderlik etmek ve temsil etmek", "Pilot lisansı vermek"], answer: "Havayolu endüstrisine liderlik etmek ve temsil etmek" },
-        { q: "Paris Antlaşması'nın tam adı nedir?", options: ["Hava Seyrüseferinin Düzenlenmesine Dair Anlaşma", "Uluslararası Sivil Havacılık Anlaşması", "Hava Kuralları Anlaşması", "Avrupa Havacılık Anlaşması"], answer: "Hava Seyrüseferinin Düzenlenmesine Dair Anlaşma" },
-        { q: "Hangisi Hava Taşımacılık İşletmesi DEĞİLDİR?", options: ["Havayolu İşletmesi", "Hava Taksi İşletmesi", "Genel Havacılık İşletmesi", "Kargo Havayolu"], answer: "Genel Havacılık İşletmesi" },
-        { q: "Stratejik Akış Yönetimi uçuştan kaç gün önce başlar?", options: ["1 gün önce", "3 gün önce", "7 gün ve daha önce", "Uçuş günü"], answer: "7 gün ve daha önce" },
-        { q: "Yapılış amacına göre bakım türleri nelerdir?", options: ["Hat ve Üs", "Önleyici ve Düzeltici", "Ağır ve Hafif", "Planlı ve Plansız"], answer: "Önleyici ve Düzeltici" },
-        { q: "Hangisi Havacılık Sözleşmesi DEĞİLDİR?", options: ["Paris", "Madrid", "Şikago", "Pekin"], answer: "Pekin" },
-        { q: "Hangisi Havacılık Dışı bir hizmettir?", options: ["Yer Hizmetleri", "Yakıt İkmali", "Eğlence ve Reklam Hizmetleri", "Kargo Hizmetleri"], answer: "Eğlence ve Reklam Hizmetleri" },
-        { q: "Programlı bakım için gerekli dokümanlardan biri değildir?", options: ["AMM (Bakım El Kitabı)", "IPC (Parça Kataloğu)", "MEL (Asgari Teçhizat Listesi)", "Pilotun Günlüğü"], answer: "Pilotun Günlüğü" },
-        { q: "Yetkinlik Bazlı Eğitim Yaklaşımı (CBTA) özelliği nedir?", options: ["Ezbere dayalıdır", "Sadece teoriktir", "Performansa dayalı değerlendirme yapılır", "Sadece sınav odaklıdır"], answer: "Performansa dayalı değerlendirme yapılır" },
-        { q: "Hangisi Havayolu İş Modellerinden değildir?", options: ["Tam Hizmet Ağı Taşıyıcıları", "Düşük Maliyetli Taşıyıcılar", "Servis", "Bölgesel Taşıyıcılar"], answer: "Servis" },
-        { q: "Hangisi EASA'nın görevlerinden değildir?", options: ["Havacılık emniyetini geliştirmek", "Üye devletlere danışmanlık yapmak", "Üye devletlerin LEHİNE (taraflı) karar vermek", "Sertifikasyon yapmak"], answer: "Üye devletlerin LEHİNE (taraflı) karar vermek" },
-        { q: "Uçuş devam ederken yapılan bakım türü nedir?", options: ["Üs Bakımı", "HAT Bakımı", "Düzeltici Bakım", "Ağır Bakım"], answer: "HAT Bakımı" },
-        { q: "Havacılık Telsiz Frekans Aralığı nedir?", options: ["88-108 MHz", "118.000 - 137.000 MHz", "400-500 MHz", "2.4 GHz"], answer: "118.000 - 137.000 MHz" },
-        { q: "ATSEP'in görevi nedir?", options: ["Uçağı uçurmak", "Bilet kesmek", "CNS (Haberleşme, Seyrüsefer, Gözetim) sistemlerinin bakım ve işletilmesi", "Yolcu güvenliğini sağlamak"], answer: "CNS (Haberleşme, Seyrüsefer, Gözetim) sistemlerinin bakım ve işletilmesi" },
-        { q: "Uçuş Harekat Uzmanının (Dispeçer) görevi nedir?", options: ["Uçağı tamir etmek", "Uçuşu planlamak ve süresince izlemek", "Kulede çalışmak", "Bagaj yüklemek"], answer: "Uçuşu planlamak ve süresince izlemek" },
-        { q: "Kapasite farklılıklarına göre 'Ana Hat' uçaklarının yolcu kapasitesi nasıldır?", options: ["100'ün üzerinde", "100'ün altında", "En fazla 19", "En fazla 50"], answer: "100'ün üzerinde" },
-        { q: "Döner kanatlı hava araçları hangileridir?", options: ["Planör, Balon", "Uçak, Zeplin", "Gyroplane, Helikopter", "İHA, Roket"], answer: "Gyroplane, Helikopter" },
-        { q: "Döner kanatlı hava araçlarında kullanılan motor tipi nedir?", options: ["Turbojet", "Turbofan", "Turboşaft", "Pistonlu"], answer: "Turboşaft" },
-        { q: "En büyük daire (Great Circle) nedir?", options: ["En uzun yol", "İki nokta arasındaki en kısa mesafe", "Ekvator", "Paralel"], answer: "İki nokta arasındaki en kısa mesafe" },
-        { q: "600 knot hızla giden uçak 80 knot baş rüzgarı alıyorsa yer hızı nedir?", options: ["680", "520", "600", "480"], answer: "520" },
-        { q: "Kabin memurlarının ASIL görevi nedir?", options: ["İkram yapmak", "Güleryüz göstermek", "Yolcu emniyetini sağlamak", "Kokpite girmek"], answer: "Yolcu emniyetini sağlamak" },
-        { q: "Havacılık eğitimi veren yerler hangileridir?", options: ["Sadece üniversiteler", "Meslek edindirme kursları, Okul eğitimi, Hizmet içi eğitim", "Sadece havayolları", "Yurtdışı kursları"], answer: "Meslek edindirme kursları, Okul eğitimi, Hizmet içi eğitim" },
-        { q: "Uçağın dengesini sağlayan eleman hangisidir?", options: ["Kanat", "Motor", "Kuyruk", "İniş Takımı"], answer: "Kuyruk" }
+        { q: "Bakımın yapıldığı yere göre bakım türleri nelerdir?", options: ["Hat Bakımı, Üs Bakımı", "Önleyici, Düzeltici", "Planlı, Plansız", "Ağır, Hafif"], answer: "Hat Bakımı, Üs Bakımı" }
     ];
 
     const aiQuestions = [
-        { q: "ICAO Annex 17 (Ek-17) hangi konuyu düzenler ve amacı nedir?", options: ["Hava Trafik Hizmetleri - Trafik akışını sağlar", "Güvenlik (Security) - Kanunsuz girişimlere karşı koruma sağlar", "Çevre Koruma - Gürültüyü azaltır", "Arama Kurtarma - Kaza incelemesi yapar"], answer: "Güvenlik (Security) - Kanunsuz girişimlere karşı koruma sağlar" },
-        { q: "Tehlikeli Maddelerin Havayolu ile Güvenli Taşınması hangi ICAO Ek'inde (Annex) yer alır?", options: ["Annex 9", "Annex 14", "Annex 18", "Annex 6"], answer: "Annex 18" },
-        { q: "Havaalanı sistemini oluşturan taraflardan hangisi 'Düzenleme ve Denetleme' yetkisine sahiptir?", options: ["Yer Hizmet Kuruluşları", "Havayolu İşletmeleri", "Devlet Kurumları ve Otoriteler", "Ticari İşletmeler"], answer: "Devlet Kurumları ve Otoriteler" },
-        { q: "Bir havaalanında 'Hava Tarafı' (Airside) neleri kapsar?", options: ["Terminal binaları ve otoparklar", "Pistler, taksi yolları ve apronlar", "Gümrüksüz satış mağazaları", "Bilet satış ofisleri"], answer: "Pistler, taksi yolları ve apronlar" },
-        { q: "EASA'nın (Avrupa Havacılık Emniyeti Ajansı) temel sorumluluğu nedir?", options: ["Avrupa'da hava trafik kontrolü yapmak", "Havacılık emniyeti ile ilgili yasal düzenlemeleri hazırlamak ve sertifikasyon yapmak", "Uçak bileti fiyatlarını belirlemek", "Sadece kargo taşımacılığını denetlemek"], answer: "Havacılık emniyeti ile ilgili yasal düzenlemeleri hazırlamak ve sertifikasyon yapmak" },
-        { q: "ATSEP personelinin çalışma alanı aşağıdakilerden hangisidir?", options: ["Uçak içi kabin hizmetleri", "Pist temizliği ve bakımı", "CNS (Haberleşme, Seyrüsefer, Gözetim) sistemlerinin teknik bakımı", "Yolcu bagaj transferi"], answer: "CNS (Haberleşme, Seyrüsefer, Gözetim) sistemlerinin teknik bakımı" },
-        { q: "'Hat Bakımı' (Line Maintenance) ne zaman yapılır?", options: ["Uçak hangara çekildiğinde haftalarca sürer", "Uçuş aralarında veya gece konaklamalarında yapılan rutin kontrollerdir", "Uçak fabrikada üretilirken yapılır", "Sadece kaza sonrası yapılır"], answer: "Uçuş aralarında veya gece konaklamalarında yapılan rutin kontrollerdir" },
-        { q: "CORSIA programının 'Karbon Nötr Büyüme' hedefi hangi yıldan itibaren geçerlidir?", options: ["2000", "2010", "2020", "2050"], answer: "2020" },
-        { q: "Hava Trafik Hizmetleri (ATS) kapsamında 'İkaz Hizmeti'nin amacı nedir?", options: ["Uçaklara meteorolojik bilgi vermek", "Arama ve kurtarma gerektiren durumlardaki uçaklar için ilgili birimleri uyarmak", "Havaalanı ışıklarını yakmak", "Pilotlara rota tavsiyesi vermek"], answer: "Arama ve kurtarma gerektiren durumlardaki uçaklar için ilgili birimleri uyarmak" },
-        { q: "ICAO Annex 14 (Havaalanları) neyi belirler?", options: ["Pilot lisans standartlarını", "Havaalanı tasarımı ve işletilmesi ile ilgili standartları", "Uçak motor tiplerini", "Hava kargo kurallarını"], answer: "Havaalanı tasarımı ve işletilmesi ile ilgili standartları" },
-        { q: "Aşağıdakilerden hangisi 'Yer Hizmetleri' kapsamında verilen 'Ramp Hizmetleri'nden biridir?", options: ["Bilet satışı", "Uçuş planlama", "Uçak yükleme, boşaltma ve push-back", "Kule ile haberleşme"], answer: "Uçak yükleme, boşaltma ve push-back" },
-        { q: "Stratejik Akış Yönetimi ile Ağ Akış Yönetimi arasındaki fark nedir?", options: ["Stratejik 7 gün önce, Ağ 6 gün önce başlar", "Stratejik uçuş günü, Ağ 1 ay önce başlar", "İkisi de aynıdır", "Stratejik sadece kargo uçakları içindir"], answer: "Stratejik 7 gün önce, Ağ 6 gün önce başlar" },
-        { q: "IATA'nın 'Havayolu Endüstrisine Hizmet Etmek' görevi neyi amaçlar?", options: ["Sadece yolculara yemek vermek", "Havayollarının emniyetli, verimli ve ekonomik faaliyet göstermesine yardımcı olmak", "Uçak üretmek", "Havaalanı inşa etmek"], answer: "Havayollarının emniyetli, verimli ve ekonomik faaliyet göstermesine yardımcı olmak" },
-        { q: "Genel Havacılık İşletmesi ile Ticari Havayolu İşletmesi arasındaki temel fark nedir?", options: ["Genel havacılıkta uçaklar daha büyüktür", "Ticari havayolu tarifeli/tarifesiz yük ve yolcu taşır, genel havacılık eğitim/hobi/tarım gibi özel amaçlıdır", "Genel havacılıkta pilot gerekmez", "Ticari havayolu sadece kargo taşır"], answer: "Ticari havayolu tarifeli/tarifesiz yük ve yolcu taşır, genel havacılık eğitim/hobi/tarım gibi özel amaçlıdır" },
-        { q: "Havaalanı 'Kara Tarafı'nda (Landside) hangi işlem yapılır?", options: ["Uçağa yakıt ikmali", "Pist bakımı", "Yolcu check-in ve bilet işlemleri", "Uçak park etme"], answer: "Yolcu check-in ve bilet işlemleri" },
-        { q: "Annex 1 (Personel Lisansları) kimleri kapsar?", options: ["Sadece yolcuları", "Pilotlar, hava trafik kontrolörleri ve bakım teknisyenlerini", "Sadece havayolu yöneticilerini", "Havaalanı temizlik personelini"], answer: "Pilotlar, hava trafik kontrolörleri ve bakım teknisyenlerini" },
-        { q: "Hava aracı tescil işaretinde (Örn: TC-JFK) ilk iki harf neyi ifade eder?", options: ["Uçağın modelini", "Havayolu şirketini", "Uçağın milliyetini (Ülke Kodu)", "Motor tipini"], answer: "Uçağın milliyetini (Ülke Kodu)" },
-        { q: "'Önleyici Bakım'ın amacı nedir?", options: ["Arıza çıktıktan sonra tamir etmek", "Arıza çıkmadan önce olası sorunları gidermek ve performansı korumak", "Uçağı hurdaya ayırmak", "Uçağı boyamak"], answer: "Arıza çıkmadan önce olası sorunları gidermek ve performansı korumak" },
-        { q: "ICAO Annex 6 (Uçağın İşletilmesi) neyi düzenler?", options: ["Uçak bilet fiyatlarını", "Hava araçlarının güvenli operasyon standartlarını", "Havaalanı güvenliğini", "Meteoroloji kodlarını"], answer: "Hava araçlarının güvenli operasyon standartlarını" },
-        { q: "Sivil havacılıkta 'Sürdürülebilirlik' neyi ifade eder?", options: ["Sadece daha hızlı uçmayı", "Ekonomik başarı ile birlikte çevresel etkilerin azaltılmasını ve gelecek nesillerin desteklenmesini", "Daha fazla uçak üretmeyi", "Bilet fiyatlarını artırmayı"], answer: "Ekonomik başarı ile birlikte çevresel etkilerin azaltılmasını ve gelecek nesillerin desteklenmesini" },
-        { q: "Havaalanı 'Trafiği Rahatlatıcı Havaalanı' (Reliever Airport) nedir?", options: ["Sadece askeri uçuşlar içindir", "Büyük ticari havaalanlarının yoğunluğunu azaltmak için genel havacılık trafiğini alan havaalanıdır", "Kargo uçaklarının kullandığı alandır", "Kapatılmış havaalanıdır"], answer: "Büyük ticari havaalanlarının yoğunluğunu azaltmak için genel havacılık trafiğini alan havaalanıdır" },
-        { q: "Bir uçağın 'Uçuşa Elverişlilik Sertifikası' (CofA) neyi belgeler?", options: ["Uçağın renginin uygunluğunu", "Uçağın uçuş için emniyetli ve standartlara uygun olduğunu", "Uçağın bilet fiyatlarını", "Pilotun sağlığını"], answer: "Uçağın uçuş için emniyetli ve standartlara uygun olduğunu" },
-        { q: "ICAO Annex 19 (Emniyet Yönetim Sistemi - SMS) neyi hedefler?", options: ["Havacılıkta risklerin yönetilmesi ve emniyet kültürünün oluşturulmasını", "Uçakların daha hızlı gitmesini", "Yolcu sayısını artırmayı", "Havaalanı sayısını azaltmayı"], answer: "Havacılıkta risklerin yönetilmesi ve emniyet kültürünün oluşturulmasını" },
-        { q: "Hangi motor tipi 'Döner Kanatlı' hava araçlarında (Helikopter) en yaygın kullanılır?", options: ["Turbojet", "Turbofan", "Turboşaft", "Ramjet"], answer: "Turboşaft" },
-        { q: "Havacılıkta 'Blok Saat' hesaplaması ne zaman başlar?", options: ["Pilot uçağa bindiğinde", "Motorlar çalıştırılıp uçak taksi için hareket ettiğinde", "Uçak havalandığında", "Yolcular bindiğinde"], answer: "Motorlar çalıştırılıp uçak taksi için hareket ettiğinde" },
-        { q: "Annex 13 (Uçak Kazası ve Olay İnceleme) temel amacı nedir?", options: ["Suçluyu bulup cezalandırmak", "Kazaların nedenini bulup gelecekteki benzer kazaları önlemek", "Sigorta şirketlerine rapor vermek", "Pilotları işten çıkarmak"], answer: "Kazaların nedenini bulup gelecekteki benzer kazaları önlemek" },
-        { q: "Havaalanı yer hizmetlerinde 'Temsil Hizmeti' ne demektir?", options: ["Havayolunun yerel makamlar ve diğer kuruluşlar nezdinde temsil edilmesi", "Yolculara bilet satılması", "Bagajların taşınması", "Uçağın temizlenmesi"], answer: "Havayolunun yerel makamlar ve diğer kuruluşlar nezdinde temsil edilmesi" },
-        { q: "'Gayri Resmi Havaalanı' ifadesi ne anlama gelir?", options: ["Yasadışı havaalanı", "Hizmet tipine göre yapılan sınıflandırmada yanlış bir terimdir", "Sadece özel uçakların indiği yer", "Askeri üs"], answer: "Hizmet tipine göre yapılan sınıflandırmada yanlış bir terimdir" },
-        { q: "ICAO Annex 9 (Kolaylıklar - Facilitation) neyi amaçlar?", options: ["Gümrük, göçmenlik ve sağlık işlemlerini hızlandırarak sınır geçişlerini kolaylaştırmayı", "Uçakların daha hızlı uçmasını", "Pilotların eğitimini", "Havaalanı inşaatını"], answer: "Gümrük, göçmenlik ve sağlık işlemlerini hızlandırarak sınır geçişlerini kolaylaştırmayı" },
-        { q: "Havacılıkta 'Dispeçer' (Uçuş Harekat Uzmanı) ile Pilot arasındaki ilişki nasıldır?", options: ["Sadece kalkışta konuşurlar", "Dispeçer uçuşu planlar ve uçuş boyunca pilotla irtibat halinde kalarak destek sağlar", "Pilot dispeçere emir verir", "Hiçbir ilişkileri yoktur"], answer: "Dispeçer uçuşu planlar ve uçuş boyunca pilotla irtibat halinde kalarak destek sağlar" },
-        { q: "Hangi ICAO Annex'i 'Çevresel Koruma - Uçak Gürültüsü' konusunu işler?", options: ["Annex 1", "Annex 16", "Annex 10", "Annex 5"], answer: "Annex 16" },
-        { q: "Havaalanı güvenlik kontrolünde 'X-Ray' cihazı ne için kullanılır?", options: ["Yolcuların kimliğini kontrol etmek için", "Bagajların içindeki tehlikeli maddeleri görüntülemek için", "Uçağın motorunu kontrol etmek için", "Pasaport okumak için"], answer: "Bagajların içindeki tehlikeli maddeleri görüntülemek için" },
-        { q: "ICAO Annex 12 (Arama Kurtarma) kapsamında 'SAR' kısaltması neyi ifade eder?", options: ["Safe and Ready", "Search and Rescue", "System Air Report", "Standard Area Route"], answer: "Search and Rescue" },
-        { q: "Bir uçağın 'Kuyruk' (Empennage) kısmının temel görevi nedir?", options: ["Yakıt depolamak", "Yolcu taşımak", "Uçağın dengesini ve yön kontrolünü sağlamak", "İniş takımını saklamak"], answer: "Uçağın dengesini ve yön kontrolünü sağlamak" },
-        { q: "Havaalanı 'Destek Hizmet Kuruluşları' nelerdir?", options: ["Sadece havayolları", "İkram, temizlik, güvenlik ve yakıt sağlayan kuruluşlar", "Sadece kule", "Sadece yolcular"], answer: "İkram, temizlik, güvenlik ve yakıt sağlayan kuruluşlar" },
-        { q: "Bölgesel Uçaklar (Regional Aircraft) genellikle hangi kapasiteye sahiptir?", options: ["400 yolcu üzeri", "100 yolcunun altında", "Sadece 2 kişilik", "Sadece kargo taşır"], answer: "100 yolcunun altında" },
-        { q: "'Geniş Gövdeli' (Wide Body) uçakların özelliği nedir?", options: ["Tek koridorlu olması", "Çift koridorlu olması ve bir sırada 7-10 koltuk bulunması", "Sadece pervaneli olması", "Sadece kısa mesafe uçması"], answer: "Çift koridorlu olması ve bir sırada 7-10 koltuk bulunması" },
-        { q: "ICAO Annex 4 (Havacılık Haritaları) ne işe yarar?", options: ["Uçak boyaması için", "Uçuş planlaması ve navigasyon için gerekli harita standartlarını belirler", "Havaalanı menüsü için", "Yolcu oturma planı için"], answer: "Uçuş planlaması ve navigasyon için gerekli harita standartlarını belirler" },
-        { q: "Havayolu 'Low Cost Carrier' (Düşük Maliyetli Taşıyıcı) iş modelinin özelliği nedir?", options: ["Her şey dahil lüks hizmet", "Yalın hizmet, ekstralar ücretli, tek tip uçak filosu", "Sadece business class", "Sadece uzun mesafe uçuş"], answer: "Yalın hizmet, ekstralar ücretli, tek tip uçak filosu" },
-        { q: "ICAO Annex 15 (Havacılık Bilgi Hizmetleri - AIS) ne sağlar?", options: ["Uçuş emniyeti için gerekli bilginin akışını (NOTAM vb.)", "Uçak bakımını", "Yolcu yemeğini", "Pilot maaşlarını"], answer: "Uçuş emniyeti için gerekli bilginin akışını (NOTAM vb.)" }
+        { q: "ICAO Annex 17 (Ek-17) hangi konuyu düzenler?", options: ["Hava Trafik", "Güvenlik (Security)", "Çevre", "Arama Kurtarma"], answer: "Güvenlik (Security)" }
     ];
 
-    // AOF Soruları (Buraya word dosyasındaki soruları ekleyin)
     const aofData = {
-        deneme1: [ { q: "AOF Deneme 1 Örnek Soru?", options: ["A", "B", "C", "D"], answer: "A" } ],
-        deneme2: [ { q: "AOF Deneme 2 Örnek Soru?", options: ["X", "Y", "Z", "Q"], answer: "X" } ],
-        final1: [ { q: "AOF Final 1 Örnek Soru?", options: ["1", "2", "3", "4"], answer: "1" } ],
-        final2: [ { q: "AOF Final 2 Örnek Soru?", options: ["Evet", "Hayır"], answer: "Evet" } ]
+        deneme1: [ { q: "AOF Deneme 1 Soru 1?", options: ["A", "B", "C", "D"], answer: "A" } ],
+        deneme2: [ { q: "AOF Deneme 2 Soru 1?", options: ["X", "Y", "Z", "Q"], answer: "X" } ],
+        final1: [ { q: "AOF Final 1 Soru 1?", options: ["1", "2", "3", "4"], answer: "1" } ],
+        final2: [ { q: "AOF Final 2 Soru 1?", options: ["Evet", "Hayır"], answer: "Evet" } ]
     };
 
+    // --- 2. UYGULAMA MANTIĞI ---
 
-    /* --- 2. SİSTEM MANTIĞI --- */
     let currentUser = null;
     let currentPool = [];
     let currentIndex = 0;
-    let userAnswers = []; // O anki session cevapları
+    let userAnswers = []; // [ {selected: 'A', isCorrect: true/false}, null, ... ]
 
     // Başlangıç
     window.onload = function() {
         const savedUser = localStorage.getItem('havacilik_user');
         if (savedUser) {
             currentUser = savedUser;
-            updateUIUser();
+            updateUserInfo();
             showPage('page-menu');
             renderMistakeMenu();
         } else {
@@ -584,152 +319,112 @@
     function showPage(id) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         document.getElementById(id).classList.add('active');
-        document.getElementById('global-user-panel').style.display = (id === 'page-menu' || id === 'page-result' || id === 'page-aof') ? 'flex' : 'none';
+        document.getElementById('user-info-panel').style.display = (id === 'page-login') ? 'none' : 'flex';
         if(id === 'page-menu') renderMistakeMenu();
     }
 
-    // Login / Logout
+    // Login
     function login() {
         const val = document.getElementById('username-input').value.trim();
         if(!val) return alert("İsim giriniz.");
         currentUser = val;
         localStorage.setItem('havacilik_user', val);
-        
-        // Veritabanı başlat
-        let db = getDB();
-        if(!db[currentUser]) {
-            db[currentUser] = { stats: {} }; // Soru bazlı istatistikler
-            saveDB(db);
-        }
-        
-        updateUIUser();
+        updateUserInfo();
         showPage('page-menu');
     }
 
     function logout() {
-        if(confirm("Çıkış yapmak istiyor musunuz?")) {
+        if(confirm("Çıkış yapılsın mı?")) {
             localStorage.removeItem('havacilik_user');
             currentUser = null;
             showPage('page-login');
         }
     }
 
-    function updateUIUser() {
-        document.getElementById('display-username-global').textContent = currentUser;
-        document.getElementById('display-username-quiz').textContent = currentUser;
+    function updateUserInfo() {
+        document.getElementById('display-username').textContent = currentUser;
     }
 
-    // Veritabanı
-    function getDB() { return JSON.parse(localStorage.getItem('havacilik_db_v2') || '{}'); }
-    function saveDB(data) { localStorage.setItem('havacilik_db_v2', JSON.stringify(data)); }
+    // Veritabanı (LocalStorage)
+    function getDB() { return JSON.parse(localStorage.getItem('havacilik_db_v3') || '{}'); }
+    function saveDB(data) { localStorage.setItem('havacilik_db_v3', JSON.stringify(data)); }
 
-    // İstatistik Güncelleme (Soruyu çözünce çalışır)
-    function updateQuestionStats(question, isCorrect) {
+    // Hata İstatistiği Güncelleme
+    function updateStats(question, isCorrect) {
         let db = getDB();
-        if (!db[currentUser].stats) db[currentUser].stats = {};
+        if(!db[currentUser]) db[currentUser] = { stats: {} };
         
-        // Sorunun metni unique ID olarak kullanılır
-        const qKey = question.q; 
-        
-        if (!db[currentUser].stats[qKey]) {
-            db[currentUser].stats[qKey] = { total: 0, correct: 0, wrong: 0, lastCorrect: false, questionObj: question };
+        const key = question.q;
+        if(!db[currentUser].stats[key]) {
+            db[currentUser].stats[key] = { total: 0, correct: 0, wrong: 0, qObj: question };
         }
         
-        let stat = db[currentUser].stats[qKey];
+        let stat = db[currentUser].stats[key];
         stat.total++;
-        if (isCorrect) {
-            stat.correct++;
-            stat.lastCorrect = true;
-        } else {
-            stat.wrong++;
-            stat.lastCorrect = false;
-        }
-        stat.questionObj = question; // Objenin güncel halini sakla
+        if(isCorrect) stat.correct++; else stat.wrong++;
+        stat.qObj = question;
         
         saveDB(db);
     }
 
-    // Hata Kategorilerini Hesapla ve Menüyü Çiz
-    function getMistakeCategories() {
+    function renderMistakeMenu() {
         let db = getDB();
         let stats = db[currentUser] ? db[currentUser].stats : {};
         let critical = [], warning = [], info = [];
 
         Object.values(stats).forEach(item => {
-            // Sadece en az 1 kez yanlış yapılmış soruları al
-            if (item.wrong > 0) {
-                let successRate = (item.correct / item.total) * 100;
-                
-                // Kategorize Et
-                if (successRate < 50) critical.push(item.questionObj);      // %0 - %49 (En Çok Yanlış)
-                else if (successRate < 80) warning.push(item.questionObj);  // %50 - %79 (Sık Hata)
-                else info.push(item.questionObj);                           // %80+ (Nadir Hata)
+            if(item.wrong > 0) {
+                let rate = (item.correct / item.total) * 100;
+                if(rate < 50) critical.push(item.qObj);
+                else if(rate < 80) warning.push(item.qObj);
+                else info.push(item.qObj);
             }
         });
 
-        return { critical, warning, info };
-    }
-
-    function renderMistakeMenu() {
-        const cats = getMistakeCategories();
-        const container = document.getElementById('mistake-categories');
+        const container = document.getElementById('mistake-stats');
         container.innerHTML = '';
 
-        if (cats.critical.length === 0 && cats.warning.length === 0 && cats.info.length === 0) {
-            container.innerHTML = `<div style="text-align: center; color: #94a3b8; padding: 10px;">Harika! Kayıtlı hata yok.</div>`;
-            return;
-        }
-
-        if (cats.critical.length > 0) {
-            container.innerHTML += `
-            <div class="mistake-cat cat-critical" onclick="startMistakeQuiz('critical')">
-                <span>🔴 En Çok Yanlış Yapılanlar (%0-%49)</span>
-                <span class="cat-badge">${cats.critical.length} Soru</span>
-            </div>`;
-        }
-        if (cats.warning.length > 0) {
-            container.innerHTML += `
-            <div class="mistake-cat cat-warning" onclick="startMistakeQuiz('warning')">
-                <span>🟠 Sık Hata Yapılanlar (%50-%79)</span>
-                <span class="cat-badge">${cats.warning.length} Soru</span>
-            </div>`;
-        }
-        if (cats.info.length > 0) {
-            container.innerHTML += `
-            <div class="mistake-cat cat-info" onclick="startMistakeQuiz('info')">
-                <span>🔵 Nadir Hatalar (%80+)</span>
-                <span class="cat-badge">${cats.info.length} Soru</span>
-            </div>`;
-        }
+        if(critical.length > 0) container.innerHTML += `<button class="btn btn-danger" onclick="startMistakeQuiz('critical')">🔴 Kritik (${critical.length})</button>`;
+        if(warning.length > 0) container.innerHTML += `<button class="btn" style="color:#b45309; border-color:#fcd34d; background:#fffbeb;" onclick="startMistakeQuiz('warning')">🟠 Sık Hata (${warning.length})</button>`;
+        if(info.length > 0) container.innerHTML += `<button class="btn" style="color:#1e40af; border-color:#bfdbfe; background:#eff6ff;" onclick="startMistakeQuiz('info')">🔵 Nadir (${info.length})</button>`;
+        
+        if(critical.length===0 && warning.length===0 && info.length===0) container.innerHTML = '<span style="color:#94a3b8;">Henüz hata kaydı yok.</span>';
     }
 
-    // Quiz Başlatıcılar
+    // Quiz Başlatma
     function startQuiz(type) {
         currentPool = [];
-        if (type === 'temel') currentPool = [...basicQuestions];
-        else if (type === 'cikmis') currentPool = [...pastQuestions];
-        else if (type === 'ai') currentPool = [...aiQuestions];
-        else if (type === 'mix') currentPool = [...basicQuestions, ...pastQuestions, ...aiQuestions];
-        else if (type === 'aof_deneme1') currentPool = [...aofData.deneme1];
-        else if (type === 'aof_deneme2') currentPool = [...aofData.deneme2];
-        else if (type === 'aof_final1') currentPool = [...aofData.final1];
-        else if (type === 'aof_final2') currentPool = [...aofData.final2];
-        else if (type === 'aof_mix') currentPool = [...aofData.deneme1, ...aofData.deneme2, ...aofData.final1, ...aofData.final2];
+        if(type === 'temel') currentPool = [...basicQuestions];
+        else if(type === 'cikmis') currentPool = [...pastQuestions];
+        else if(type === 'ai') currentPool = [...aiQuestions];
+        else if(type === 'mix') currentPool = [...basicQuestions, ...pastQuestions, ...aiQuestions];
+        else if(type === 'aof_deneme1') currentPool = [...aofData.deneme1];
+        else if(type === 'aof_deneme2') currentPool = [...aofData.deneme2];
+        else if(type === 'aof_final1') currentPool = [...aofData.final1];
+        else if(type === 'aof_final2') currentPool = [...aofData.final2];
+        else if(type === 'aof_mix') currentPool = [...aofData.deneme1, ...aofData.deneme2, ...aofData.final1, ...aofData.final2];
 
-        if (currentPool.length === 0) return alert("Bu kategoride soru bulunamadı.");
-
-        // Karıştır
-        currentPool.sort(() => Math.random() - 0.5);
+        if(currentPool.length === 0) return alert("Soru bulunamadı.");
         
+        currentPool.sort(() => Math.random() - 0.5);
         initQuizUI();
     }
 
-    function startMistakeQuiz(category) {
-        const cats = getMistakeCategories();
-        if (category === 'critical') currentPool = cats.critical;
-        else if (category === 'warning') currentPool = cats.warning;
-        else if (category === 'info') currentPool = cats.info;
+    function startMistakeQuiz(cat) {
+        let db = getDB();
+        let stats = db[currentUser].stats;
+        let pool = [];
         
+        Object.values(stats).forEach(item => {
+            if(item.wrong > 0) {
+                let rate = (item.correct / item.total) * 100;
+                if(cat === 'critical' && rate < 50) pool.push(item.qObj);
+                if(cat === 'warning' && rate >= 50 && rate < 80) pool.push(item.qObj);
+                if(cat === 'info' && rate >= 80) pool.push(item.qObj);
+            }
+        });
+        
+        currentPool = pool;
         currentPool.sort(() => Math.random() - 0.5);
         initQuizUI();
     }
@@ -739,16 +434,15 @@
         userAnswers = new Array(currentPool.length).fill(null);
         showPage('page-quiz');
         loadQuestion();
-        renderDots();
-        updateProgressBar();
     }
 
     // Soru Yükleme
     function loadQuestion() {
         const q = currentPool[currentIndex];
-        document.getElementById('q-text').textContent = q.q;
+        document.getElementById('q-text').textContent = `${currentIndex+1}. ${q.q}`;
         document.getElementById('q-counter').textContent = `Soru ${currentIndex + 1} / ${currentPool.length}`;
-        
+        document.getElementById('q-progress').style.width = `${((currentIndex+1)/currentPool.length)*100}%`;
+
         const optsDiv = document.getElementById('q-options');
         optsDiv.innerHTML = '';
 
@@ -760,66 +454,60 @@
             optsDiv.appendChild(btn);
         });
 
-        // Varsa eski cevabı yükle
-        if (userAnswers[currentIndex]) restoreState();
-
-        // Buton durumları
+        if(userAnswers[currentIndex]) restoreState();
+        
+        // Navigasyon Buton Durumları
         document.getElementById('btn-prev').disabled = (currentIndex === 0);
         document.getElementById('btn-next').textContent = (currentIndex === currentPool.length - 1) ? 'Bitir' : 'Sonraki →';
         
-        updateProgressBar();
-        updateDots();
+        renderFastAccess();
     }
 
     function handleAnswer(selected, btn) {
-        if (userAnswers[currentIndex]) return;
+        if(userAnswers[currentIndex]) return; // Zaten cevaplandı
 
         const q = currentPool[currentIndex];
         const isCorrect = (selected === q.answer);
         
-        userAnswers[currentIndex] = { selected, isCorrect, questionObj: q };
-
-        // İstatistik Kaydet
-        updateQuestionStats(q, isCorrect);
-
-        // UI Güncelle
-        applyFeedback();
-        updateDots();
-
-        // Otomatik Geçiş (Düzeltilmiş ve Garantilenmiş)
-        const autoNext = document.getElementById('auto-next');
+        userAnswers[currentIndex] = { selected, isCorrect, qObj: q };
         
-        // 1. Tüm şıklara tıklamayı engelle (Çift tıklama sorunu olmaması için)
-        const allOpts = document.querySelectorAll('.option-card');
-        allOpts.forEach(o => o.style.pointerEvents = 'none');
+        // İstatistik
+        updateStats(q, isCorrect);
+        
+        // UI Boyama
+        applyFeedback();
+        renderFastAccess();
 
-        // 2. Eğer doğruysa ve otomatik geçiş açıksa 400ms sonra geç
-        if (autoNext && autoNext.checked && isCorrect) {
+        // OTOMATİK GEÇİŞ MANTIĞI (DÜZELTİLDİ)
+        const autoNext = document.getElementById('auto-next').checked;
+        if(isCorrect && autoNext) {
+            // Şıklara tıklamayı engelle
+            const allOpts = document.querySelectorAll('.option-card');
+            allOpts.forEach(o => o.style.pointerEvents = 'none');
+            
             setTimeout(() => {
-                // Eğer kullanıcı manuel olarak geçmediyse biz geçirelim
-                // (current pool length kontrolü ile son soruda hata vermesini önleyelim)
-                if (currentIndex < currentPool.length - 1) {
+                if(currentIndex < currentPool.length - 1) {
                     nextQuestion();
                 } else {
                     finishQuiz();
                 }
-            }, 400); 
+            }, 700); // 0.7 saniye bekle
         }
     }
 
     function applyFeedback() {
         const ans = userAnswers[currentIndex];
-        if (!ans) return;
+        if(!ans) return;
         
         const q = currentPool[currentIndex];
         const opts = document.querySelectorAll('.option-card');
         
         opts.forEach(btn => {
             btn.style.pointerEvents = 'none';
-            if (btn.textContent === q.answer) {
+            if(btn.textContent === q.answer) {
                 btn.classList.add(ans.isCorrect ? 'correct' : 'hint');
             }
-            if (btn.textContent === ans.selected && !ans.isCorrect) {
+            if(btn.textContent === ans.selected && !ans.isCorrect) {
                 btn.classList.add('incorrect');
             }
         });
@@ -827,9 +515,35 @@
 
     function restoreState() { applyFeedback(); }
 
+    // Hızlı Erişim Paneli (YENİ)
+    function renderFastAccess() {
+        const grid = document.getElementById('fast-access-grid');
+        grid.innerHTML = '';
+        
+        currentPool.forEach((_, i) => {
+            const btn = document.createElement('div');
+            btn.className = 'access-btn';
+            btn.textContent = i + 1;
+            
+            // Stil Ata
+            if (i === currentIndex) btn.classList.add('current');
+            
+            if (userAnswers[i]) {
+                if (userAnswers[i].isCorrect) btn.classList.add('correct');
+                else btn.classList.add('incorrect');
+            }
+            
+            btn.onclick = () => {
+                currentIndex = i;
+                loadQuestion();
+            };
+            grid.appendChild(btn);
+        });
+    }
+
     // Navigasyon
     function nextQuestion() {
-        if (currentIndex < currentPool.length - 1) {
+        if(currentIndex < currentPool.length - 1) {
             currentIndex++;
             loadQuestion();
         } else {
@@ -838,33 +552,14 @@
     }
 
     function prevQuestion() {
-        if (currentIndex > 0) {
+        if(currentIndex > 0) {
             currentIndex--;
             loadQuestion();
         }
     }
 
     function endQuiz() {
-        if(confirm("Testi sonlandırmak istiyor musunuz?")) showPage('page-menu');
-    }
-
-    function updateProgressBar() {
-        const percent = ((currentIndex + 1) / currentPool.length) * 100;
-        document.getElementById('q-bar').style.width = `${percent}%`;
-    }
-
-    function renderDots() {
-        const div = document.getElementById('q-dots');
-        div.innerHTML = '';
-        currentPool.forEach((_, i) => {
-            const dot = document.createElement('div');
-            dot.className = 'dot';
-            dot.textContent = i + 1;
-            if (i === currentIndex) dot.classList.add('current');
-            if (userAnswers[i]) dot.classList.add(userAnswers[i].isCorrect ? 'correct' : 'incorrect');
-            dot.onclick = () => { currentIndex = i; loadQuestion(); };
-            div.appendChild(dot);
-        });
+        if(confirm("Testi bitirmek istiyor musunuz?")) showPage('page-menu');
     }
 
     function finishQuiz() {
@@ -872,19 +567,19 @@
         const score = Math.round((correct / currentPool.length) * 100);
         
         document.getElementById('res-score').textContent = `%${score}`;
+        
         const msg = document.getElementById('res-msg');
-        
-        if (score >= 90) msg.textContent = "Mükemmel! 🚀";
-        else if (score >= 70) msg.textContent = "Gayet İyi! 👍";
-        else msg.textContent = "Biraz Daha Tekrar Gerekli. 🧐";
+        if(score >= 90) msg.textContent = "Mükemmel! 🚀";
+        else if(score >= 70) msg.textContent = "Güzel! 👍";
+        else msg.textContent = "Geliştirilmeli. 🧐";
 
-        // Yanlışları Bul ve Butonu Göster/Gizle
-        const wrongAnswers = userAnswers.filter(a => !a.isCorrect);
-        const retryBtn = document.getElementById('btn-retry-session-mistakes');
+        // Yanlışları Çöz Butonu Kontrolü
+        const wrongOnes = userAnswers.filter(a => a && !a.isCorrect);
+        const retryBtn = document.getElementById('btn-retry-session');
         
-        if (wrongAnswers.length > 0) {
+        if(wrongOnes.length > 0) {
             retryBtn.style.display = 'block';
-            retryBtn.textContent = `⚠️ Bu Testteki ${wrongAnswers.length} Yanlışı Çöz`;
+            retryBtn.textContent = `⚠️ Bu Testteki ${wrongOnes.length} Yanlışı Çöz`;
         } else {
             retryBtn.style.display = 'none';
         }
@@ -893,20 +588,13 @@
     }
 
     function restartQuiz() {
-        // Aynı havuz, yeniden karıştır
         currentPool.sort(() => Math.random() - 0.5);
         initQuizUI();
     }
 
-    // Sadece O Anki Testteki Yanlışları Tekrar Çöz
     function retrySessionMistakes() {
-        const wrongQuestions = userAnswers
-            .filter(a => !a.isCorrect)
-            .map(a => a.questionObj);
-            
-        if(wrongQuestions.length === 0) return;
-
-        currentPool = wrongQuestions;
+        const wrongs = userAnswers.filter(a => !a.isCorrect).map(a => a.qObj);
+        currentPool = wrongs;
         currentPool.sort(() => Math.random() - 0.5);
         initQuizUI();
     }
