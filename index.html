@@ -1068,7 +1068,7 @@
         if (type === 'temel') sourceData = basicQuestions;
         else if (type === 'cikmis') sourceData = pastQuestions;
         else if (type === 'ai') sourceData = aiQuestions;
-        else if (type === 'mix') sourceData = [...basicQuestions, ...pastQuestions, ...aiQuestions, ...allAof];
+        else if (type === 'mix') sourceData = [...basicQuestions, ...pastQuestions, ...aiQuestions];
         else if (type === 'aof_mix') sourceData = allAof;
         else if (aofData[type]) sourceData = aofData[type]; // AOF alt kümeleri
 
@@ -1295,6 +1295,7 @@
 </script>
 </body>
 </html>
+
 
 
 
